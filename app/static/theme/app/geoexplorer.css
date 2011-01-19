@@ -162,6 +162,13 @@ div.map-overlay div.overlay-element {
     margin-top: 0px;
 }
 
+.overlay-overviewMap {
+    top: 10px;
+    position: absolute;
+    right: 10px;
+    z-index: 1000;
+}
+
 /* Pan- and Zoom- Panel Styles*/
 
 .olControlPanPanel div {
@@ -190,6 +197,13 @@ div.map-overlay div.overlay-element {
     background-position:15px -105px;
     left: 2px;
     top: 16px;
+}
+
+.olControlOverviewMapElement {
+    -moz-border-radius: 0 0 0 0;
+    background-color: black;
+    border: 1px solid black;
+    padding: 0;
 }
 
 .olControlZoomPanel { 
