@@ -71,8 +71,13 @@
         <copy todir="${build}/geoexplorer/WEB-INF/app/static/externals/PrintPreview/resources">
             <fileset dir="app/static/externals/PrintPreview/resources"/>
         </copy>
-        
-    </target>
+        <!-- copy Proj4js resources -->
+		<copy file="app/static/externals/proj4js/lib/proj4js-compressed.js"
+			  tofile="${build}/geoexplorer/WEB-INF/app/static/externals/proj4js/lib/proj4js-compressed.js" />		  
+        <copy todir="${build}/geoexplorer/WEB-INF/app/static/externals/proj4js/lib/defs">
+            <fileset dir="app/static/externals/proj4js/lib/defs"/>
+        </copy>
+	</target>
 
     <target name="debug">
         <java jar="externals/ringojs/run.jar" fork="true">
