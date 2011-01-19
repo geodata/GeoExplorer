@@ -29,6 +29,15 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
     widthText: "Width",
     exportMapText: "Export Map",
     embedText: "Your map is ready to be published to the web! Simply copy the following HTML to embed the map in your website:",
+    loadMapText: "Load Map",
+    editMapPropertiesText: "Edit map properties",
+    abstractText: "Abstract",
+    availableMapsText: "Available Maps",
+    deleteMapText: "Delete Map",
+    loadText: "Load",
+    saveText: "Save",
+    cancelText: "Cancel",
+    closeText: "Close",
     // End i18n.
 
     /**
@@ -49,7 +58,7 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
         tools.unshift(new Ext.Button({
             tooltip: this.publishMapText,
             handler: function() {
-                this.save(this.showEmbedWindow);
+                this.editMapDescription(this.showEmbedWindow);
             },
             scope: this,
             iconCls: 'icon-export'
@@ -57,10 +66,18 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
         tools.unshift(new Ext.Button({
             tooltip: this.saveMapText,
             handler: function() {
-                this.save(this.showUrl);
+                this.editMapDescription(this.showUrl);
             },
             scope: this,
             iconCls: "icon-save"
+        }));
+        tools.unshift(new Ext.Button({
+            tooltip: this.loadMapText,
+            handler: function() {
+                this.loadMapWindow();
+            },
+            scope: this,
+            iconCls: 'icon-load'
         }));
         tools.unshift("-");
         tools.unshift(aboutButton);
@@ -168,6 +185,158 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
             listeners: {afterrender: updateSnippet}
         });
         win.show();
+    },
+    
+    loadMapWindow: function() {
+
+        var loadMap = function() {
+            var record = Ext.getCmp('mapGridPanel').getSelectionModel().getSelected();
+            if (!record) {
+                return false;
+            }
+            window.location.hash = "#maps/" + record.get("id");
+            app.loadConfig(record.get("config"));
+            Ext.getCmp('mapGridWindow').close();
+        };
+
+        var removeMap = function() {
+            var grid = Ext.getCmp('mapGridPanel');
+            var rec = grid.getSelectionModel().getSelected();
+            if (!rec) {
+                return false;
+            }
+            grid.store.remove(rec);
+            mapStore.reload();
+        };
+
+        var mapStore = new Ext.data.JsonStore({
+            autoDestroy: true,
+            autoLoad: true,
+            restful: true,
+            url: 'maps',
+            storeId: 'maps',
+            root: 'maps',
+            idProperty: 'id',
+            fields: [
+                'id',
+                {name:'title', mapping: 'config.about.title'},
+                {name:'abstract', mapping: 'config.about.abstract'},
+                'config'
+            ],
+            writer: new Ext.data.JsonWriter({
+                encode: true, writeAllFields: true
+            })
+        });
+
+        var expander = new Ext.grid.RowExpander({
+            tpl: new Ext.Template(this.abstractTemplateText)
+        });
+        
+        var mapGridPanel = new Ext.grid.GridPanel({
+            id: "mapGridPanel",
+            layout: "fit",
+            region: "center",
+            autoScroll: true,
+            autoExpandColumn: "title",
+            store: mapStore,
+            plugins: [expander],
+            colModel: new Ext.grid.ColumnModel([
+                expander,
+                {id: "title", header: this.titleText, dataIndex: "title", sortable: true},
+                {header: this.idText, dataIndex: "id", width: 40, sortable: true}
+            ]),
+            listeners: {
+                rowdblclick: loadMap,
+                scope: this
+            }
+        });
+
+        var mapGridWindow = new Ext.Window({
+            title: this.availableMapsText,
+            id: "mapGridWindow",
+            layout: "border",
+            height: 300,
+            width: 450,
+            modal: true,
+            items: [mapGridPanel],
+            bbar: [
+                new Ext.Button({
+                    text: this.deleteMapText,
+                    iconCls: "icon-removemap",
+                    handler: removeMap,
+                    scope : this
+                }),
+                "->",
+                new Ext.Button({
+                    text: this.loadMapText,
+                    iconCls: "icon-loadmap",
+                    handler: loadMap,
+                    scope : this
+                }),
+                new Ext.Button({
+                    text: this.closeText,
+                    handler: function() {
+                        Ext.getCmp('mapGridWindow').close();
+                    }
+                })
+            ]
+        }).show();
+    },
+
+    // Edit map properties before saving
+    editMapDescription: function(callback, scope) {
+
+        var form = new Ext.form.FormPanel({
+            labelAlign: 'top',
+            layout: 'form',
+            bodyStyle: "padding: 5px;border:0;background-color:transparent;",
+            defaults: {
+                anchor: "100%",
+                xtype:"textarea"
+            },
+            items: [{
+                name: "title",
+                xtype: "textfield",
+                fieldLabel: this.titleText,
+                value: this.about.title
+            },{
+                name: "contact",
+                fieldLabel: this.contactText,
+                value: this.about.contact,
+                height: 40
+            },{
+                name: "abstract",
+                fieldLabel: this.abstractText,
+                value: this.about["abstract"],
+                anchor: "100% -113"
+            }]
+        });
+
+        new Ext.Window({
+            width: 360, height: 280,
+            title: this.editMapPropertiesText,
+            id: "save-about",
+            layout: 'fit',
+            items: form,
+            modal: true,
+            buttons: [{
+                text: this.saveText,
+                handler: function(){
+                    var f = form.getForm();
+                    this.about.title = f.findField('title').getValue();
+                    this.about["abstract"] = f.findField('abstract').getValue();
+                    this.about.contact = f.findField('contact').getValue();
+                    GeoExplorer.Composer.superclass.save.apply(this, [callback, scope]);
+                    Ext.getCmp('save-about').close();
+                },
+                scope: this
+            },{
+                text: this.cancelText,
+                handler: function(btn){
+                    Ext.getCmp('save-about').close();
+                }
+            }]
+        }).show();
     }
 
 });

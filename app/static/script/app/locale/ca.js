@@ -65,7 +65,16 @@ GeoExt.Lang.add("ca", {
         heightText: "Alçària",
         widthText: "Amplada",
         exportMapText: "Exporta el Mapa",
-        embedText: "Ja podeu incloure el vostre mapa a altres webs! Simplement copieu el següent codi HTML allà on desitgeu incrustar-ho:"
+        embedText: "Ja podeu incloure el vostre mapa a altres webs! Simplement copieu el següent codi HTML allà on desitgeu incrustar-ho:",
+        loadMapText: "Carrega Mapa",
+        editMapPropertiesText: "Edita les propietats del mapa",
+        abstractText: "Descripció",
+        availableMapsText: "Mapes disponibles",
+        deleteMapText: "Elimina Mapa",
+        loadText: "Obre",
+        saveText: "Desa",
+        cancelText: "Cancel·la",
+        closeText: "Tanca"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Afegeix nou Web Map Service (WMS)...",

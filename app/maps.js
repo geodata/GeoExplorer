@@ -84,7 +84,7 @@ var handlers = {
         var id = getId(env);
         if (id === null) {
             // retrieve all map identifiers
-            resp = createResponse(getMapIds(env));
+            resp = createResponse(getAllMaps(env));
         } else if (id === false) {
             // invalid id
             resp = createResponse({error: "Invalid map id."}, 400);
@@ -156,6 +156,26 @@ var getMapIds = exports.getMapIds = function(request) {
     connection.close();
     // return all ids
     return {ids: ids};
+};
+
+var getAllMaps = exports.getAllMaps = function(request) {
+    var connection = SQLITE.open(getDb(request));
+    var statement = connection.createStatement();
+    var results = statement.executeQuery(
+        "SELECT * FROM maps;"
+    );
+    var maps = [];
+    while (results.next()) {
+    	map = {
+    		id: results.getInt("id"),
+    		config: JSON.parse(String(results.getString("config")))
+    	};
+        maps.push(map);
+    }
+    results.close();
+    connection.close();
+    // return all maps
+    return {maps: maps};
 };
 
 var createMap = exports.createMap = function(config, request) {

@@ -65,7 +65,16 @@ GeoExt.Lang.add("es", {
         heightText: "Alto",
         widthText: "Ancho",
         exportMapText: "Exportar Mapa",
-        embedText: "¡Su mapa ya puede publicarse en otras webs! Simplemente copie el siguiente código HTML en el lugar donde desee incrustarlo:"
+        embedText: "¡Su mapa ya puede publicarse en otras webs! Simplemente copie el siguiente código HTML en el lugar donde desee incrustarlo:",
+        loadMapText: "Abrir Mapa",
+        editMapPropertiesText: "Editar propiedades del mapa",
+        abstractText: "Descripción",
+        availableMapsText: "Mapas disponibles",
+        deleteMapText: "Eliminar Mapa",
+        loadText: "Abrir",
+        saveText: "Guardar",
+        cancelText: "Cancelar",
+        closeText: "Cerrar"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Añadir nuevo Web Map Service (WMS)...",

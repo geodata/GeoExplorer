@@ -45,11 +45,15 @@ body {
     background-image: url(img/silk/add.png);
 }
 
+.x-btn .icon-loadmap {
+    background-image: url(img/silk/pencil.png);
+}
+
 .x-btn .icon-addserver {
     background-image: url(img/silk/map_add.png);
 }
 
-.x-btn .icon-removelayers, .x-menu-item .icon-removelayers {
+.x-btn .icon-removelayers, .x-menu-item .icon-removelayers, .x-btn .icon-removemap {
     background-image: url(img/silk/delete.png);
 }
 
@@ -59,6 +63,10 @@ body {
 
 .x-btn .icon-getfeatureinfo {
     background-image: url(img/silk/information.png);
+}
+
+.x-btn .icon-load {
+    background-image: url(img/geosilk/map_edit.png);
 }
 
 .x-btn .icon-save {

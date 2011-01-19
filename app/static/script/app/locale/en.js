@@ -65,7 +65,16 @@ GeoExt.Lang.add("en", {
         heightText: "Height",
         widthText: "Width",
         exportMapText: "Export Map",
-        embedText: "Your map is ready to be published to the web! Simply copy the following HTML to embed the map in your website:"
+        embedText: "Your map is ready to be published to the web! Simply copy the following HTML to embed the map in your website:",
+        loadMapText: "Load Map",
+        editMapPropertiesText: "Edit map properties",
+        abstractText: "Abstract",
+        availableMapsText: "Available Maps",
+        deleteMapText: "Delete Map",
+        loadText: "Load",
+        saveText: "Save",
+        cancelText: "Cancel",
+        closeText: "Close"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Add New Web Map Service (WMS) ...",
