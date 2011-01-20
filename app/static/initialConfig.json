@@ -45,16 +45,8 @@
         layers: [{
             source: "google",
             title: "Google Terrain",
-            name: "TERRAIN",
+            name: "ROADMAP",
             group: "background"
-        }, {
-            source: "ol",
-            group: "background",
-            fixed: true,
-            type: "OpenLayers.Layer",
-            args: [
-                "None", {visibility: false}
-            ]
         }],
         center: [0, 0],
         zoom: 2

@@ -475,6 +475,17 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 Ext.apply(new Ext.Button(showPropertiesAction), {text: ""})
             ]
         });
+        
+        var searchContainer = new gdxp.StreetSearch({
+            border: false,
+            region: 'north',
+            height: 140,
+            collapsible: true,
+            split: true,
+            autoScroll: true,
+            ascending: true,
+            map: this.mapPanel.map
+        });
 
         var legendContainer = new GeoExt.LegendPanel({
             title: this.legendText,
@@ -489,7 +500,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             defaults: {cls: 'legend-item'}
             // TODO: remove when http://trac.geoext.org/ticket/305 is fixed
             ,items: []
-        });        
+        });
 
         var westPanel = new Ext.Panel({
             border: true,
@@ -500,7 +511,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             collapsible: true,
             collapseMode: "mini",
             items: [
-                layersContainer, legendContainer
+                layersContainer, searchContainer, legendContainer
             ]
         });
         
@@ -569,8 +580,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 westPanel
             ]
         }];
-        
-        GeoExplorer.superclass.initPortal.apply(this, arguments);        
+       
+        GeoExplorer.superclass.initPortal.apply(this, arguments);
+
     },
     
     /**
