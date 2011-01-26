@@ -1,54 +1,292 @@
 ﻿{
-    proxy: "proxy/?url=",
-    printService: "/geoserver/pdf/",
-    alignToGrid: true,
-    about: {
-        title: "GeoExplorer Demo Map",
-        "abstract": "This is a demonstration of GeoExplorer, " +
-            "an application for assembling and publishing web " +
-            "based maps.  After adding layer to the map, find " +
-            "the 'Publish Map' button above to embed this map " +
-            "in any web page.",
-        contact: "For more information, contact <a href='http://opengeo.org'>OpenGeo</a>."
-    },
-    defaultSourceType: "gx_wmssource",
-    sources: {
-        local: {
-            url: "/geoserver/ows",
-            title: "Local GeoServer"
-        },
-        suite: {
-            url: "http://v2.suite.opengeo.org/geoserver/ows",
-            title: "Remote Suite GeoServer"
-        },
-        osm: {
-            ptype: "gx_osmsource"
-        },
-        google: {
-            ptype: "gx_googlesource"
-        },
-        bing: {
-            ptype: "gx_bingsource"
-        },
-        ol: {
-            ptype: "gx_olsource"
-        }
-    },
-    map: {
-        projection: "EPSG:900913",
-        units: "m",
-        maxResolution: 156543.0339,
-        maxExtent: [
-            -20037508.34, -20037508.34,
-            20037508.34, 20037508.34
-        ],
-        layers: [{
-            source: "google",
-            title: "Google Terrain",
-            name: "ROADMAP",
-            group: "background"
-        }],
-        center: [0, 0],
-        zoom: 2
-    }
+   "proxy":"proxy/?url=",
+   "printService":"/geoserver/pdf/",
+   "alignToGrid":true,
+   "about":{
+      "title":"Mapa demostratiu de Castellbisbal (Planejament)",
+      "abstract":"Mapa inicial del planejament de Castellbisbal",
+      "contact":"For more information, contact <a href='http://opengeo.org'>OpenGeo</a>."
+   },
+   "defaultSourceType":"gx_wmssource",
+   "sources":{
+      "local":{
+         "url":"/geoserver/ows",
+         "title":"Local GeoServer",
+         "projection":"EPSG:900913"
+      },
+      "osm":{
+         "ptype":"gx_osmsource",
+         "projection":"EPSG:900913"
+      },
+      "google":{
+         "ptype":"gx_googlesource",
+         "projection":"EPSG:900913"
+      },
+      "bing":{
+         "ptype":"gx_bingsource",
+         "projection":"EPSG:900913"
+      },
+      "ol":{
+         "ptype":"gx_olsource",
+         "projection":"EPSG:900913"
+      }
+   },
+   "map":{
+      "projection":"EPSG:900913",
+      "units":"m",
+      "maxResolution":1066,
+      "maxExtent":[
+         210814,
+         5077212,
+         230325,
+         5088009
+      ],
+      "layers":[
+         {
+            "source":"google",
+            "name":"HYBRID",
+            "title":"Google Hybrid",
+            "visibility":true,
+            "opacity":1,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"osm",
+            "name":"osmarender",
+            "title":"Tiles@home",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"osm",
+            "name":"mapnik",
+            "title":"OpenStreetMap",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"osm",
+            "name":"mapquest",
+            "title":"MapQuest",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"google",
+            "name":"ROADMAP",
+            "title":"Google Roadmap",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"google",
+            "name":"SATELLITE",
+            "title":"Google Satellite",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"google",
+            "name":"TERRAIN",
+            "title":"Google Terrain",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_proteccions",
+            "title":"Àmbit de protecció de sistemes",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_rg_sect2",
+            "title":"Règim del sòl",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_qualificacions",
+            "title":"Qualificacions",
+            "visibility":true,
+            "opacity":0.44,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_rg_sect",
+            "title":"Sectors",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_pati_illa",
+            "title":"Pati d'illa",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_galib",
+            "title":"Gàlib edificatòri",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:cad_ajuntament",
+            "title":"Parcel·lari Ajuntament",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_alcades",
+            "title":"Número de plantes",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_profunditat",
+            "title":"Profunditat edificatoria",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_estudis_detall",
+            "title":"Estudis de detall",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:adm_tm_atermenament_2010",
+            "title":"TM atermenament 2010",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_cotes",
+            "title":"Cotes",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:car_eixos_opengeo",
+            "title":"Eixos carrer",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:car_portals_opengeo",
+            "title":"Portals",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_cataleg_element",
+            "title":"Catàleg d'elements a protegir: Element",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_cataleg_ambit",
+            "title":"Catàleg d'elements a protegir: Àmbit",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png",
+            "styles":"",
+            "transparent":true
+         }
+      ],
+      "center":[
+         219853.84581941,
+         5081832.5781858
+      ],
+      "zoom":14
+   }
 }

@@ -4,9 +4,9 @@
 
 GeoExt.Lang.add("en", {
     "gdxp.StreetSearch.prototype": {
-        titleText: "Search",
+        titleText: "Street Directory",
         streetText: "Street",
-        portalText: "Portal",
+        portalText: "Number",
         loadingText: "Loading..."
     }
 });

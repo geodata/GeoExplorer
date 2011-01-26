@@ -53,7 +53,9 @@ GeoExt.Lang.add("ca", {
         mapInfoText: "Informació del mapa",
         descriptionText: "Descripció",
         contactText: "Contacte",
-        aboutThisMapText: "Quant a aquest mapa"
+        aboutThisMapText: "Quant a aquest mapa",
+        googleGeocoderFieldText: 'Geocodificador de Google',
+        searchersTitleText: 'Cercadors'
     },
     "GeoExplorer.Composer.prototype": {
         publishMapText: "Publica el Mapa",
@@ -74,7 +76,8 @@ GeoExt.Lang.add("ca", {
         loadText: "Obre",
         saveText: "Desa",
         cancelText: "Cancel·la",
-        closeText: "Tanca"
+        closeText: "Tanca",
+        overviewMapText: "Mapa de referència"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Afegeix nou Web Map Service (WMS)...",

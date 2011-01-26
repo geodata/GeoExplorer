@@ -4,7 +4,7 @@
 
 GeoExt.Lang.add("es", {
     "gdxp.StreetSearch.prototype": {
-        titleText: "Buscador",
+        titleText: "Callejero",
         streetText: "Calle",
         portalText: "Número",
         loadingText: "Buscando...",       

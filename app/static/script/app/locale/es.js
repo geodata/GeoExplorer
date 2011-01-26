@@ -53,7 +53,9 @@ GeoExt.Lang.add("es", {
         mapInfoText: "Información del mapa",
         descriptionText: "Descripción",
         contactText: "Contacto",
-        aboutThisMapText: "Acerca de este mapa"
+        aboutThisMapText: "Acerca de este mapa",
+        googleGeocoderFieldText: 'Geocodificador de Google',
+        searchersTitleText: 'Buscadores'
     },
     "GeoExplorer.Composer.prototype": {
         publishMapText: "Publicar Mapa",
@@ -74,7 +76,8 @@ GeoExt.Lang.add("es", {
         loadText: "Abrir",
         saveText: "Guardar",
         cancelText: "Cancelar",
-        closeText: "Cerrar"
+        closeText: "Cerrar",
+        overviewMapText: "Mapa de referencia"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Añadir nuevo Web Map Service (WMS)...",

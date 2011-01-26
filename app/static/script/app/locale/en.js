@@ -53,7 +53,9 @@ GeoExt.Lang.add("en", {
         mapInfoText: "Map Info",
         descriptionText: "Description",
         contactText: "Contact",
-        aboutThisMapText: "About this Map"
+        aboutThisMapText: "About this Map",
+        googleGeocoderFieldText: 'Google Geocoder',
+        searchersTitleText: 'Search engines'
     },
     "GeoExplorer.Composer.prototype": {
         publishMapText: "Publish Map",

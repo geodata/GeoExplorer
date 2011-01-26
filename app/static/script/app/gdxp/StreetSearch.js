@@ -2,9 +2,9 @@
 
 gdxp.StreetSearch = Ext.extend(Ext.Panel, {
     /* i18n */
-    titleText: "Search",
+    titleText: "Street Directory",
     streetText: "Street",
-    portalText: "Portal",
+    portalText: "Number",
     loadingText: "Loading...",
     /* end i18n */
     

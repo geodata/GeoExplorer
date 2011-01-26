@@ -115,6 +115,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     descriptionText: "Description",
     contactText: "Contact",
     aboutThisMapText: "About this Map",
+    googleGeocoderFieldText: 'Google Geocoder',
+    searchersTitleText: 'Search engines',
     // End i18n.
     
     /**
@@ -466,7 +468,6 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var layersContainer = new Ext.Panel({
             autoScroll: true,
             border: false,
-            region: 'center',
             title: this.layersText,
             items: [layerTree],
             tbar: [
@@ -476,26 +477,63 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             ]
         });
         
-        var searchContainer = new gdxp.StreetSearch({
+        var streetSearch = new gdxp.StreetSearch({
+            header: false,
+            border: false,
+            map: this.mapPanel.map
+        });
+
+        this.googleSearch = new Ext.Panel({
+            title: 'Google',
+            header: false,
+            border: false,
+            layout: 'form',
+            labelAlign: 'top'
+        });
+
+        this.on("ready", function(){
+            this.googleSearch.add(new gxp.form.GoogleGeocoderComboBox({
+                bounds: new OpenLayers.Bounds(1.9, 41.42, 2.03, 41.55),
+                anchor: "100%",
+                fieldLabel: this.googleGeocoderFieldText,
+                listeners: {
+                    select: function(combo, record) {
+                        var gg = new OpenLayers.Projection("EPSG:4326");
+                        var sm = this.mapPanel.map.getProjectionObject();
+                        var bounds = record.get("viewport").transform(gg, sm);
+                        this.mapPanel.map.zoomToExtent(bounds, true);
+                    },
+                    scope: this
+                } 
+            }));
+            this.googleSearch.doLayout();
+        }, this);
+        
+        var searchersContainer = new Ext.Panel({
+            title: this.searchersTitleText,
             border: false,
             region: 'north',
-            height: 140,
+            height: 150,
             collapsible: true,
             split: true,
             autoScroll: true,
             ascending: true,
-            map: this.mapPanel.map
+            labelAlign: 'top',
+            width: 250,
+            defaults:{border:false, activeTab:0},
+            items:[{
+                xtype: 'tabpanel',
+                items: [
+                    this.googleSearch,
+                    streetSearch
+                ]
+            }]        
         });
 
         var legendContainer = new GeoExt.LegendPanel({
             title: this.legendText,
             border: false,
-            region: 'south',
-            height: 200,
-            collapsible: true,
-            split: true,
             autoScroll: true,
-            ascending: false,
             map: this.mapPanel.map,
             defaults: {cls: 'legend-item'}
             // TODO: remove when http://trac.geoext.org/ticket/305 is fixed
@@ -504,15 +542,20 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
 
         var westPanel = new Ext.Panel({
             border: true,
+            header: false,
             layout: "border",
             region: "west",
             width: 250,
             split: true,
             collapsible: true,
             collapseMode: "mini",
-            items: [
-                layersContainer, searchContainer, legendContainer
-            ]
+            items: [searchersContainer, {
+                closable: false,
+                layout: 'accordion',
+                region: 'center',
+                layoutConfig:{animate:true},
+                items: [layersContainer, legendContainer]
+            }]
         });
         
         this.toolbar = new Ext.Toolbar({
