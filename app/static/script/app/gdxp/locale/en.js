@@ -8,5 +8,11 @@ GeoExt.Lang.add("en", {
         streetText: "Street",
         portalText: "Number",
         loadingText: "Loading..."
+    },
+    "gdxp.Catastro.prototype": {
+        titleText: "Cadastre",
+        labelText: "Cadatral Reference",
+        loadingText: "Loading...",
+        errorText: "Error accessing Cadaste search service"
     }
 });

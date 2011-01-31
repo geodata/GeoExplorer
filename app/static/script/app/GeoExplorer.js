@@ -490,7 +490,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             layout: 'form',
             labelAlign: 'top'
         });
-
+        
         this.on("ready", function(){
             this.googleSearch.add(new gxp.form.GoogleGeocoderComboBox({
                 bounds: new OpenLayers.Bounds(1.9, 41.42, 2.03, 41.55),
@@ -509,6 +509,18 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             this.googleSearch.doLayout();
         }, this);
         
+        var cadastreSearch = new gdxp.Catastro({
+            header: false,
+            border: false,
+            map: this.mapPanel.map        
+        });
+        
+        var UTMSearch = new gdxp.UTMSearch({
+            header: false,
+            border: false,
+            map: this.mapPanel.map        
+        });
+        
         var searchersContainer = new Ext.Panel({
             title: this.searchersTitleText,
             border: false,
@@ -525,7 +537,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 xtype: 'tabpanel',
                 items: [
                     this.googleSearch,
-                    streetSearch
+                    streetSearch,
+                    cadastreSearch,
+                    UTMSearch
                 ]
             }]        
         });

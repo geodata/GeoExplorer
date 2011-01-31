@@ -8,5 +8,11 @@ GeoExt.Lang.add("ca", {
         streetText: "Carrer",
         portalText: "Número",
         loadingText: "Cercant..."
+    },
+    "gdxp.Catastro.prototype": {
+        titleText: "Cadastre",
+        labelText: "Referència Cadastral",
+        loadingText: "Cercant...",
+        errorText: "Error accedint al cercador de Cadastre"
     }
 });
