@@ -17,9 +17,9 @@ exports.middleware = function(conf) {
             }
 
             if (authConf) {
-				authenticate(req);
-				
-				// Test if user has any of the required roles.
+                authenticate(req);
+            
+                // Test if user has any of the required roles.
                 if (!req.roles || intersect(authConf, req.roles).length == 0) {
                     return(unAuthResponse());
                 }
@@ -29,30 +29,27 @@ exports.middleware = function(conf) {
     }
 };
 
-
-authenticate = function(request) {
+var authenticate = function(request) {
     var roles = null;
 
     if (request.headers.authorization) { // Extract credentials from HTTP.
-        var credentials = base64.decode(request.headers.authorization
-                .replace(/Basic /, '')).split(':');
+        var credentials = base64.decode(request.headers.authorization.replace(/Basic /, '')).split(':');
     
         var authName = credentials[0];
         var authPass = credentials[1];
         
         getGeoServerUsers(request).forEach(function(user) {
-            if(user.name.equals(authName) && user.password.equals(authPass)){
+            if(user.name.equals(authName) && user.password.equals(authPass)) {
                 request.roles = user.roles; // Put roles in request object
             }
         });
     }
 }
 
-
-getGeoServerUsers = function(request) {
+var getGeoServerUsers = function(request) {
     var dataDir;
-	
-	// Choose data_dir location
+   
+   // Choose data_dir location
     if (request) {
         dataDir = request.env.servlet.getServletConfig().getInitParameter("GEOSERVER_DATA_DIR");
     }
@@ -63,11 +60,10 @@ getGeoServerUsers = function(request) {
         );
     }
     var path = FILE.join(dataDir, "security", "users.properties");
-	
 
     // Parse "users.properties" file
     var users = [];
-	FILE.read(path, "r").split(/\r?\n/).forEach(function(line) {
+    FILE.read(path, "r").split(/\r?\n/).forEach(function(line) {
         var name, attr, password;
         
         line = line.match(/^[^#]*(?=#*)/)[0]; // Strip out #comments    	
@@ -75,8 +71,9 @@ getGeoServerUsers = function(request) {
         if(attr) {
             attr = attr.split(",");
         }
+
         // first attribute is password; last attribute should be "enabled"
-        if(attr && attr.length > 2 && attr.pop().trim().equals("enabled")){
+        if(attr && attr.length > 2 && attr.pop().trim().equals("enabled")) {
             password = attr.shift().trim();
             // attributes in between are the roles
             users.push({name: name, password: password, roles: attr});
@@ -86,8 +83,7 @@ getGeoServerUsers = function(request) {
     return users;
 }
 
-
-unAuthResponse = function(){
+var unAuthResponse = function() {
     var msg = '401 Unauthorized';
     return {
         status: 401,
@@ -103,25 +99,25 @@ unAuthResponse = function(){
     };
 }
 
+var intersect = function(a, b) {
+    var x = new Array();
+    var ai = 0;
+    var bi = 0;
 
-intersect = function(a, b) {
-	var x = new Array();
-	var ai = bi = 0;
-	
-	a.sort();
+    a.sort();
     b.sort();
-	
-	while( ai < a.length && bi < b.length ) {
-		if (a[ai] < b[bi]) {
-			ai++;
-		} else if (a[ai] > b[bi]){
-			bi++;
-		} else /* they're equal */ {
-		   x.push(a[ai]);
-		   ai++;
-		   bi++;
-		}
-	}
-		
-	return x;
+
+    while( ai < a.length && bi < b.length ) {
+        if (a[ai] < b[bi]) {
+            ai++;
+        } else if (a[ai] > b[bi]) {
+            bi++;
+        } else { /* they're equal */
+            x.push(a[ai]);
+            ai++;
+            bi++;
+        }
+    }
+      
+    return x;
 }

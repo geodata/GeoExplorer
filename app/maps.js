@@ -96,6 +96,11 @@ var handlers = {
     },
     "POST": function(env) {
         var resp;
+        
+        if (!env.roles || env.roles.indexOf("ROLE_ADMINISTRATOR") < 0) {
+            return createResponse({error: "No write permissions"}, 401);
+        }
+        
         var id = getId(env);
         if (id !== null) {
             resp = createResponse({error: "Can't POST to map " + id}, 405);
@@ -112,6 +117,11 @@ var handlers = {
     },
     "PUT": function(env) {
         var resp;
+
+        if (!env.roles || env.roles.indexOf("ROLE_ADMINISTRATOR") < 0) {
+           return createResponse({error: "No write permissions"}, 401);
+        }
+
         var id = getId(env);
         if (id === null) {
             resp = createResponse({error: "Can't PUT without map id."}, 405);
@@ -130,6 +140,11 @@ var handlers = {
     },
     "DELETE": function(env) {
         var resp;
+
+        if (!env.roles || env.roles.indexOf("ROLE_ADMINISTRATOR") < 0) {
+           return createResponse({error: "No write permissions"}, 401);
+        }
+        
         var id = getId(env);
         if (id === null) {
             resp = createResponse({error: "Can't DELETE without map id."}, 405);
@@ -166,7 +181,7 @@ var getAllMaps = exports.getAllMaps = function(request) {
     );
     var maps = [];
     while (results.next()) {
-    	map = {
+    	var map = {
     		id: results.getInt("id"),
     		config: JSON.parse(String(results.getString("config")))
     	};
@@ -174,6 +189,7 @@ var getAllMaps = exports.getAllMaps = function(request) {
     }
     results.close();
     connection.close();
+    
     // return all maps
     return {maps: maps};
 };
