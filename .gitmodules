@@ -16,3 +16,6 @@
 [submodule "app/static/externals/PrintPreview"]
 	path = app/static/externals/PrintPreview
 	url = git://github.com/GeoNode/PrintPreview.git
+[submodule "externals\\ringojs"]
+	path = externals\\ringojs
+	url = git://github.com/ringo/ringojs.git
