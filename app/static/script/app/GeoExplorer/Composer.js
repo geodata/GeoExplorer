@@ -391,6 +391,14 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
         });
         
         return mapOverviewPanel;
+    },
+    
+    applyConfig: function(config) {
+        // On load map, force resolutions defined in map config, if any
+        GeoExplorer.Composer.superclass.applyConfig.apply(this, [config]);
+        if (config.map.resolutions) {
+            this.mapPanel.map.resolutions = config.map.resolutions;
+        }
     }
 
 });

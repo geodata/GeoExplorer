@@ -483,9 +483,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             map: this.mapPanel.map
         });
 
-        this.googleSearch = new Ext.Panel({
+        this.googleSearch = this.googleSearch || new Ext.Panel({
             title: 'Google',
-            header: false,
+            header: true,
             border: false,
             layout: 'form',
             labelAlign: 'top'
@@ -576,6 +576,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             disabled: true,
             items: this.createTools()
         });
+        
         this.on("ready", function() {
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {
@@ -587,7 +588,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             });
         });
 
-        var googleEarthPanel = new gxp.GoogleEarthPanel({
+        googleEarthPanel = new gxp.GoogleEarthPanel({
             mapPanel: this.mapPanel,
             listeners: {
                 beforeadd: function(record) {
@@ -614,7 +615,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 "beforeselect", updateLayerActions, this
             );
         }, this);
-
+        
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
             region: "center",

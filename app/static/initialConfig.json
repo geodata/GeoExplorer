@@ -3,9 +3,9 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa demostratiu de Castellbisbal (Planejament)",
-      "abstract":"Mapa inicial del planejament de Castellbisbal",
-      "contact":"For more information, contact <a href='http://opengeo.org'>OpenGeo</a>."
+      "title":"Mapa i planejament de Castellbisbal",
+      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
+      "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
    "defaultSourceType":"gx_wmssource",
    "sources":{
@@ -288,5 +288,6 @@
          5081832.5781858
       ],
       "zoom":14
-   }
+   },
+   "logState":function(){console.log(Ext.encode(app.getState()));}
 }

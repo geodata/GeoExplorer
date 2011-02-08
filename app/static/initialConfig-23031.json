@@ -1,0 +1,76 @@
+﻿{
+   "proxy":"proxy/?url=",
+   "printService":"/geoserver/pdf/",
+   "alignToGrid":true,
+   "about":{
+      "title":"Mapa i planejament de Castellbisbal",
+      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
+      "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
+   },
+   "defaultSourceType":"gx_wmssource",
+   "sources":{
+      "icc-tilecache":{
+         "url":"http://sagitari.icc.cat/tilecache/tilecache.py",
+         "title":"ICC-TileCache",
+         "projection":"EPSG:23031"
+      },
+      "local":{
+         "url":"/geoserver/ows",
+         "projection":"EPSG:23031"
+      },
+      "google":{
+         "ptype":"gx_googlesource",
+         "projection":"EPSG:900913"
+      }
+   },
+   "map":{
+      "projection":"EPSG:23031",
+      "units":"m",
+      "resolutions":[
+         25,
+         10,
+         5,
+         2,
+         1,
+         0.5,
+         0.25
+      ],
+      "maxResolution":25,
+      "maxExtent":[
+         258000,
+         4485000,
+         536000,
+         4752000
+      ],
+      "layers":[
+         {
+            "source":"icc-tilecache",
+            "name":"topo",
+            "title":"Mapa topogràfic de Catalunya / ICC",
+            "visibility":false,
+            "opacity":1,
+            "group":"background",
+            "format":"image/jpeg",
+            "styles":"",
+            "transparent":false
+         },
+         {
+            "source":"icc-tilecache",
+            "name":"orto",
+            "title":"Ortofotoimatge de Catalunya / ICC",
+            "visibility":false,
+            "opacity":1,
+            "group":"background",
+            "format":"image/jpeg",
+            "styles":"",
+            "transparent":false
+         }
+      ],
+      "center":[
+         413777.528,
+         4592784.715
+      ],
+      "zoom":1
+   },
+   "logState":function(){console.log(Ext.encode(app.getState()));}
+}
