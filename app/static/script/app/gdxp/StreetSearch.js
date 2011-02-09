@@ -1,22 +1,19 @@
-﻿Ext.namespace("gdxp");
+/**
+ * @requires gdxp/Search.js
+ */
+ 
+Ext.namespace("gdxp");
 
-gdxp.StreetSearch = Ext.extend(Ext.Panel, {
+gdxp.StreetSearch = Ext.extend(gdxp.Search, {
     /* i18n */
     titleText: "Street Directory",
-    streetText: "Street",
-    portalText: "Number",
-    loadingText: "Loading...",
-    /* end i18n */
+    streetLabelText: "Street",
+    portalLabelText: "Number",
+    /* ~i18n */
     
-    /* API properties */
-    map: null, // mandatory
-    projection: null, // defaults to EPSG:23031
-    zoomToScale: 500,
-    baseURL: "http://oslo.geodata.es/geosearch/castellbisbal",
-    /* end API properties */
-    
-    layout: 'form',
-    labelAlign: 'top',
+    /* API */
+    baseURL: null, // mandatory
+    /* ~API */
     
     streetDataStore: null,
     streetCombo: null,
@@ -24,15 +21,10 @@ gdxp.StreetSearch = Ext.extend(Ext.Panel, {
     portalCombo: null,
     
     initComponent: function() {
-        this.title = this.titleText,
-        
-        this.projection = (this.projection || new OpenLayers.Projection("EPSG:23031"));
     
         this.streetDataStore = new Ext.data.Store({
             url: this.baseURL,
-            baseParams: {
-                op: "getStreets"
-            },
+            baseParams: {op: "getStreets"},
             reader: new Ext.data.JsonReader({
                 root: '',
             }, [
@@ -42,7 +34,7 @@ gdxp.StreetSearch = Ext.extend(Ext.Panel, {
         });
 
         this.streetCombo = new Ext.form.ComboBox({
-            fieldLabel: this.streetText,
+            fieldLabel: this.streetLabelText,
             anchor: "100%",
             store: this.streetDataStore,
             minChars: 3,
@@ -85,7 +77,7 @@ gdxp.StreetSearch = Ext.extend(Ext.Panel, {
             triggerAction:  'all',
             forceSelection: true,
             editable:       false,
-            fieldLabel:     this.portalText,
+            fieldLabel:     this.portalLabelText,
             displayField:   'number',
             valueField:     'number',
             store: this.portalDataStore,
@@ -105,16 +97,7 @@ gdxp.StreetSearch = Ext.extend(Ext.Panel, {
     
     loadPortals: function(streetId) {
         this.portalDataStore.reload({
-            params: {
-                street: streetId
-            }
+            params: {street: streetId}
         });
-    },
-    
-    zoomTo: function(x, y) {
-        var point = new OpenLayers.LonLat(x, y);
-        point.transform(this.projection, this.map.getProjectionObject());
-        this.map.zoomToScale(this.zoomToScale);
-        this.map.panTo(point);        
     }
 });

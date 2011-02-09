@@ -476,19 +476,47 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 Ext.apply(new Ext.Button(showPropertiesAction), {text: ""})
             ]
         });
+
         
-        var streetSearch = new gdxp.StreetSearch({
-            header: false,
-            border: false,
+        /* SEARCHERS */
+        var carrererSearch = new gdxp.StreetSearch({
+            baseURL: "http://oslo.geodata.es/geosearch/castellbisbal",
+            map: this.mapPanel.map,
+        });
+        
+        var toponimSearch = new gdxp.TextFieldSearch({
+            titleText: "Topònims",
+            fieldLabelText: "Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, \"can\")",
+            baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
+            layerName: "castellbisbal:top_toponimia",
+            fieldName: "toponim",
+            map: this.mapPanel.map
+        });
+        
+        var equipamentSearch = new gdxp.TextFieldSearch({
+            titleText: "Equipaments",
+            fieldLabelText: "Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, \"casa\")",
+            baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
+            layerName: "castellbisbal:eq_equipaments",
+            fieldName: "nom",
             map: this.mapPanel.map
         });
 
+        var cadastreSearch = new gdxp.CatastroSearch({
+            map: this.mapPanel.map        
+        });
+
+        var UTMSearch = new gdxp.UTMSearch({
+            map: this.mapPanel.map        
+        });
+        
         this.googleSearch = this.googleSearch || new Ext.Panel({
             title: 'Google',
-            header: true,
-            border: false,
             layout: 'form',
-            labelAlign: 'top'
+            labelAlign: 'top',
+            header: false,
+            border: false,
+            anchor: "100%"
         });
         
         this.on("ready", function(){
@@ -509,41 +537,36 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             this.googleSearch.doLayout();
         }, this);
         
-        var cadastreSearch = new gdxp.Catastro({
-            header: false,
-            border: false,
-            map: this.mapPanel.map        
-        });
-        
-        var UTMSearch = new gdxp.UTMSearch({
-            header: false,
-            border: false,
-            map: this.mapPanel.map        
-        });
-        
         var searchersContainer = new Ext.Panel({
             title: this.searchersTitleText,
-            border: false,
             region: 'north',
-            height: 150,
-            collapsible: true,
+            width: 250,
+            height: 180,
             split: true,
+            collapsible: true,
+            border: false,
             autoScroll: true,
             ascending: true,
             labelAlign: 'top',
-            width: 250,
-            defaults:{border:false, activeTab:0},
-            items:[{
-                xtype: 'tabpanel',
-                items: [
-                    this.googleSearch,
-                    streetSearch,
-                    cadastreSearch,
-                    UTMSearch
-                ]
-            }]        
-        });
 
+            defaults: {border: false, activeTab: 0},
+            items: [{
+                xtype: 'tabpanel',
+                enableTabScroll: true,
+                width: "100%",
+                items: [
+                    carrererSearch,
+                    toponimSearch,
+                    equipamentSearch,
+                    cadastreSearch,
+                    UTMSearch,
+                    this.googleSearch
+                ]
+            }]
+        });
+        /* ~SEARCHERS */
+
+        
         var legendContainer = new GeoExt.LegendPanel({
             title: this.legendText,
             border: false,
