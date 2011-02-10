@@ -7,7 +7,7 @@
       "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
-   "defaultSourceType":"gx_wmssource",
+   "defaultSourceType":"gxp_wmssource",
    "sources":{
       "icc-tilecache":{
          "url":"http://sagitari.icc.cat/tilecache/tilecache.py",
@@ -19,7 +19,7 @@
          "projection":"EPSG:23031"
       },
       "google":{
-         "ptype":"gx_googlesource",
+         "ptype":"gxp_googlesource",
          "projection":"EPSG:900913"
       }
    },

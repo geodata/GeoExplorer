@@ -41,9 +41,11 @@ function slash(config) {
 }
 
 exports.middleware = [
+    /*
     require("auth").middleware({
         "/maps": ["ROLE_ADMINISTRATOR", "ROLE_GEOEXPLORER"]
     }),
+    */
     slash(),
     require("ringo/middleware/gzip").middleware,
     require("ringo/middleware/static").middleware({base: module.resolve("static"), index: "index.html"}),

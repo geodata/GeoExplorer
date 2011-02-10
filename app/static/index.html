@@ -11,7 +11,7 @@
             See http://code.google.com/apis/maps/signup.html for information.
         -->
         <script src="http://www.google.com/jsapi?key=ABQIAAAAeDjUod8ItM9dBg5_lz0esxTnme5EwnLVtEDGnh-lFVzRJhbdQhQBX5VH8Rb3adNACjSR5kaCLQuBmw"></script>
-        <script type="text/javascript">google&&google.load("earth", "1")&&google.load("maps", "3.2", {other_params:"sensor=false"});</script>
+        <script type="text/javascript">google&&google.load("earth", "1");</script>
 
         <!-- Ext resources -->
         <link rel="stylesheet" type="text/css" href="externals/ext/resources/css/ext-all.css">
@@ -46,6 +46,12 @@
         <link rel="stylesheet" type="text/css" href="externals/PrintPreview/resources/css/printpreview.css">
         <script type="text/javascript" src="script/PrintPreview.js"></script> 
         <script>
+            Ext.preg("gx_wmssource", gxp.plugins.WMSSource);
+            Ext.preg("gx_olsource", gxp.plugins.OLSource);
+            Ext.preg("gx_googlesource", gxp.plugins.GoogleSource);
+            Ext.preg("gx_bingsource", gxp.plugins.BingSource);
+            Ext.preg("gx_osmsource", gxp.plugins.OSMSource);
+            
             Ext.BLANK_IMAGE_URL = "theme/app/img/blank.gif";
             OpenLayers.DOTS_PER_INCH = 127;
             OpenLayers.ImgPath = "externals/openlayers/img/";

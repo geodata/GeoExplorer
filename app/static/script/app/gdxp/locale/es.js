@@ -1,7 +1,3 @@
-/**
- * Copyright (c) 2009-2010 The Open Planning Project
- */
-
 GeoExt.Lang.add("es", {
     "gdxp.Search.prototype": {
         titleText: "Buscador",
@@ -19,8 +15,12 @@ GeoExt.Lang.add("es", {
     },
     "gdxp.StreetSearch.prototype": {
         titleText: "Callejero",
-        streetText: "Calle",
-        portalText: "Número"
+        streetLabelText: "Calle",
+        portalLabelText: "Número"
+    },
+    "gdxp.GoogleSearch.prototype": {
+        titleText: "Google",
+        labelText: "Geocodificador de Google"
     }
 });
 

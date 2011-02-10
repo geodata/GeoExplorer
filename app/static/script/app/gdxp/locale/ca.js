@@ -1,7 +1,3 @@
-/**
- * Copyright (c) 2009-2010 The Open Planning Project
- */
-
 GeoExt.Lang.add("ca", {
     "gdxp.Search.prototype": {
         titleText: "Cercador",
@@ -21,5 +17,9 @@ GeoExt.Lang.add("ca", {
         titleText: "Carrerer",
         streetLabelText: "Carrer",
         portalLabelText: "Número"
+    },
+    "gdxp.GoogleSearch.prototype": {
+        titleText: "Google",
+        labelText: "Geocodificador de Google"
     }
 });

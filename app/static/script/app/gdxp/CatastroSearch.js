@@ -31,7 +31,7 @@ gdxp.CatastroSearch = Ext.extend(gdxp.Search, {
             }
         });
         
-        this.display = new Ext.form.DisplayField({anchor: "100%"});
+        this.display = new Ext.form.DisplayField({anchor: "100%", value: ' '});
         
         this.items = [this.input, this.display];
 

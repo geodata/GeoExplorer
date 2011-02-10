@@ -115,9 +115,11 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     descriptionText: "Description",
     contactText: "Contact",
     aboutThisMapText: "About this Map",
-    googleGeocoderFieldText: 'Google Geocoder',
     searchersTitleText: 'Search engines',
-    // End i18n.
+    toponimSearchTitleText: 'Placenames',
+    toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
+    equipamentSearchTitleText: 'Equipment',
+    equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")',    // End i18n.
     
     /**
      * private: property[mapPanel]
@@ -485,20 +487,20 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         });
         
         var toponimSearch = new gdxp.TextFieldSearch({
-            titleText: "Topònims",
-            fieldLabelText: "Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, \"can\")",
+            titleText: this.toponimSearchTitleText,
+            labelText: this.toponimSearchLabelText,
             baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
-            layerName: "castellbisbal:top_toponimia",
-            fieldName: "toponim",
+            layer: "castellbisbal:top_toponimia",
+            field: "toponim",
             map: this.mapPanel.map
         });
         
         var equipamentSearch = new gdxp.TextFieldSearch({
-            titleText: "Equipaments",
-            fieldLabelText: "Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, \"casa\")",
+            titleText: this.equipamentSearchTitleText,
+            labelText: this.equipamentSearchLabelText,
             baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
-            layerName: "castellbisbal:eq_equipaments",
-            fieldName: "nom",
+            layer: "castellbisbal:eq_equipaments",
+            field: "nom",
             map: this.mapPanel.map
         });
 
@@ -510,32 +512,10 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             map: this.mapPanel.map        
         });
         
-        this.googleSearch = this.googleSearch || new Ext.Panel({
-            title: 'Google',
-            layout: 'form',
-            labelAlign: 'top',
-            header: false,
-            border: false,
-            anchor: "100%"
+        var googleSearch = new gdxp.GoogleSearch({
+            map: this.mapPanel.map,
+            bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
         });
-        
-        this.on("ready", function(){
-            this.googleSearch.add(new gxp.form.GoogleGeocoderComboBox({
-                bounds: new OpenLayers.Bounds(1.9, 41.42, 2.03, 41.55),
-                anchor: "100%",
-                fieldLabel: this.googleGeocoderFieldText,
-                listeners: {
-                    select: function(combo, record) {
-                        var gg = new OpenLayers.Projection("EPSG:4326");
-                        var sm = this.mapPanel.map.getProjectionObject();
-                        var bounds = record.get("viewport").transform(gg, sm);
-                        this.mapPanel.map.zoomToExtent(bounds, true);
-                    },
-                    scope: this
-                } 
-            }));
-            this.googleSearch.doLayout();
-        }, this);
         
         var searchersContainer = new Ext.Panel({
             title: this.searchersTitleText,
@@ -560,7 +540,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                     equipamentSearch,
                     cadastreSearch,
                     UTMSearch,
-                    this.googleSearch
+                    googleSearch
                 ]
             }]
         });

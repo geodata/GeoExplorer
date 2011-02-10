@@ -54,8 +54,11 @@ GeoExt.Lang.add("es", {
         descriptionText: "Descripción",
         contactText: "Contacto",
         aboutThisMapText: "Acerca de este mapa",
-        googleGeocoderFieldText: 'Geocodificador de Google',
-        searchersTitleText: 'Buscadores'
+        searchersTitleText: 'Buscadores',
+        toponimSearchTitleText: 'Topónimos',
+        toponimSearchLabelText: 'Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, "can")',
+        equipamentSearchTitleText: 'Equipamientos',
+        equipamentSearchLabelText: 'Despliegue para seleccionar un equipamiento; esriba para restringir la bússqueda (por ejemplo, "casa")'
     },
     "GeoExplorer.Composer.prototype": {
         publishMapText: "Publicar Mapa",

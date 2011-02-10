@@ -8,8 +8,8 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
     
     /* API */
     baseURL: null,   // mandatory
-    layerName: null, // mandatory
-    fieldName: null, // mandatory
+    layer: null, // mandatory
+    field: null, // mandatory
     /* ~API */
     
     dataStore: null,
@@ -24,18 +24,18 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
                 version: "1.1",
                 outputFormat: "json",
                 request: "getFeature",
-                typeName: this.layerName
+                typeName: this.layer
             },
             remoteSort: false,
-            sortInfo: {
+            sortInfo: { // This sort is case sensitive
                 field: 'name',
-                direction: 'ASC' // This is case sensitive...
+                direction: 'ASC' 
             },
             reader: new Ext.data.JsonReader({
                 root: 'features',
             }, [
                 {name: 'id', mapping: 'id'},
-                {name: 'name', mapping: 'properties.'+this.fieldName},
+                {name: 'name', mapping: 'properties.'+this.field},
                 {name: 'geom', mapping: 'geometry'}
             ])
         });
@@ -59,7 +59,7 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
                 },
                 beforequery: function(e) {
                     // if(e.query.length > 1) { // minChars: 2
-                        e.query = this.fieldName + " LIKE '" + e.query + "%'"; // This is CQL for "text starts with..."
+                        e.query = this.field + " LIKE '" + e.query + "%'"; // This is CQL for "text starts with..."
                     //} else {
                     //    return false;
                     //}

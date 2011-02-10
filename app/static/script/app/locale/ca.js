@@ -54,8 +54,11 @@ GeoExt.Lang.add("ca", {
         descriptionText: "Descripció",
         contactText: "Contacte",
         aboutThisMapText: "Quant a aquest mapa",
-        googleGeocoderFieldText: 'Geocodificador de Google',
-        searchersTitleText: 'Cercadors'
+        searchersTitleText: 'Cercadors',
+        toponimSearchTitleText: 'Topònims',
+        toponimSearchLabelText: 'Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, "can")',
+        equipamentSearchTitleText: 'Equipaments',
+        equipamentSearchLabelText: 'Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, "casa")'
     },
     "GeoExplorer.Composer.prototype": {
         publishMapText: "Publica el Mapa",

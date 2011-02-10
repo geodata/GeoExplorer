@@ -344,8 +344,10 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
         GeoExplorer.Composer.superclass.initPortal.apply(this);
        
         this.on("ready", function(){
-            var mapOverview = this.createMapOverview();
-            this.mapPanel.add(mapOverview);
+            if(!this.mapOverview) {
+                this.mapOverview = this.createMapOverview();
+            }
+            this.mapPanel.add(this.mapOverview);
             this.mapPanel.doLayout();
         }, this);
     },
