@@ -1,25 +1,77 @@
 /**
+ * Copyright (c) 2011 Geodata Sistemas
+ */
+
+/**
  * @requires gdxp/Search.js
  */
  
 Ext.namespace("gdxp");
 
+/** api: (define)
+ *  module = gdxp
+ *  class = TextFieldSearch
+ *  extends = gdxp.Search
+ */
+
+/** api: constructor
+ *  .. class:: TextFieldSearch()
+ *
+ *      Connects to a GeoServer WFS service to locate features
+ *      by one of its text attributes.
+ *      
+ *      It is GeoServer specific because it uses CQL filters
+ *      and GeoJSON response format. A more generic approach
+ *      would use WFS filters and GML.
+ *      
+ *      Must specify:
+ *       * 'baseURL' the GeoServer WFS service,
+ *       * 'layer' the layer name,
+ *       * 'field' the field name to search for.
+ */
 gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
     
-    /* API */
-    baseURL: null,   // mandatory
-    layer: null, // mandatory
-    field: null, // mandatory
-    /* ~API */
+    /** api: config[baseURL]
+     *  ``String``
+     *  
+     *  GeoServer WFS service endpoint. Required.
+     */ 
+    baseURL: null,
     
+    /** api: config[baseURL]
+     *  ``String``
+     *  
+     *  GeoServer WFS service layer name. Required.
+     */ 
+    layer: null,
+
+    /** api: config[baseURL]
+     *  ``String``
+     *  
+     *  Layer's text field to search for. Required.
+     */
+    field: null,
+    
+    /** private: property[streetDataStore]
+     *  ``Ext.data.Store`` Where field values are loaded.
+     */    
     dataStore: null,
+    
+    /** private: property[streetCombo]
+     *  ``Ext.form.ComboBox`` Where field values are displayed.
+     */
     combo: null,
     
+    /** private: method[initComponent]
+     * 
+     *  Instantiates datastore and combo.
+     */
     initComponent: function() {
     
         this.dataStore = new Ext.data.Store({
             url: this.baseURL,
             baseParams: {
+                // WFS request static parameters
                 service: "WFS",
                 version: "1.1",
                 outputFormat: "json",
@@ -54,12 +106,14 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
             itemSelector: 'div.search-item',
             listeners: {
                 select: function(combo, record, index) {
-                    var p = new OpenLayers.Format.GeoJSON().read(record.data.geom, "Geometry").getCentroid();
-                    this.zoomTo(p.x, p.y);
+                    var p = new OpenLayers.Format.GeoJSON().read(record.get("geom"), "Geometry").getCentroid();
+                    this.showLocation(p.x, p.y, record.get("name"));
                 },
                 beforequery: function(e) {
-                    // if(e.query.length > 1) { // minChars: 2
-                        e.query = this.field + " LIKE '" + e.query + "%'"; // This is CQL for "text starts with..."
+                    // This would implement minChars -- commented out
+                    // if(e.query.length > 1) {
+                        // CQL syntax for "text starts with..."
+                        e.query = this.field + " LIKE '" + e.query + "%'";
                     //} else {
                     //    return false;
                     //}
@@ -74,3 +128,5 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
         
     }
 });
+
+Ext.reg('gdxp_textfieldsearch', gdxp.TextFieldSearch);

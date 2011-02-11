@@ -1,19 +1,52 @@
 ﻿/**
+ * Copyright (c) 2011 Geodata Sistemas
+ */
+
+/**
  * @requires gdxp/Search.js
  */
- 
+
 Ext.namespace("gdxp");
 
+/** api: (define)
+ *  module = gdxp
+ *  class = UTMSearch
+ *  extends = gdxp.Search
+ */
+
+
+/** api: constructor
+ *  .. class:: UTMSearch()
+ *
+ *     Not a search engine at all. Just moves map to the specified point.
+ *
+ */
 gdxp.UTMSearch = Ext.extend(gdxp.Search, {
+    
     /* i18n */
     titleText: "UTM",
     labelText: "Type coordinate pair and press ENTER (example: X '415165', Y '4592355')",
     /* ~i18n */
 
+    /** private: property[inputX]
+     *  ``Ext.form.TextField`` The X coordinate.
+     */
     inputX: null,
-    inputY: null,
-    labelAlign: '',
     
+    /** private: property[inputX]
+     *  ``Ext.form.TextField`` The Y coordinate.
+     */    
+    inputY: null,
+
+    /** private: property[labelAlign]
+     *  ``String`` GUI sugar.
+     */
+    labelAlign: '',
+
+    /** private: method[initComponent]
+     * 
+     *  Instantiates inputs.
+     */    
     initComponent: function() {
         
         this.inputX = new Ext.form.TextField({
@@ -38,11 +71,21 @@ gdxp.UTMSearch = Ext.extend(gdxp.Search, {
 
         gdxp.UTMSearch.superclass.initComponent.apply(this, arguments);
     },
-    
+
+    /** private: method[onKeyPress]
+     * 
+     *  Captures the ENTER key to trigger showLocation.
+     */     
     onKeyPress: function(field, e) {
         if (e.getKey() == e.ENTER) {
-            this.zoomTo(this.inputX.getValue(), this.inputY.getValue());
-        }        
+            // TODO: Validate coordinate values; restrict to a given BBOX.
+            var x = this.inputX.getValue();
+            var y = this.inputY.getValue();
+            var text = "X: '"+x+"', Y:'"+y+"'";
+            this.showLocation(x, y, text);
+        }
     }
     
 });
+
+Ext.reg('gdxp_utmsearch', gdxp.UTMSearch);
