@@ -1,14 +1,7 @@
-﻿/**
+/**
  * Copyright (c) 2009-2010 The Open Planning Project
  *
  * @requires GeoExplorer.js
- */
-
-/**
- * api: (define)
- * module = GeoExplorer
- * class = GeoExplorer.Composer(config)
- * extends = GeoExplorer
  */
 
 /** api: constructor
@@ -19,27 +12,81 @@
 GeoExplorer.Composer = Ext.extend(GeoExplorer, {
 
     // Begin i18n.
-    publishMapText: "Publish Map",
     saveMapText: "Save Map",
-    mapSizeText: "Map Size",
-    miniText: "Mini",
-    smallText: "Small",
-    largeText: "Large",
-    heightText: "Height",
-    widthText: "Width",
     exportMapText: "Export Map",
-    embedText: "Your map is ready to be published to the web! Simply copy the following HTML to embed the map in your website:",
-    loadMapText: "Load Map",
-    editMapPropertiesText: "Edit map properties",
-    abstractText: "Abstract",
-    availableMapsText: "Available Maps",
-    deleteMapText: "Delete Map",
-    loadText: "Load",
-    saveText: "Save",
-    cancelText: "Cancel",
-    closeText: "Close",
-    overviewMapText: "Map Overview",
+    toolsTitle: "Choose tools to include in the toolbar:",
+    previewText: "Preview",
+    backText: "Back",
+    nextText: "Next",
     // End i18n.
+
+    constructor: function(config) {
+        
+        config.tools = [
+            {
+                ptype: "gxp_layertree",
+                outputConfig: {
+                    id: "layertree"
+                },
+                outputTarget: "tree"
+            }, {
+                ptype: "gxp_legend",
+                outputTarget: 'legend',
+                outputConfig: {autoScroll: true}
+            }, {
+                ptype: "gxp_addlayers",
+                actionTarget: "tree.tbar",
+                upload: true
+            }, {
+                ptype: "gxp_removelayer",
+                actionTarget: ["tree.tbar", "layertree.contextMenu"]
+            }, {
+                ptype: "gxp_layerproperties",
+                actionTarget: ["tree.tbar", "layertree.contextMenu"]
+            }, {
+                ptype: "gxp_styler",
+                actionTarget: ["tree.tbar", "layertree.contextMenu"]
+            }, {
+                ptype: "gxp_zoomtolayerextent",
+                actionTarget: {target: "layertree.contextMenu", index: 0}
+            }, {
+                ptype: "gxp_navigation", toggleGroup: this.toggleGroup,
+                actionTarget: {target: "paneltbar", index: 6}
+            }, {
+                ptype: "gxp_wmsgetfeatureinfo", toggleGroup: this.toggleGroup,
+                actionTarget: {target: "paneltbar", index: 7}
+            }, {
+                ptype: "gxp_featuremanager",
+                id: "featuremanager",
+                maxFeatures: 20
+            }, {
+                ptype: "gxp_featureeditor",
+                featureManager: "featuremanager",
+                autoLoadFeatures: true,
+                toggleGroup: this.toggleGroup,
+                actionTarget: {target: "paneltbar", index: 8}
+            }, {
+                ptype: "gxp_measure", toggleGroup: this.toggleGroup,
+                actionTarget: {target: "paneltbar", index: 10}
+            }, {
+                ptype: "gxp_zoom",
+                actionTarget: {target: "paneltbar", index: 11}
+            }, {
+                ptype: "gxp_navigationhistory",
+                actionTarget: {target: "paneltbar", index: 13}
+            }, {
+                ptype: "gxp_zoomtoextent",
+                actionTarget: {target: "paneltbar", index: 15}
+            }, {
+                ptype: "gxp_print",
+                printService: config.printService,
+                actionTarget: {target: "paneltbar", index: 5}
+            }
+        ];
+        
+        GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
+    }, 
+    
 
     /**
      * api: method[createTools]
@@ -57,9 +104,9 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
 
         tools.unshift("-");
         tools.unshift(new Ext.Button({
-            tooltip: this.publishMapText,
+            tooltip: this.exportMapText,
             handler: function() {
-                this.editMapDescription(this.showEmbedWindow);
+                this.save(this.showEmbedWindow);
             },
             scope: this,
             iconCls: 'icon-export'
@@ -67,277 +114,96 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
         tools.unshift(new Ext.Button({
             tooltip: this.saveMapText,
             handler: function() {
-                this.editMapDescription(this.showUrl);
+                this.save(this.showUrl);
             },
             scope: this,
             iconCls: "icon-save"
-        }));
-        tools.unshift(new Ext.Button({
-            tooltip: this.loadMapText,
-            handler: function() {
-                this.loadMapWindow();
-            },
-            scope: this,
-            iconCls: 'icon-load'
         }));
         tools.unshift("-");
         tools.unshift(aboutButton);
         return tools;
     },
 
+    /** private: method[openPreview]
+     */
+    openPreview: function(embedMap) {
+        var preview = new Ext.Window({
+            title: this.previewText,
+            layout: "fit",
+            items: [{border: false, html: embedMap.getIframeHTML()}]
+        });
+        preview.show();
+        var body = preview.items.get(0).body;
+        var iframe = body.dom.firstChild;
+        var loading = new Ext.LoadMask(body);
+        loading.show();
+        Ext.get(iframe).on('load', function() { loading.hide(); });
+    },
+
     /** private: method[showEmbedWindow]
      */
     showEmbedWindow: function() {
+       var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle, 
+           autoScroll: true,
+           root: {
+               nodeType: 'async', 
+               expanded: true, 
+               children: this.viewerTools
+           }, 
+           rootVisible: false,
+           id: 'geobuilder-0'
+       });
 
-        // TODO: Get rid of viewer.html
-        var obj = OpenLayers.Util.createUrlObject("viewer.html");
-        var port = (obj.port === "80") ? "" : ":" + obj.port;
-        var url = obj.protocol + "//" + obj.host + port + obj.pathname + "#maps/" + this.id;
+       var previousNext = function(incr){
+           var l = Ext.getCmp('geobuilder-wizard-panel').getLayout();
+           var i = l.activeItem.id.split('geobuilder-')[1];
+           var next = parseInt(i, 10) + incr;
+           l.setActiveItem(next);
+           Ext.getCmp('wizard-prev').setDisabled(next==0);
+           Ext.getCmp('wizard-next').setDisabled(next==1);
+           if (incr == 1) {
+               this.save();
+           }
+       };
 
-        var snippetArea = new Ext.form.TextArea({
-            height: 70,
-            selectOnFocus: true,
-            readOnly: true
-        });
- 
-        var updateSnippet = function() {
-            snippetArea.setValue(
-                '<iframe height="' + heightField.getValue() +
-                ' " width="' + widthField.getValue() + '" src="' + url + '"> </iframe>'
-            );
-        };
+       var embedMap = new gxp.EmbedMapDialog({
+           id: 'geobuilder-1',
+           url: "viewer" + "#maps/" + this.id
+       });
 
-        var heightField = new Ext.form.NumberField({
-            width: 50,
-            value: 400,
-            listeners: {change: updateSnippet}
-        });
-        var widthField = new Ext.form.NumberField({
-            width: 50,
-            value: 600,
-            listeners: {change: updateSnippet}
-        });        
+       var wizard = {
+           id:'geobuilder-wizard-panel',
+           layout:'card',
+           activeItem: 0,
+           defaults: {border:false, hideMode:'offsets'},
+           bbar: [{
+               id: 'preview',
+               text: this.previewText,
+               handler: function() {
+                   this.save(this.openPreview.createDelegate(this, [embedMap]));
+               },
+               scope: this
+           }, '->', {
+               id: 'wizard-prev',
+               text: this.backText,
+               handler: previousNext.createDelegate(this, [-1]),
+               scope: this,
+               disabled: true
+           },{
+               id: 'wizard-next',
+               text: this.nextText,
+               handler: previousNext.createDelegate(this, [1]),
+               scope: this
+           }],
+           items: [toolsArea, embedMap]
+       };
 
-        var adjustments = new Ext.Container({
-            layout: "column",
-            defaults: {
-                border: false,
-                xtype: "box"
-            },
-            items: [
-                {autoEl: {cls: "gx-field-label", html: this.mapSizeText}},
-                new Ext.form.ComboBox({
-                    editable: false,
-                    width: 70,
-                    store: new Ext.data.SimpleStore({
-                        fields: ["name", "height", "width"],
-                        data: [
-                            [this.miniText, 100, 100],
-                            [this.smallText, 200, 300],
-                            [this.largeText, 400, 600]
-                        ]
-                    }),
-                    triggerAction: 'all',
-                    displayField: 'name',
-                    value: this.largeText,
-                    mode: 'local',
-                    listeners: {
-                        select: function(combo, record, index) {
-                            widthField.setValue(record.get("width"));
-                            heightField.setValue(record.get("height"));
-                            updateSnippet();
-                        }
-                    }
-                }),
-                {autoEl: {cls: "gx-field-label", html: this.heightText}},
-                heightField,
-                {autoEl: {cls: "gx-field-label", html: this.widthText}},
-                widthField
-            ]
-        });
-
-        var win = new Ext.Window({
-            height: 205,
-            width: 350,
-            modal: true,
-            title: this.exportMapText,
-            layout: "fit",
-            items: [{
-                xtype: "container",
-                border: false,
-                defaults: {
-                    border: false,
-                    cls: "gx-export-section",
-                    xtype: "container",
-                    layout: "fit"
-                },
-                items: [{
-                    xtype: "box",
-                    autoEl: {
-                        tag: "p",
-                        html: this.embedText
-                    }
-                }, {
-                    items: [snippetArea]
-                }, {
-                    items: [adjustments]
-                }]
-            }],
-            listeners: {afterrender: updateSnippet}
-        });
-        win.show();
-    },
-    
-    loadMapWindow: function() {
-
-        var loadMap = function() {
-            var record = Ext.getCmp('mapGridPanel').getSelectionModel().getSelected();
-            if (!record) {
-                return false;
-            }
-            window.location.hash = "#maps/" + record.get("id");
-            app.loadConfig(record.get("config"));
-            Ext.getCmp('mapGridWindow').close();
-        };
-
-        var removeMap = function() {
-            var grid = Ext.getCmp('mapGridPanel');
-            var rec = grid.getSelectionModel().getSelected();
-            if (!rec) {
-                return false;
-            }
-            grid.store.remove(rec);
-            mapStore.reload();
-        };
-
-        var mapStore = new Ext.data.JsonStore({
-            autoDestroy: true,
-            autoLoad: true,
-            restful: true,
-            url: 'maps',
-            storeId: 'maps',
-            root: 'maps',
-            idProperty: 'id',
-            fields: [
-                'id',
-                {name:'title', mapping: 'config.about.title'},
-                {name:'abstract', mapping: 'config.about.abstract'},
-                'config'
-            ],
-            writer: new Ext.data.JsonWriter({
-                encode: true, writeAllFields: true
-            })
-        });
-
-        var expander = new Ext.grid.RowExpander({
-            tpl: new Ext.Template(this.abstractTemplateText)
-        });
-        
-        var mapGridPanel = new Ext.grid.GridPanel({
-            id: "mapGridPanel",
-            layout: "fit",
-            region: "center",
-            autoScroll: true,
-            autoExpandColumn: "title",
-            store: mapStore,
-            plugins: [expander],
-            colModel: new Ext.grid.ColumnModel([
-                expander,
-                {id: "title", header: this.titleText, dataIndex: "title", sortable: true},
-                {header: this.idText, dataIndex: "id", width: 40, sortable: true}
-            ]),
-            listeners: {
-                rowdblclick: loadMap,
-                scope: this
-            }
-        });
-
-        var mapGridWindow = new Ext.Window({
-            title: this.availableMapsText,
-            id: "mapGridWindow",
-            layout: "border",
-            height: 300,
-            width: 450,
-            modal: true,
-            items: [mapGridPanel],
-            bbar: [
-                new Ext.Button({
-                    text: this.deleteMapText,
-                    iconCls: "icon-removemap",
-                    handler: removeMap,
-                    scope : this
-                }),
-                "->",
-                new Ext.Button({
-                    text: this.loadMapText,
-                    iconCls: "icon-loadmap",
-                    handler: loadMap,
-                    scope : this
-                }),
-                new Ext.Button({
-                    text: this.closeText,
-                    handler: function() {
-                        Ext.getCmp('mapGridWindow').close();
-                    }
-                })
-            ]
-        }).show();
-    },
-
-    // Edit map properties before saving
-    editMapDescription: function(callback, scope) {
-
-        var form = new Ext.form.FormPanel({
-            labelAlign: 'top',
-            layout: 'form',
-            bodyStyle: "padding: 5px;border:0;background-color:transparent;",
-            defaults: {
-                anchor: "100%",
-                xtype:"textarea"
-            },
-            items: [{
-                name: "title",
-                xtype: "textfield",
-                fieldLabel: this.titleText,
-                value: this.about.title
-            },{
-                name: "contact",
-                fieldLabel: this.contactText,
-                value: this.about.contact,
-                height: 40
-            },{
-                name: "abstract",
-                fieldLabel: this.abstractText,
-                value: this.about["abstract"],
-                anchor: "100% -113"
-            }]
-        });
-
-        new Ext.Window({
-            width: 360, height: 280,
-            title: this.editMapPropertiesText,
-            id: "save-about",
+       new Ext.Window({
             layout: 'fit',
-            items: form,
-            modal: true,
-            buttons: [{
-                text: this.saveText,
-                handler: function(){
-                    var f = form.getForm();
-                    this.about.title = f.findField('title').getValue();
-                    this.about["abstract"] = f.findField('abstract').getValue();
-                    this.about.contact = f.findField('contact').getValue();
-                    GeoExplorer.Composer.superclass.save.apply(this, [callback, scope]);
-                    Ext.getCmp('save-about').close();
-                },
-                scope: this
-            },{
-                text: this.cancelText,
-                handler: function(btn){
-                    Ext.getCmp('save-about').close();
-                }
-            }]
-        }).show();
+            width: 500, height: 300,
+            title: this.exportMapText,
+            items: [wizard]
+       }).show();
     }
 
 });

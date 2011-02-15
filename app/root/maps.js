@@ -1,5 +1,5 @@
-var SQLITE = require("./sqlite");
-var {Request} = require("ringo/webapp/request");
+var SQLITE = require("../sqlite");
+var Request = require("ringo/webapp/request").Request;
 var FILE = require("fs");
 
 var System = Packages.java.lang.System;
@@ -84,7 +84,7 @@ var handlers = {
         var id = getId(env);
         if (id === null) {
             // retrieve all map identifiers
-            resp = createResponse(getAllMaps(env));
+            resp = createResponse(getMapList(env));
         } else if (id === false) {
             // invalid id
             resp = createResponse({error: "Invalid map id."}, 400);
@@ -96,11 +96,6 @@ var handlers = {
     },
     "POST": function(env) {
         var resp;
-        
-        if (!env.roles || env.roles.indexOf("ROLE_ADMINISTRATOR") < 0) {
-            return createResponse({error: "No write permissions"}, 401);
-        }
-        
         var id = getId(env);
         if (id !== null) {
             resp = createResponse({error: "Can't POST to map " + id}, 405);
@@ -117,11 +112,6 @@ var handlers = {
     },
     "PUT": function(env) {
         var resp;
-
-        if (!env.roles || env.roles.indexOf("ROLE_ADMINISTRATOR") < 0) {
-           return createResponse({error: "No write permissions"}, 401);
-        }
-
         var id = getId(env);
         if (id === null) {
             resp = createResponse({error: "Can't PUT without map id."}, 405);
@@ -140,11 +130,6 @@ var handlers = {
     },
     "DELETE": function(env) {
         var resp;
-
-        if (!env.roles || env.roles.indexOf("ROLE_ADMINISTRATOR") < 0) {
-           return createResponse({error: "No write permissions"}, 401);
-        }
-        
         var id = getId(env);
         if (id === null) {
             resp = createResponse({error: "Can't DELETE without map id."}, 405);
@@ -157,47 +142,39 @@ var handlers = {
     }
 };
 
-var getMapIds = exports.getMapIds = function(request) {
+var getMapList = exports.getMapList = function(request) {
     var connection = SQLITE.open(getDb(request));
     var statement = connection.createStatement();
     var results = statement.executeQuery(
-        "SELECT id FROM maps;"
+        "SELECT id, config FROM maps;"
     );
-    var ids = [];
+    var items = [];
+    var config;
     while (results.next()) {
-        ids.push(results.getInt("id"));
+        config = JSON.parse(results.getString("config"));
+        items.push({
+            id: results.getInt("id"), 
+            title: config.about && config.about.title,
+            "abstract": config.about && config.about["abstract"],
+            created: config.created,
+            modified: config.modified
+        });
     }
     results.close();
     connection.close();
-    // return all ids
-    return {ids: ids};
-};
-
-var getAllMaps = exports.getAllMaps = function(request) {
-    var connection = SQLITE.open(getDb(request));
-    var statement = connection.createStatement();
-    var results = statement.executeQuery(
-        "SELECT * FROM maps;"
-    );
-    var maps = [];
-    while (results.next()) {
-    	var map = {
-    		id: results.getInt("id"),
-    		config: JSON.parse(String(results.getString("config")))
-    	};
-        maps.push(map);
-    }
-    results.close();
-    connection.close();
-    
-    // return all maps
-    return {maps: maps};
+    // return all items
+    return {maps: items};
 };
 
 var createMap = exports.createMap = function(config, request) {
-    if (typeof config !== "string") {
-        config = JSON.stringify(config);
+    if (typeof config === "string") {
+        config = JSON.parse(config);
     }
+    // add creation & modified date
+    var now = Date.now();
+    config.created = now;
+    config.modified = now;
+    config = JSON.stringify(config);
     var connection = SQLITE.open(getDb(request));
     // store the new map config
     var prep = connection.prepareStatement(
@@ -237,9 +214,12 @@ var readMap = exports.readMap = function(id, request) {
 };
 
 var updateMap = exports.updateMap = function(id, config, request) {
-    if (typeof config !== "string") {
-        config = JSON.stringify(config);
+    if (typeof config === "string") {
+        config = JSON.parse(config);
     }
+    // update modified date
+    config.modified = Date.now();
+    config = JSON.stringify(config);
     var result;
     var connection = SQLITE.open(getDb(request));
     var prep = connection.prepareStatement(

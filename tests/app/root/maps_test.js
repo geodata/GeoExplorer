@@ -1,6 +1,6 @@
 var assert = require("assert");
 var fs = require("fs");
-var maps = require("../../app/maps");
+var maps = require("../../../app/root/maps");
 
 var System = Packages.java.lang.System;
 
@@ -25,7 +25,20 @@ exports["test: create"] = function() {
     var response = maps.createMap(config);
     assert.ok(response, "got a response");
     assert.ok("id" in response, "response includes map id");
+
+};
+
+exports["test: list"] = function() {
     
+    maps.createMap({"about": {"title": "test 1"}});
+    var items = maps.getMapList().maps;
+    assert.equal(items.length, 1, "got one item");
+    assert.equal(items[0].title, "test 1")
+    
+    maps.createMap({"about": {"title": "test 2"}});    
+    var items = maps.getMapList().maps;
+    assert.equal(items.length, 2, "got two items");
+
 };
 
 exports["test: read"] = function() {
@@ -34,6 +47,11 @@ exports["test: read"] = function() {
     var response = maps.createMap(config);
     
     var got = maps.readMap(response.id);
+    
+    // confirm created & modified are added
+    assert.equal(typeof got.created, "number", "created member");
+    assert.equal(typeof got.modified, "number", "modified member");
+    
     assert.deepEqual(got, config, "map config stored");
 
     assert.throws(function() {
@@ -52,6 +70,8 @@ exports["test: update"] = function() {
     maps.updateMap(response.id, updated);
     var got = maps.readMap(response.id);
     assert.deepEqual(got, updated, "map config updated");
+    
+    assert.isTrue(updated.modified > config.modified, "update increases modified date");
 
     assert.throws(function() {
         maps.updateMap("xxx", config)
@@ -64,12 +84,12 @@ exports["test: delete"] = function() {
     var config = {"test": "delete"};
     var response = maps.createMap(config);
     
-    var {ids} = maps.getMapIds();
-    assert.ok(ids.indexOf(response.id) > -1, "map index in list before delete");
+    var items = maps.getMapList().maps;
+    assert.equal(items.length, 1, "one item before deletion");
 
     maps.deleteMap(response.id);
-    var {ids} = maps.getMapIds();
-    assert.ok(ids.indexOf(response.id) < 0, "map index not in list after delete")
+    var items = maps.getMapList().maps;
+    assert.equal(items.length, 0, "no items after deletion");
     
     assert.throws(function() {
         maps.readMap(response.id)
@@ -155,3 +175,7 @@ exports["test: getDb(precedence)"] = function() {
     
 };
 
+// start the test runner if we're called directly from command line
+if (require.main == module.id) {
+    system.exit(require("test").run(exports));
+}

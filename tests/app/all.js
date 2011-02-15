@@ -1,5 +1,5 @@
-exports["test: maps"] = require("./maps_test");
+exports["test: root"] = require("./root/all");
 
 if (require.main == module || require.main == module.id) {
-    require("test").run(exports);
+    system.exit(require("test").run(exports));
 }
