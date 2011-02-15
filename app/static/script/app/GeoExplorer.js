@@ -63,6 +63,11 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     descriptionText: "Description",
     contactText: "Contact",
     aboutThisMapText: "About this Map",
+    searchersTitleText: 'Search engines',
+    toponimSearchTitleText: 'Placenames',
+    toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
+    equipamentSearchTitleText: 'Equipment',
+    equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")',
     // End i18n.
     
     /**
@@ -219,6 +224,61 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         });
         /* ~OVERVIEW */
 
+        /* SEARCHERS */
+        var searchersContainer = {
+            xtype: 'panel', // The searchers container
+            title: this.searchersTitleText,
+            region: 'north',
+            width: 250,
+            height: 180,
+            split: true,
+            collapsible: true,
+            border: false,
+            autoScroll: true,
+            ascending: true,
+            labelAlign: 'top',
+            defaults: {
+                border: false,
+                activeTab: 0
+            },
+            items: [{
+                xtype: 'tabpanel', // The tabs
+                enableTabScroll: true,
+                width: "100%",
+                defaults: {
+                    map: this.mapPanel.map
+                },
+                items: [ // The search engines
+                    {
+                        xtype: 'gdxp_streetsearch',
+                        baseURL: "http://oslo.geodata.es/geosearch/castellbisbal"
+                    },{
+                        xtype: 'gdxp_textfieldsearch',
+                        titleText: this.toponimSearchTitleText,
+                        labelText: this.toponimSearchLabelText,
+                        baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
+                        layer: "castellbisbal:top_toponimia",
+                        field: "toponim"
+                    },{
+                        xtype: 'gdxp_textfieldsearch',
+                        titleText: this.equipamentSearchTitleText,
+                        labelText: this.equipamentSearchLabelText,
+                        baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
+                        layer: "castellbisbal:eq_equipaments",
+                        field: "nom"
+                    },{
+                        xtype: 'gdxp_catastrosearch'
+                    },{
+                        xtype: 'gdxp_utmsearch'
+                    },{
+                        xtype: 'gdxp_googlesearch',
+                        bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
+                    }
+                ]
+            }]
+        };
+        /* ~SEARCHERS */
+
         var westPanel = new Ext.Panel({
             border: false,
             layout: "border",
@@ -229,9 +289,10 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             collapseMode: "mini",
             header: false,
             items: [
+                searchersContainer,
                 {region: 'center', autoScroll: true, tbar: [], border: false, id: 'tree', title: this.layersText}, 
                 {region: 'south', xtype: "container", layout: "fit", border: false, height: 200, id: 'legend'}
-            ]
+           ]
         });
         
         this.toolbar = new Ext.Toolbar({

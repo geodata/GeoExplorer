@@ -20,7 +20,12 @@ GeoExt.Lang.add("en", {
         mapInfoText: "Map Info",
         descriptionText: "Description",
         contactText: "Contact",
-        aboutThisMapText: "About this Map"
+        aboutThisMapText: "About this Map",
+        searchersTitleText: 'Search engines',
+        toponimSearchTitleText: 'Placenames',
+        toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
+        equipamentSearchTitleText: 'Equipment',
+        equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")'
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Export Map",
