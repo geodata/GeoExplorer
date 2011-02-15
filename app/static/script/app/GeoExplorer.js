@@ -212,6 +212,13 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
 
+        /* OVERVIEW */        
+        this.mapPanel.add({
+            xtype: 'gdxp_iccoverviewmap',
+            map: this.mapPanel.map
+        });
+        /* ~OVERVIEW */
+
         var westPanel = new Ext.Panel({
             border: false,
             layout: "border",
