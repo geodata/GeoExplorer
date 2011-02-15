@@ -9,18 +9,13 @@
    },
    "defaultSourceType":"gxp_wmssource",
    "sources":{
-      "icc-tilecache":{
-         "url":"http://sagitari.icc.cat/tilecache/tilecache.py",
-         "title":"ICC-TileCache",
-         "projection":"EPSG:23031"
-      },
       "local":{
          "url":"/geoserver/ows",
          "projection":"EPSG:23031"
       },
-      "google":{
-         "ptype":"gxp_googlesource",
-         "projection":"EPSG:900913"
+      "icc":{
+         "ptype":"gdxp_icc_tilecache",
+         "projection":"EPSG:23031"
       }
    },
    "map":{
@@ -44,33 +39,38 @@
       ],
       "layers":[
          {
-            "source":"icc-tilecache",
-            "name":"topo",
-            "title":"Mapa topogràfic de Catalunya / ICC",
+            "source":"icc",
+            "name":"orto",
             "visibility":false,
-            "opacity":1,
             "group":"background",
-            "format":"image/jpeg",
-            "styles":"",
-            "transparent":false
+            "fixed":true,
+            "selected":false
          },
          {
-            "source":"icc-tilecache",
-            "name":"orto",
-            "title":"Ortofotoimatge de Catalunya / ICC",
-            "visibility":false,
-            "opacity":1,
+            "source":"icc",
+            "name":"topo",
+            "visibility":true,
             "group":"background",
-            "format":"image/jpeg",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"local",
+            "name":"castellbisbal:plan_qualificacions",
+            "title":"Qualificacions",
+            "visibility":true,
+            "opacity":0.44,
+            "selected":false,
+            "format":"image/png",
             "styles":"",
-            "transparent":false
-         }
+            "transparent":true
+         },
       ],
       "center":[
          413777.528,
          4592784.715
       ],
-      "zoom":1
+      "zoom":5
    },
    "logState":function(){console.log(Ext.encode(app.getState()));}
 }
