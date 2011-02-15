@@ -79,8 +79,7 @@ GeoExt.Lang.add("ca", {
         loadText: "Obre",
         saveText: "Desa",
         cancelText: "Cancel·la",
-        closeText: "Tanca",
-        overviewMapText: "Mapa de referència"
+        closeText: "Tanca"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Afegeix nou Web Map Service (WMS)...",

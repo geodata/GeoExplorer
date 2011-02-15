@@ -235,6 +235,13 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
         
+        /* OVERVIEW */
+        this.mapPanel.add({
+            xtype: 'gdxp_iccoverviewmap',
+            map: this.mapPanel.map
+        });
+        /* ~OVERVIEW */
+        
         var addLayerButton = new Ext.Button({
             tooltip : this.addLayersText,
             disabled: true,
@@ -1602,6 +1609,16 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             items: [tabs]
         });
         win.show();
+    },
+   
+    applyConfig: function(config) {
+        // On load map, force resolutions defined in map config, if any
+        /* RESOLUTIONS */
+        GeoExplorer.superclass.applyConfig.apply(this, [config]);
+        if (config.map.resolutions) {
+            this.mapPanel.map.resolutions = config.map.resolutions;
+        }
+        /* ~RESOLUTIONS */
     }
 });
 

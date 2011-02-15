@@ -21,5 +21,8 @@ GeoExt.Lang.add("ca", {
     "gdxp.GoogleSearch.prototype": {
         titleText: "Google",
         labelText: "Geocodificador de Google"
+    },
+    "gdxp.ICCOverviewMap.prototype": {
+        titleText: "Mapa de referència"
     }
 });

@@ -79,8 +79,7 @@ GeoExt.Lang.add("es", {
         loadText: "Abrir",
         saveText: "Guardar",
         cancelText: "Cancelar",
-        closeText: "Cerrar",
-        overviewMapText: "Mapa de referencia"
+        closeText: "Cerrar"
     },
     "GeoExplorer.NewSourceWindow.prototype": {
         title: "Añadir nuevo Web Map Service (WMS)...",

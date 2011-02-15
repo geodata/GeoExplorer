@@ -338,69 +338,6 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
                 }
             }]
         }).show();
-    },
-    
-    initPortal: function() {
-        GeoExplorer.Composer.superclass.initPortal.apply(this);
-       
-        this.on("ready", function(){
-            if(!this.mapOverview) {
-                this.mapOverview = this.createMapOverview();
-            }
-            this.mapPanel.add(this.mapOverview);
-            this.mapPanel.doLayout();
-        }, this);
-    },
-    
-    createMapOverview: function(config) {
-    
-        var overviewMap = new Ext.BoxComponent({
-            autoEl: {
-                tag: "div",
-                cls: "olControlOverviewMapElement"
-            }
-        });
-
-        overviewMap.on('render', function(){
-            var overviewControl = new OpenLayers.Control.OverviewMap({
-                size: new OpenLayers.Size(240, 135),
-                div: overviewMap.getEl().dom,
-                minRatio: 32, maxRatio: 64,
-                mapOptions: {
-                    projection: "EPSG:23031",
-                    units: "m",
-                    resolutions: [1100,550,275,100,50,25,10,5,2,1,0.5,0.25],
-                    maxExtent: new OpenLayers.Bounds(258000, 4485000, 536000, 4752000)
-                },
-                layers: [
-                    new OpenLayers.Layer.WMS(
-                        "Topogràfic", "http://sagitari.icc.cat/tilecache/tilecache.py",
-                        {layers: 'topo', format:"image/jpeg", exceptions:"application/vnd.ogc.se_xml"},
-                        {buffer:0, transitionEffect:'resize'}
-                    )
-                ]
-            });
-            this.mapPanel.map.addControl(overviewControl);
-            overviewControl.update();
-        }, this);
-                       
-        var mapOverviewPanel = new Ext.Panel({
-            xtype: 'panel',
-            title: this.overviewMapText,
-            cls: 'overlay-overviewMap',
-            collapsible: true,
-            items: [overviewMap]
-        });
-        
-        return mapOverviewPanel;
-    },
-    
-    applyConfig: function(config) {
-        // On load map, force resolutions defined in map config, if any
-        GeoExplorer.Composer.superclass.applyConfig.apply(this, [config]);
-        if (config.map.resolutions) {
-            this.mapPanel.map.resolutions = config.map.resolutions;
-        }
     }
 
 });
