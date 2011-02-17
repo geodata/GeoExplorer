@@ -71,7 +71,7 @@
                     align: "center",
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.location = "viewer#maps/" + id;
+                        window.location = "gdviewer#maps/" + id;
                     }
                 }, {
                     xtype: "actioncolumn",
@@ -123,6 +123,7 @@
                     handler: function() {
                         window.location = "/dashboard/";
                     },
+                    hidden: (status === 401)
                 },{
                     text: "Nou Mapa Google",
                     id: "new-map-900913-button",
