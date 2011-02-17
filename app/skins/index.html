@@ -117,11 +117,26 @@
                     }
                 }],
                 buttons: [{
-                    text: "Create new map",
-                    id: "new-map-button",
+                    text: "OpenGeo Suite Dashboard",
+                    id: "dashboard-button",
+                    iconCls: "dashboard",
+                    handler: function() {
+                        window.location = "/dashboard/";
+                    },
+                },{
+                    text: "Nou Mapa Google",
+                    id: "new-map-900913-button",
                     iconCls: "add",
                     handler: function() {
-                        window.location = "composer";
+                        window.location = "composer#config/900913";
+                    },
+                    hidden: (status === 401)
+                },{
+                    text: "Nou Mapa ICC",
+                    id: "new-map-23031-button",
+                    iconCls: "add",
+                    handler: function() {
+                        window.location = "composer#config/23031";
                     },
                     hidden: (status === 401)
                 }]
@@ -181,7 +196,9 @@
                                     var cm = mapGrid.getColumnModel();
                                     cm.setHidden(cm.getIndexById("editcolumn"), false);
                                     cm.setHidden(cm.getIndexById("removecolumn"), false);
-                                    Ext.getCmp("new-map-button").show();
+                                    Ext.getCmp("new-map-23031-button").show();
+                                    Ext.getCmp("new-map-900913-button").show();
+                                    Ext.getCmp("dashboard-button").show();
                                     win.close();
                                 },
                                 function failure(response) {
