@@ -71,6 +71,5 @@
          4592784.715
       ],
       "zoom":5
-   },
-   "logState":function(){console.log(Ext.encode(app.getState()));}
+   }
 }

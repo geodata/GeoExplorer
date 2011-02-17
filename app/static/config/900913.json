@@ -9,28 +9,31 @@
    },
    "defaultSourceType":"gxp_wmssource",
    "sources":{
-      "local":{
-         "url":"/geoserver/ows",
-         "title":"Local GeoServer",
-         "projection":"EPSG:900913"
-      },
-      "osm":{
-         "ptype":"gxp_osmsource",
-         "projection":"EPSG:900913"
-      },
-      "google":{
-         "ptype":"gxp_googlesource",
-         "projection":"EPSG:900913"
-      },
-      "bing":{
-         "ptype":"gxp_bingsource",
-         "projection":"EPSG:900913"
-      },
-      "ol":{
-         "ptype":"gxp_olsource",
-         "projection":"EPSG:900913"
-      }
-   },
+        "local": {
+            "url": "/geoserver/ows",
+            "title": "GeoServer Intranet Castellbisbal",
+            "ptype": "gxp_wmscsource"
+        },
+        "mapquest": {
+            "title": "MapQuest",
+            "ptype": "gxp_mapquestsource"
+        },
+        "osm": {
+            "title": "OpenStreetMap",
+            "ptype": "gxp_osmsource"
+        },
+        "google": {
+            "title": "Google",
+            "ptype": "gxp_googlesource"
+        },
+        "bing": {
+            "title": "Bing",
+            "ptype": "gxp_bingsource"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
+        }
+    },
    "map":{
       "projection":"EPSG:900913",
       "units":"m",
@@ -45,17 +48,61 @@
          {
             "source":"google",
             "name":"HYBRID",
-            "title":"Google Hybrid",
+            "title":"Google - Híbrid",
             "visibility":true,
-            "opacity":1,
+            "group":"background",
+            "fixed":true,
+            "selected":true
+         },
+         {
+            "source":"google",
+            "name":"ROADMAP",
+            "title":"Google - Mapa",
+            "visibility":false,
             "group":"background",
             "fixed":true,
             "selected":false
          },
          {
-            "source":"osm",
-            "name":"osmarender",
-            "title":"Tiles@home",
+            "source":"google",
+            "name":"SATELLITE",
+            "title":"Google - Imatge",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"google",
+            "name":"TERRAIN",
+            "title":"Google - Topogràfic",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"bing",
+            "name":"AerialWithLabels",
+            "title":"Bing - Híbrid",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"bing",
+            "name":"Road",
+            "title":"Bing - Mapa",
+            "visibility":false,
+            "group":"background",
+            "fixed":true,
+            "selected":false
+         },
+         {
+            "source":"bing",
+            "name":"Aerial",
+            "title":"Bing - Imatge",
             "visibility":false,
             "group":"background",
             "fixed":true,
@@ -71,36 +118,9 @@
             "selected":false
          },
          {
-            "source":"osm",
-            "name":"mapquest",
-            "title":"MapQuest",
-            "visibility":false,
-            "group":"background",
-            "fixed":true,
-            "selected":false
-         },
-         {
-            "source":"google",
-            "name":"ROADMAP",
-            "title":"Google Roadmap",
-            "visibility":false,
-            "group":"background",
-            "fixed":true,
-            "selected":false
-         },
-         {
-            "source":"google",
-            "name":"SATELLITE",
-            "title":"Google Satellite",
-            "visibility":false,
-            "group":"background",
-            "fixed":true,
-            "selected":false
-         },
-         {
-            "source":"google",
-            "name":"TERRAIN",
-            "title":"Google Terrain",
+            "source":"mapquest",
+            "name":"osm",
+            "title":"MapQuest - OSM",
             "visibility":false,
             "group":"background",
             "fixed":true,
@@ -288,6 +308,5 @@
          5081832.5781858
       ],
       "zoom":14
-   },
-   "logState":function(){console.log(Ext.encode(app.getState()));}
+   }
 }
