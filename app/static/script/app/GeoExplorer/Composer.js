@@ -204,6 +204,77 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
             title: this.exportMapText,
             items: [wizard]
        }).show();
+    },
+    
+    /* EDITABLE MAP PROPERTIES */
+    displayAppInfo: function() {
+        var appInfo = new Ext.Panel({
+            title: this.appInfoText,
+            html: "<iframe style='border: none; height: 100%; width: 100%' src='about.html' frameborder='0' border='0'><a target='_blank' href='about.html'>"+this.aboutText+"</a> </iframe>"
+        });
+
+        var about = Ext.applyIf(this.about, {
+            title: '', 
+            "abstract": '', 
+            contact: ''
+        });
+
+        /* EDITABLE MAP PROPERTIES */       
+        var mapInfo = new Ext.form.FormPanel({
+            title: this.mapInfoText,
+            labelAlign: 'top',
+            height: 'auto',
+            width: 'auto',
+            defaults: {
+                anchor: "100%",
+                xtype:"textarea",
+                enableKeyEvents: true
+            },
+            items: [{
+                xtype: "textfield",
+                fieldLabel: this.titleText,
+                value: this.about.title,
+                listeners: {
+                    keyup: function(field) {
+                        this.about.title = field.getValue();
+                    }, scope: this
+                }
+            },{
+                anchor: "100% -112",
+                fieldLabel: this.descriptionText,
+                value: this.about["abstract"],
+                listeners: {
+                    keyup: function(field) {
+                        this.about["abstract"] = field.getValue();
+                    }, scope: this
+                }
+            },{
+                height: 40,
+                fieldLabel: this.contactText,
+                value: this.about.contact,
+                listeners: {
+                    keyup: function(field) {
+                        this.about.contact = field.getValue();
+                    }, scope: this
+                }
+            }]
+        });
+        /* ~EDITABLE MAP PROPERTIES */
+    
+        var tabs = new Ext.TabPanel({
+            activeTab: 0,
+            items: [mapInfo, appInfo]
+        });
+
+        var win = new Ext.Window({
+            title: this.aboutThisMapText,
+            modal: true,
+            layout: "fit",
+            width: 300,
+            height: 300,
+            items: [tabs]
+        });
+        win.show();
     }
 
 });
