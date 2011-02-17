@@ -8,13 +8,15 @@
     <property name="build" location="build"/>
     <property name="app.proxy.geoserver" value=""/>
     <property name="app.port" value="8080"/>
-    <property name="debugargs" value=""/>
 
     <target name="init">
 
         <echo message="pulling in submodules"/>
         <exec executable="git" failonerror="true">
             <arg line="submodule init"/>
+        </exec>
+        <exec executable="git" failonerror="true">
+            <arg line="submodule sync"/>
         </exec>
         <exec executable="git" failonerror="true">
             <arg line="submodule update"/>
@@ -90,7 +92,16 @@
         <java jar="externals/ringojs/run.jar" fork="true">
             <sysproperty key="app.proxy.geoserver" value="${app.proxy.geoserver}"/>
             <sysproperty key="ringo.home" path="externals/ringojs"/>
-            <arg value="${debugargs}"/>
+            <arg path="app/main.js"/>
+            <arg line="-p ${app.port}"/>
+        </java>
+    </target>
+
+    <target name="debugall">
+        <java jar="externals/ringojs/run.jar" fork="true">
+            <sysproperty key="app.proxy.geoserver" value="${app.proxy.geoserver}"/>
+            <sysproperty key="ringo.home" path="externals/ringojs"/>
+            <arg value="-d"/>
             <arg path="app/main.js"/>
             <arg line="-p ${app.port}"/>
         </java>
