@@ -206,7 +206,6 @@ GeoExplorer.Composer = Ext.extend(GeoExplorer, {
        }).show();
     },
     
-    /* EDITABLE MAP PROPERTIES */
     displayAppInfo: function() {
         var appInfo = new Ext.Panel({
             title: this.appInfoText,
