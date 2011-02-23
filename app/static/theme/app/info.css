@@ -1,0 +1,25 @@
+ul {
+    color: black;
+    padding: 4px 4px 10px 4px;
+    font-size: 12px;
+}
+
+.title {
+    font-weight: bold;		
+}
+
+ul.feature li {
+    padding: 5px 0px 5px 0px;
+}
+
+ul.feature {
+    border-bottom: 1px solid #99B3CC;
+}
+
+ul.feature li:nth-child(even) {
+    background-color: #C7D7E5;
+}
+
+a {
+    cursor: pointer;
+}
