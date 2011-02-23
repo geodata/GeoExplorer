@@ -63,7 +63,7 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
                 actionTarget: {target: "paneltbar", index: 3}
             }, {
                 iconCls: "gxp-icon-getfeatureinfo",
-                ptype: "gxp_wmsgetfeatureinfo", 
+                ptype: "gdxp_wmsgetfeatureinfo", /* INFO GDXP */
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 4}
             }, {

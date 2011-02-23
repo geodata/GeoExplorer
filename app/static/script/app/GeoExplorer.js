@@ -102,10 +102,10 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 actionTarget: {target: "paneltbar", index: 2}
             }, {
                 leaf: true, 
-                text: gxp.plugins.WMSGetFeatureInfo.prototype.infoActionTip, 
+                text: gdxp.WMSGetFeatureInfo.prototype.infoActionTip, /* INFO GDXP */
                 checked: true, 
                 iconCls: "gxp-icon-getfeatureinfo",
-                ptype: "gxp_wmsgetfeatureinfo", 
+                ptype: "gdxp_wmsgetfeatureinfo", 
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 3}
             }, {
