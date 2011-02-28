@@ -229,7 +229,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             xtype: 'panel', // The searchers container
             title: this.searchersTitleText,
             region: 'north',
-            width: 250,
+            layout: 'fit',
             height: 180,
             split: true,
             collapsible: true,
@@ -237,14 +237,11 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             autoScroll: true,
             ascending: true,
             labelAlign: 'top',
-            defaults: {
-                border: false,
-                activeTab: 0
-            },
             items: [{
                 xtype: 'tabpanel', // The tabs
                 enableTabScroll: true,
-                width: "100%",
+                border: false,
+                activeTab: 0,
                 defaults: {
                     map: this.mapPanel.map
                 },
