@@ -1,25 +1,28 @@
-ul {
+.layer ul {
     color: black;
     padding: 4px 4px 10px 4px;
     font-size: 12px;
 }
 
-.title {
+.layer .title {
     font-weight: bold;		
 }
 
-ul.feature li {
+.layer ul.feature li {
     padding: 5px 0px 5px 0px;
 }
 
-ul.feature {
+.layer ul.feature {
     border-bottom: 1px solid #99B3CC;
 }
 
-ul.feature li:nth-child(even) {
+.layer ul.feature li:nth-child(even) {
     background-color: #C7D7E5;
 }
 
-a {
+.layer a {
+	color: blue;
     cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
 }
