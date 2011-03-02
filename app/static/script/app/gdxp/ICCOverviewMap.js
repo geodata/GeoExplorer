@@ -26,11 +26,14 @@ gdxp.ICCOverviewMap = Ext.extend(Ext.Panel, {
     control: null,
     collapsible: true,
     cls: 'overlay-overviewMap',
+    width: 246,
+    height: 166,
 
     initComponent: function() {
         this.title = this.titleText;
         
         this.box = new Ext.BoxComponent({
+            layout: 'fit',
             autoEl: {
                 tag: "div",
                 cls: "olControlOverviewMapElement"

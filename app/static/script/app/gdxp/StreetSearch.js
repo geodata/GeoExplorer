@@ -90,7 +90,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
             url: this.baseURL,
             baseParams: {op: "getStreets"},
             reader: new Ext.data.JsonReader({
-                root: '',
+                root: ''
             }, [
                 {name: 'id', mapping: 'id'},
                 {name: 'name', mapping: 'name'}

@@ -84,7 +84,7 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
                 direction: 'ASC' 
             },
             reader: new Ext.data.JsonReader({
-                root: 'features',
+                root: 'features'
             }, [
                 {name: 'id', mapping: 'id'},
                 {name: 'name', mapping: 'properties.'+this.field},
