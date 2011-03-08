@@ -1,0 +1,26 @@
+<% extends ./base.html %>
+<% subskin extrahead %>
+    <link rel="stylesheet" type="text/css" href="theme/app/index.css"/>
+    <link rel="stylesheet" type="text/css" href="theme/app/filetype.css"/>
+    <script>
+        Ext.onReady(function() {
+            var docTree = new Ext.tree.TreePanel({
+                renderTo: 'tree',
+                useArrows: true,
+                autoScroll: true,
+                animate: true,
+                containerScroll: true,
+                border: false,
+                dataUrl: 'documents.json',
+                root: {
+                    nodeType: 'async',
+                    text: 'Arbre de Documents'
+                }
+            });
+            docTree.getRootNode().expand();
+        });
+    </script>
+<% subskin content %>
+    <div class="logo"></div>
+    <h2>GeoExplorer</h2>
+    <div id="tree" style="text-align:left;border:1px solid black;"></div>

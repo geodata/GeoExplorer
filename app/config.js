@@ -7,7 +7,8 @@ var urls = [
     [(/^\/(maps(\/\d+)?)/), require("./root/maps").app],
     [(/^\/(composer)/), require("./root/composer").app],
     [(/^\/(gdviewer)/), require("./root/gdviewer").app],
-    [(/^\/(viewer(.html)?)/), require("./root/viewer").app]
+    [(/^\/(viewer(.html)?)/), require("./root/viewer").app],
+    [(/^\/(documents)(.+)?/), require("./root/documents").app]
 ];
 
 // debug mode loads unminified scripts

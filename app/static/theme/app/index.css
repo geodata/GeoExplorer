@@ -1,27 +1,30 @@
 body {
     font-family: tahoma,arial,helvetica,sans-serif;
     font-size: 1.25em;
-    background-color: white;
-    text-align: center;
 }
 
 h2 {
-    text-align: center;
+    margin: 15px 0 0 100px;
     font-weight: bold;
     font-size: 1.75em;
 }
 
 div.logo {
-    margin: 20px auto 0;
+    margin: 10px;
     width: 100%;
-    text-align: center;
-    height: 70px;
-    background: url('img/GeoExt_Logo.png') center no-repeat;
+    height: 72px;
+    background: url('img/CTBB_Logo.png') left no-repeat;
+    float: left;
 }
 
-div#maps {
+#maps {
     margin: 1em auto;
     width: 600px;
+    text-align: center;
+}
+
+#docs {
+    margin: 0.5em auto;
 }
 
 /* list of maps on index page */
@@ -54,5 +57,5 @@ img.icon-removemap {
     display: block;
     position: absolute;
     top: 20px;
-    right: 200px;
+    right: 20px;
 }

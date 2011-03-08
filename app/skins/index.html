@@ -1,8 +1,36 @@
 <% extends ./base.html %>
 <% subskin extrahead %>
-    
     <link rel="stylesheet" type="text/css" href="theme/app/index.css"/>
+    <link rel="stylesheet" type="text/css" href="theme/app/filetype.css"/>
     <script>
+        /* i18n */
+        //var lang = navigator.language || navigator.userLanguage;
+        //lang = lang.split("-")[0].toLowerCase();
+        var lang = "ca";
+        function _(t) { return (texts[t] && texts[t][lang]) || t; };
+
+        var texts = {
+            "No maps found.": {"es": "No se han encontrado mapas.", "ca": "No s'han trobat mapes."},
+            "Title": {"es": "Título", "ca": "Títol"},
+            "Created": {"es": "Creado", "ca": "Creat"},
+            "Modified": {"es": "Modificado", "ca": "Modificat"},
+            "View Map": {"es": "Ver Mapa", "ca": "Vés a Mapa"},
+            "Edit Map": {"es": "Editar Mapa", "ca": "Edita Mapa"},
+            "Delete Map": {"es": "Borrar Mapa", "ca": "Esborra Mapa"},
+            "Confirm Deletion": {"es": "Confirme la eliminación", "ca": "Confirmeu l'eliminació"},
+            "Are you sure you want to delete this map?": {"es": "¿Está seguro de querer borrar este mapa", "ca": "Esteu segur de voler esborrar aquest mapa?"},
+            "Dashboard": {"es": "Panel de Control", "ca": "Panell de Control"},
+            "New Map (Google base)": {"es": "Nuevo Mapa Google", "ca": "Nou Mapa Google"},
+            "New Map (ICC base)": {"es": "Nuevo Mapa ICC", "ca": "Nou Mapa ICC"},
+            "User": {"es": "Usuario", "ca": "Usuari"},
+            "Password": {"es": "Contraseña", "ca": "Clau"},
+            "Login": {"es": "Login", "ca": "Login"},
+            "Invalid username or password.": {"es": "Usuario o contraseña errónea.", "ca": "Usuari o clau errònia."},
+            "Document Tree": {"es": "Árbol de Documentos", "ca": "Arbre de Documents"},
+            "Map Table": {"es": "Tabla de Mapas", "ca": "Taula de Mapes"}
+        };
+        /* !i18n */
+        
         Ext.onReady(function() {
             Ext.QuickTips.init();
             var status = <% status %>;
@@ -23,7 +51,7 @@
             });
             
             var mapGrid = new Ext.grid.GridPanel({
-                renderTo: "maps",
+                id: 'maps',
                 autoHeight: true,
                 store: mapStore,
                 singleSelect: true,
@@ -31,7 +59,7 @@
                 autoExpandColumn: "title",
                 viewConfig: {
                     forceFit: true,
-                    emptyText: "No maps found.  Create a new one with the link below."
+                    emptyText: _("No maps found.")
                 },
                 columns: [{
                     header: "ID",
@@ -42,13 +70,13 @@
                     align: "center"
                 }, {
                     id: "title",
-                    header: "Title",
+                    header: _("Title"),
                     align: "left",
                     width: 300,
                     dataIndex: "title",
                     sortable: true
                 }, {
-                    header: "Created",
+                    header: _("Created"),
                     dataIndex: "created",
                     width: 90,
                     xtype: "datecolumn",
@@ -56,7 +84,7 @@
                     sortable: true,
                     align: "center"
                 }, {
-                    header: "Modified",
+                    header: _("Modified"),
                     dataIndex: "modified",
                     width: 90,
                     xtype: "datecolumn",
@@ -67,11 +95,11 @@
                     xtype: "actioncolumn",
                     width: 30,
                     iconCls: "icon-viewmap",
-                    tooltip: "View Map",
+                    tooltip: _("View Map"),
                     align: "center",
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.location = "gdviewer#maps/" + id;
+                        window.open("gdviewer#maps/" + id);
                     }
                 }, {
                     xtype: "actioncolumn",
@@ -79,10 +107,10 @@
                     hidden: (status === 401),
                     width: 30,
                     iconCls: "icon-editmap",
-                    tooltip: "Edit Map",
+                    tooltip: _("Edit Map"),
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.location = "composer#maps/" + id;
+                        window.open("composer#maps/" + id);
                     }
                 }, {
                     xtype: "actioncolumn",
@@ -90,13 +118,13 @@
                     hidden: (status === 401),
                     width: 30,
                     iconCls: "icon-removemap",
-                    tooltip: "Delete Map",
+                    tooltip: _("Delete Map"),
                     handler: function(grid, rowIndex, colIndex) {
                         var rec = mapStore.getAt(rowIndex);
                         var id = rec.get("id");
                         Ext.Msg.show({
-                            title: "Confirm Deletion",
-                            msg: "Are you sure you want to delete this map?",
+                            title: _("Confirm Deletion"),
+                            msg: _("Are you sure you want to delete this map?"),
                             buttons: Ext.Msg.YESNO,
                             fn: function(button) {
                                 if (button === "yes") {
@@ -117,30 +145,67 @@
                     }
                 }],
                 buttons: [{
-                    text: "OpenGeo Suite Dashboard",
+                    text: _("Dashboard"),
                     id: "dashboard-button",
                     iconCls: "dashboard",
                     handler: function() {
-                        window.location = "/dashboard/";
+                        window.open("/dashboard/");
                     },
                     hidden: (status === 401)
                 },{
-                    text: "Nou Mapa Google",
+                    text: _("New Map (Google base)"),
                     id: "new-map-900913-button",
                     iconCls: "add",
                     handler: function() {
-                        window.location = "composer#config/900913";
+                        window.open("composer#config/900913");
                     },
                     hidden: (status === 401)
                 },{
-                    text: "Nou Mapa ICC",
+                    text: _("New Map (ICC base)"),
                     id: "new-map-23031-button",
                     iconCls: "add",
                     handler: function() {
-                        window.location = "composer#config/23031";
+                        window.open("composer#config/23031");
                     },
                     hidden: (status === 401)
                 }]
+            });
+            
+            var docTree = new Ext.tree.TreePanel({
+                title: _("Document Tree"),
+                region: 'west',
+                width: 275,
+                minSize: 100,
+                maxSize: 500,
+                split: true,
+                autoScroll: true,
+                rootVisible: false,
+                lines: false,
+                singleExpand: true,
+                dataUrl: 'documents.json',
+                root: {
+                nodeType: 'async',
+                    text: 'Arbre de Documents'
+                }
+            });
+            docTree.getRootNode().expand();
+            
+            new Ext.Viewport({
+                layout: 'border',
+                items: [
+                    {
+                        region: 'north',
+                        height: 95,
+                        html: '<div class="logo"><h2>GeoExplorer Castellbisbal</h2></div>',
+                    },
+                    docTree,
+                    {
+                        //layout: 'fit',
+                        title: _("Map Table"),
+                        region: 'center',
+                        items: [mapGrid]
+                    }
+                ]
             });
             
             function displayLoginLink() {
@@ -161,11 +226,11 @@
                     labelWidth: 60,
                     defaultType: "textfield",
                     items: [{
-                        fieldLabel: "User",
+                        fieldLabel: _("User"),
                         name: "username",
                         allowBlank: false
                     }, {
-                        fieldLabel: "Password",
+                        fieldLabel: _("Password"),
                         name: "password",
                         inputType: "password",
                         allowBlank: false
@@ -173,7 +238,7 @@
                 });
                 
                 var win = new Ext.Window({
-                    title: "Login",
+                    title: _("Login"),
                     layout: "fit",
                     width: 235,
                     height: 130,
@@ -182,7 +247,7 @@
                     modal: true,
                     items: [panel],
                     buttons: [{
-                        text: "Login",
+                        text: _("Login"),
                         handler: function(button) {
                             var form = panel.getForm();
                             button.disable();
@@ -204,8 +269,8 @@
                                 },
                                 function failure(response) {
                                     form.markInvalid({
-                                        "username": "Invalid username or password.",
-                                        "password": "Invalid username or password."
+                                        "username": _("Invalid username or password."),
+                                        "password": _("Invalid username or password.")
                                     });
                                     button.enable();
                                 }
@@ -230,7 +295,4 @@
     </script>
 
 <% subskin content %>
-    <a id="login" href="login">Log in</a>
-    <div class="logo"></div>
-    <h2>GeoExplorer</h2>
-    <div id="maps"></div>
+<a id="login" href="login">Login</a>
