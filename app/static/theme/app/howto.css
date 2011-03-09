@@ -1,0 +1,36 @@
+body {
+    font-family: tahoma,arial,helvetica,sans-serif;
+    font-size: 12px;
+    background-color: white;
+}
+
+h2 {
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+h3 {
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+dt {
+    margin-top: 16px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+img {
+    margin: 10px auto 16px auto;
+    display: block;
+    border: 1px solid #888888;
+}
+
+img.icon {
+    margin: 0;
+    padding: 2px;
+    display: inline;
+    background: #EEEEEE;
+}

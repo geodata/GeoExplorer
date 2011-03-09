@@ -27,7 +27,10 @@
             "Login": {"es": "Login", "ca": "Login"},
             "Invalid username or password.": {"es": "Usuario o contraseña errónea.", "ca": "Usuari o clau errònia."},
             "Document Tree": {"es": "Árbol de Documentos", "ca": "Arbre de Documents"},
-            "Map Table": {"es": "Tabla de Mapas", "ca": "Taula de Mapes"}
+            "Map Table": {"es": "Tabla de Mapas", "ca": "Taula de Mapes"},
+            "The Application": {"es": "La Aplicación", "ca": "L'aplicació"},
+            "About": {"es": "Acerca de...", "ca": "Quant a..."},
+            "How to Browse": {"es": "Cómo Navegar", "ca": "Com Navegar"}
         };
         /* !i18n */
         
@@ -174,9 +177,9 @@
             var docTree = new Ext.tree.TreePanel({
                 title: _("Document Tree"),
                 region: 'west',
-                width: 275,
-                minSize: 100,
-                maxSize: 500,
+                width: 256,
+                minSize: 128,
+                maxSize: 512,
                 split: true,
                 autoScroll: true,
                 rootVisible: false,
@@ -196,14 +199,26 @@
                     {
                         region: 'north',
                         height: 95,
-                        html: '<div class="logo"><h2>GeoExplorer Castellbisbal</h2></div>',
+                        html: '<div class="logo"><h2>GeoExplorer Castellbisbal</h2></div>'
                     },
                     docTree,
                     {
-                        //layout: 'fit',
                         title: _("Map Table"),
                         region: 'center',
+                        autoScroll: true,
                         items: [mapGrid]
+                    },{
+                        title: _("The Application"),
+                        layout: 'accordion',
+                        region: 'east',
+                        width: 320,
+                        items: [{
+                            title: _("How to Browse"),
+                            html: "<iframe style='border: none; height: 100%; width: 100%' src='howto.html' frameborder='0' border='0'><a target='_blank' href='howto.html'>"+this.aboutText+"</a></iframe>"
+                        },{
+                            title: _("About"),
+                            html: "<iframe style='border: none; height: 100%; width: 100%' src='about.html' frameborder='0' border='0'><a target='_blank' href='about.html'>"+this.aboutText+"</a></iframe>"
+                        }]
                     }
                 ]
             });
