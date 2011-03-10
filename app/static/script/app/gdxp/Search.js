@@ -129,6 +129,7 @@ gdxp.Search = Ext.extend(Ext.Panel, {
     displayPopup: function(point, text){
         var popup = new GeoExt.Popup({
             layout: "fit",
+            width: "128",
             location: point,
             map: this.map,
             title: this.titleText,

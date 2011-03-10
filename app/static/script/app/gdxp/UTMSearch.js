@@ -28,6 +28,11 @@ gdxp.UTMSearch = Ext.extend(gdxp.Search, {
     labelText: "Type coordinate pair and press ENTER (example: X '415165', Y '4592355')",
     /* ~i18n */
 
+    /** private: property[label]
+     *  ``Ext.form.Label`` A brief description.
+     */
+    label: null,
+    
     /** private: property[inputX]
      *  ``Ext.form.TextField`` The X coordinate.
      */
@@ -38,19 +43,20 @@ gdxp.UTMSearch = Ext.extend(gdxp.Search, {
      */    
     inputY: null,
 
-    /** private: property[labelAlign]
-     *  ``String`` GUI sugar.
-     */
-    labelAlign: '',
-
     /** private: method[initComponent]
      * 
      *  Instantiates inputs.
      */    
     initComponent: function() {
         
+        this.label = new Ext.form.Label({
+            fieldLabel: this.labelText,
+            //autoWidth: true,
+            width: "100%"
+        });
+        
         this.inputX = new Ext.form.TextField({
-            fieldLabel: "X",
+            fieldLabel: "X (Eastings)",
             width: 100,
             listeners: {
                 specialkey: this.onKeyPress,
@@ -59,7 +65,7 @@ gdxp.UTMSearch = Ext.extend(gdxp.Search, {
         });
         
         this.inputY = new Ext.form.TextField({
-            fieldLabel: "Y",
+            fieldLabel: "Y (Northings)",
             width: 100,
             listeners: {
                 specialkey: this.onKeyPress,
@@ -67,7 +73,7 @@ gdxp.UTMSearch = Ext.extend(gdxp.Search, {
             }
         });
                 
-        this.items = [this.inputX, this.inputY];
+        this.items = [this.label, this.inputX, this.inputY];
 
         gdxp.UTMSearch.superclass.initComponent.apply(this, arguments);
     },
