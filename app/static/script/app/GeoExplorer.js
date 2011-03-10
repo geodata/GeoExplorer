@@ -307,7 +307,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 item.disable();
             });
         });
-
+        /*
         var googleEarthPanel = new gxp.GoogleEarthPanel({
             mapPanel: this.mapPanel,
             listeners: {
@@ -330,6 +330,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 layersContainer.getTopToolbar().setDisabled(false);
             }
         }, this);
+        */
 
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
@@ -338,8 +339,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 border: false
             },
             items: [
-                this.mapPanel,
-                googleEarthPanel
+                this.mapPanel//,
+                //googleEarthPanel
             ],
             activeItem: 0
         });
@@ -456,9 +457,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
      */
     createTools: function() {
         
-
+        /*
         var toolGroup = this.toggleGroup;
-
+        
         var enable3DButton = new Ext.Button({
             iconCls: "icon-3D",
             tooltip: this.switch3dText,
@@ -475,12 +476,12 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             },
             scope: this
         });
-    
+        */
         var tools = [
-            "-",
-            enable3DButton
+            "-"//,
+            //enable3DButton
         ];
-
+        
         return tools;
     },
     

@@ -54,7 +54,8 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                 border: false
             },
             items: [
-                this.mapPanel,
+                this.mapPanel//,
+                /*
                 new gxp.GoogleEarthPanel({
                     mapPanel: this.mapPanel,
                     listeners: {
@@ -62,7 +63,7 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                             return record.get("group") !== "background";
                         }
                     }
-                })
+                }) */
             ],
             activeItem: 0
         });
