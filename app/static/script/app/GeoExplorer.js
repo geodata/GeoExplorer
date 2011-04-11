@@ -253,14 +253,14 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
-                        baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
+                        baseURL: "/geoserver/castellbisbal/wfs?",
                         layer: "castellbisbal:top_toponimia",
                         field: "toponim"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
-                        baseURL: "http://donosti.geodata.es:9000/geoserver/wfs?",
+                        baseURL: "/geoserver/castellbisbal/wfs?",
                         layer: "castellbisbal:eq_equipaments",
                         field: "nom"
                     },{
