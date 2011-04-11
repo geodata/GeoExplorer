@@ -9,6 +9,10 @@
         <servlet-name>ringo</servlet-name>
         <servlet-class>org.ringojs.jsgi.JsgiServlet</servlet-class>
         <init-param>
+			<param-name>GEOEXPLORER_DATA</param-name>
+			<param-value>/usr/share/opengeo-suite-data/geoexplorer_data</param-value>
+		</init-param>
+        <init-param>
             <param-name>ringo-home</param-name>
             <param-value>/WEB-INF</param-value>
         </init-param>

@@ -6,6 +6,7 @@ exports.app = function(req) {
     var request = new Request(req);
     var details = auth.getDetails(request);
     var response;
+    /*
     if (details.status === 401) {
         var parts = request.path.split("/");
         parts.pop();
@@ -16,7 +17,7 @@ exports.app = function(req) {
             body: []
         };
     } else {
-        response = Response.skin(module.resolve("../skins/composer.html"));
-    }
+    */    response = Response.skin(module.resolve("../skins/composer.html"));
+    //}
     return response;
 };
