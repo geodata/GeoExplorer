@@ -10,7 +10,7 @@
    "defaultSourceType":"gxp_wmscsource",
    "sources":{
         "local": {
-            "url": "/geoserver/castellbisbal/ows",
+            "url": "/geoserver/ows",
             "title": "GeoServer Castellbisbal",
             "ptype": "gxp_wmscsource"
         },

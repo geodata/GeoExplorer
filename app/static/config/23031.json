@@ -16,7 +16,7 @@
       },
       "local":{
          "title": "GeoServer Castellbisbal",
-         "url":"/geoserver/castellbisbal/ows",
+         "url":"/geoserver/ows",
          "ptype": "gxp_wmscsource"
       }
    },

@@ -253,14 +253,14 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
-                        baseURL: "/geoserver/castellbisbal/wfs?",
+                        baseURL: "/geoserver/wfs?",
                         layer: "castellbisbal:top_toponimia",
                         field: "toponim"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
-                        baseURL: "/geoserver/castellbisbal/wfs?",
+                        baseURL: "/geoserver/wfs?",
                         layer: "castellbisbal:eq_equipaments",
                         field: "nom"
                     },{
