@@ -25,7 +25,10 @@ GeoExt.Lang.add("ca", {
         toponimSearchTitleText: 'Topònims',
         toponimSearchLabelText: 'Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, "can")',
         equipamentSearchTitleText: 'Equipaments',
-        equipamentSearchLabelText: 'Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, "casa")'
+        equipamentSearchLabelText: 'Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, "casa")',
+        equipamentTipusSearchTitleText: 'Tipus',
+        equipamentPOISearchTitleText: 'Equipament'
+
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exporta el Mapa",
