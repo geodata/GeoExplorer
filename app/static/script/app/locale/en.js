@@ -25,7 +25,9 @@ GeoExt.Lang.add("en", {
         toponimSearchTitleText: 'Placenames',
         toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
         equipamentSearchTitleText: 'Equipment',
-        equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")'
+        equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")',
+        equipamentTipusSearchTitleText: 'Type',
+        equipamentPOISearchTitleText: 'Equipment'
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Export Map",

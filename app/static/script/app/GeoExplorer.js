@@ -247,6 +247,17 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 },
                 items: [ // The search engines
                     {
+                        xtype: 'gdxp_doublefieldsearch',
+                        typeLabelText: this.equipamentTipusSearchTitleText,
+                        poiLabelText: this.equipamentPOISearchTitleText,
+                        baseURL: "/geoserver/wfs?",
+                        //s'ha de publicar a geoserver una capa falsa amb els tipus d'equipaments
+                        // i sense geometria, pq CQL no accepta DISTINCT
+                        typeLayer: "castellbisbal:v_tipuseq",
+                        poiLayer: "castellbisbal:eq_equipaments",
+                        typeField: "tipus",
+                        poiField: "nom"
+                    },{
                         xtype: 'gdxp_streetsearch',
                         baseURL: "http://oslo.geodata.es/geosearch/castellbisbal"
                     },{
@@ -287,7 +298,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             header: false,
             items: [
                 searchersContainer,
-                {region: 'center', autoScroll: true, tbar: [], border: false, id: 'tree', title: this.layersText}, 
+                {region: 'center', autoScroll: true, tbar: [], border: false, id: 'tree', title: this.layersText},
                 {region: 'south', xtype: "container", layout: "fit", border: false, height: 200, id: 'legend'}
            ]
         });
