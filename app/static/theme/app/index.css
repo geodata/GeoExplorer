@@ -57,6 +57,14 @@ img.icon-removemap {
     font-size: 12px;
     display: block;
     position: absolute;
+    top: 50px;
+    right: 20px;
+}
+
+#langchooser {
+    font-size: 12px;
+    display: block;
+    position: absolute;
     top: 20px;
     right: 20px;
 }

@@ -4,9 +4,15 @@
     <link rel="stylesheet" type="text/css" href="theme/app/filetype.css"/>
     <script>
         /* i18n */
-        //var lang = navigator.language || navigator.userLanguage;
-        //lang = lang.split("-")[0].toLowerCase();
-        var lang = "ca";
+        Ext.getUrlParam = function(param) {
+            var params = Ext.urlDecode(location.search.substring(1));
+            return param ? params[param] : params;
+        };
+        
+        var lang = navigator.language || navigator.userLanguage;
+        lang = lang.split("-")[0].toLowerCase() || "ca";
+        lang = Ext.getUrlParam('lang') || lang;
+
         function _(t) { return (texts[t] && texts[t][lang]) || t; };
 
         var texts = {
@@ -102,7 +108,7 @@
                     align: "center",
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.open("gdviewer#maps/" + id);
+                        window.open("gdviewer?lang="+lang+"#maps/" + id);
                     }
                 }, {
                     xtype: "actioncolumn",
@@ -113,7 +119,7 @@
                     tooltip: _("Edit Map"),
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.open("composer#maps/" + id);
+                        window.open("composer?lang="+lang+"#maps/" + id);
                     }
                 }, {
                     xtype: "actioncolumn",
@@ -160,7 +166,7 @@
                     id: "new-map-900913-button",
                     iconCls: "add",
                     handler: function() {
-                        window.open("composer#config/900913");
+                        window.open("composer?lang="+lang+"#config/900913");
                     },
                     hidden: (status === 401)
                 },{
@@ -168,7 +174,7 @@
                     id: "new-map-23031-button",
                     iconCls: "add",
                     handler: function() {
-                        window.open("composer#config/23031");
+                        window.open("composer?lang="+lang+"#config/23031");
                     },
                     hidden: (status === 401)
                 }]
@@ -310,4 +316,4 @@
     </script>
 
 <% subskin content %>
-<a id="login" href="login">Login</a>
+<div id="langchooser">[ <a href="?lang=ca">ca</a> | <a href="?lang=es">es</a> | <a href="?lang=en">en</a> ]</div> <a id="login" href="login">Login</a>
