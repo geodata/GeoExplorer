@@ -1,5 +1,5 @@
 ﻿{
-   "proxy":"proxy/?url=",
+   "proxy":"/geoserver/rest/proxy/?url=",
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
