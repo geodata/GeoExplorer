@@ -55,6 +55,7 @@
             url: './config/' + url + '.json',
             success: function(response) {
                 var initialConfig = Ext.decode(response.responseText);
+                initialConfig.proxy = "/geoserver/rest/proxy/?url=", // Force use of GeoServer Proxy regardless of config.
                 app = new gdxp.Viewer(initialConfig);
             },
             failure: function() {
