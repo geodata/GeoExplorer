@@ -87,7 +87,10 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
     initComponent: function() {
     
         this.streetDataStore = new Ext.data.Store({
-            url: this.baseURL,
+            proxy: new Ext.data.HttpProxy({
+                url: this.baseURL,
+                method: "GET"
+            }),
             baseParams: {op: "getStreets"},
             reader: new Ext.data.JsonReader({
                 root: ''
@@ -119,7 +122,10 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
         });
         
         this.portalDataStore = new Ext.data.Store({
-            url: this.baseURL,
+            proxy: new Ext.data.HttpProxy({
+                url: this.baseURL,
+                method: "GET"
+            }),
             baseParams: {
                 op: "getNumbers"
             },
