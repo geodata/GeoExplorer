@@ -191,6 +191,9 @@
                     text: 'Arbre de Documents'
                 }
             });
+            new Ext.tree.TreeSorter(docTree, {
+                dir: "ASC"
+            });
             docTree.getRootNode().expand();
             
             new Ext.Viewport({
