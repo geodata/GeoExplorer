@@ -279,10 +279,10 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         xtype: 'gdxp_catastrosearch'
                     },{
                         xtype: 'gdxp_utmsearch'
-                    },{
+                    }/*,{
                         xtype: 'gdxp_googlesearch',
                         bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
-                    }
+                    }*/
                 ]
             }]
         };

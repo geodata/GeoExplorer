@@ -3,21 +3,28 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa i planejament de Castellbisbal - base ICC",
+      "title":"Mapa i planejament de Castellbisbal - proj. UTM 31N",
       "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
    "defaultSourceType":"gxp_wmscsource",
    "sources":{
       "icc-tilecache":{
-         "title": "Tile Caché ICC",
-         "ptype": "gdxp_icc_tilecache",
+         "title":"Tile Caché ICC",
+         "ptype":"gdxp_icc_tilecache",
          "projection":"EPSG:23031"
       },
       "local":{
-         "title": "GeoServer Castellbisbal",
+         "title":"GeoServer Castellbisbal",
          "url":"/geoserver/ows",
-         "ptype": "gxp_wmscsource"
+         "ptype":"gxp_wmscsource",
+         "projection":"EPSG:23031",
+         "baseParams":{
+            "SERVICE":"WMS",
+            "REQUEST":"GetCapabilities",
+            "TILED":true,
+            "VERSION":"1.1.1"
+         }
       }
    },
    "map":{
@@ -45,24 +52,18 @@
             "name":"topo",
             "title":"Mapa topogràfic de Catalunya / ICC",
             "visibility":true,
-            "opacity":1,
             "group":"background",
-            "selected":false,
-            "format":"image/jpeg",
-            "styles":"",
-            "transparent":false
+            "fixed":true,
+            "selected":false
          },
          {
             "source":"icc-tilecache",
             "name":"orto",
             "title":"Ortofotoimatge de Catalunya / ICC",
             "visibility":false,
-            "opacity":1,
             "group":"background",
-            "selected":false,
-            "format":"image/jpeg",
-            "styles":"",
-            "transparent":false
+            "fixed":true,
+            "selected":false
          },
          {
             "source":"local",
@@ -71,9 +72,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -82,9 +84,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -93,9 +96,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -104,20 +108,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:plan_estudis_detall",
-            "title":"Estudis de detall",
-            "visibility":true,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -126,9 +120,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -137,9 +132,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -148,9 +144,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -159,9 +156,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -170,9 +168,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -181,64 +180,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:plan_proteccions",
-            "title":"Planejament - Àmbit de protecció de sistemes",
-            "visibility":true,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:inc_franges_actuacions_2010",
-            "title":"Franges de protecció 2010 - Actuacions",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:inc_franges_canyes_2010",
-            "title":"Franges de protecció 2010 - Canyes",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:inc_franges_pendents_2010",
-            "title":"Franges de protecció 2010 - Pendents",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:pmuni_inventari",
-            "title":"Inventari béns municipals",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -247,9 +192,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -258,9 +204,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -269,9 +216,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -280,9 +228,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -291,9 +240,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -302,9 +252,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -313,9 +264,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -324,9 +276,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -335,9 +288,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -346,20 +300,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:cad_ajuntament",
-            "title":"Parcel·lari Ajuntament",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -368,9 +312,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -379,9 +324,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -390,9 +336,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -401,20 +348,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"local",
-            "name":"castellbisbal:su_net_recollida_selectiva_2009",
-            "title":"Recollida selectiva 2009 (visible a 1:2.500)",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -423,9 +360,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -434,9 +372,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -445,9 +384,10 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          },
          {
             "source":"local",
@@ -456,9 +396,10 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png8",
+            "format":"image/png",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":false
          }
       ],
       "center":[
@@ -480,7 +421,7 @@
          "outputTarget":"legend",
          "outputConfig":{
             "autoScroll":true,
-            "title":"Legend"
+            "title":"Mostra Llegenda"
          }
       },
       {
@@ -525,7 +466,7 @@
          }
       },
       {
-         "ptype":"gxp_wmsgetfeatureinfo",
+         "ptype":"gdxp_wmsgetfeatureinfo",
          "toggleGroup":"toolGroup",
          "actionTarget":{
             "target":"paneltbar",
@@ -588,7 +529,7 @@
    "viewerTools":[
       {
          "leaf":true,
-         "text":"Pan Map",
+         "text":"Desplaça mapa",
          "checked":true,
          "iconCls":"gxp-icon-pan",
          "ptype":"gxp_navigation",
@@ -600,10 +541,10 @@
       },
       {
          "leaf":true,
-         "text":"Get Feature Info",
+         "text":"Consulta elements",
          "checked":true,
          "iconCls":"gxp-icon-getfeatureinfo",
-         "ptype":"gxp_wmsgetfeatureinfo",
+         "ptype":"gdxp_wmsgetfeatureinfo",
          "toggleGroup":"toolGroup",
          "actionTarget":{
             "target":"paneltbar",
@@ -612,7 +553,7 @@
       },
       {
          "leaf":true,
-         "text":"Measure",
+         "text":"Mesura",
          "checked":true,
          "iconCls":"gxp-icon-measure-length",
          "ptype":"gxp_measure",
@@ -624,7 +565,7 @@
       },
       {
          "leaf":true,
-         "text":"Zoom In / Zoom Out",
+         "text":"Apropa / Allunya",
          "checked":true,
          "iconCls":"gxp-icon-zoom-in",
          "ptype":"gxp_zoom",
@@ -635,7 +576,7 @@
       },
       {
          "leaf":true,
-         "text":"Zoom To Previous Extent / Zoom To Next Extent",
+         "text":"Vista anterior / Vista següent",
          "checked":true,
          "iconCls":"gxp-icon-zoom-previous",
          "ptype":"gxp_navigationhistory",
@@ -646,7 +587,7 @@
       },
       {
          "leaf":true,
-         "text":"Zoom To Max Extent",
+         "text":"Mostra l'extensió total",
          "checked":true,
          "iconCls":"gxp-icon-zoomtoextent",
          "ptype":"gxp_zoomtoextent",
@@ -657,7 +598,7 @@
       },
       {
          "leaf":true,
-         "text":"Show Legend",
+         "text":"Mostra Llegenda",
          "checked":true,
          "iconCls":"gxp-icon-legend",
          "ptype":"gxp_legend",

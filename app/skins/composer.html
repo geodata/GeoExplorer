@@ -5,9 +5,10 @@
         Note: Replace the key below with your own key before deploying. 
         See http://code.google.com/apis/maps/signup.html for information.
     -->
+    <!--
     <script src="http://www.google.com/jsapi?key=ABQIAAAAUsKcmnPzjuknr-Dmg-0emhTJDNqs-N0UWIgosM1Z31aKBIjWyRTlj_ogdW3SqXdS1hkMDTgb_i7jpg"></script>
     <script type="text/javascript">google&&google.load("earth", "1");</script>
-
+    -->
     <!-- OpenLayers resources -->
     <link rel="stylesheet" type="text/css" href="externals/openlayers/theme/default/style.css">
     <script type="text/javascript" src="script/OpenLayers.js"></script>
@@ -57,9 +58,23 @@
             success: function(response) {
                 var initialConfig = Ext.decode(response.responseText);
                 app = new GeoExplorer.Composer(initialConfig);
+                app.on("ready", function(){
+                    setTimeout(function(){
+                        Ext.get("appLoading").fadeOut({remove:true});
+                    }, 1000);
+                });
             },
             failure: function() {
                 console.log('cannot load initial config');
             }
         });
     </script>
+    
+<% subskin content %>
+<div id="appLoading">
+    <div id="appLoadingMessage">
+        <div class="title">Carregant l'aplicaci&oacute;</div>
+        <br>
+        <div class="subtitle">Espereu uns instants, si us plau</div>
+    </div>
+</div>
