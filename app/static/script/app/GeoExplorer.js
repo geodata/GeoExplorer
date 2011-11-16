@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2009-2011 The Open Planning Project
  */
 
@@ -248,7 +248,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 items: [ // The search engines
                     {
                         xtype: 'gdxp_streetsearch',
-                        baseURL: "http://oslo.geodata.es/geosearch/castellbisbal"
+                        streetLayer: "castellbisbal:car_eixos_opengeo",
+                        portalLayer: "castellbisbal:car_portals_opengeo"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
@@ -262,8 +263,6 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         typeLabelText: this.equipamentTipusSearchTitleText,
                         poiLabelText: this.equipamentPOISearchTitleText,
                         baseURL: "/geoserver/wfs?",
-                        //s'ha de publicar a geoserver una capa falsa amb els tipus d'equipaments
-                        // i sense geometria, pq CQL no accepta DISTINCT
                         typeLayer: "castellbisbal:v_tipuseq",
                         poiLayer: "castellbisbal:eq_equipaments",
                         typeField: "tipus",
