@@ -44,7 +44,7 @@ var getDetails = exports.getDetails = function(request) {
             headers: headers
         });
         exchange.wait();
-        var cookie = exchange.headers.get("Set-Cookie");
+        var cookie = "true"; //exchange.headers.get("Set-Cookie");
         if (cookie) {
             token = cookie.split(";").shift();
         } else {
