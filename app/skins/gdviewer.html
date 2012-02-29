@@ -61,13 +61,14 @@
                 app.on("ready", function(){
                     setTimeout(function(){
                         Ext.get("appLoading").fadeOut({remove:true});
-                    }, 1000);
+                    }, 1000);                   
                 });
             },
             failure: function() {
                 console.log('cannot load initial config');
             }
         });
+
     </script>
 
 <% subskin content %>

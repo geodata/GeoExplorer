@@ -52,8 +52,9 @@
             "name":"topo",
             "title":"Mapa topogràfic de Catalunya / ICC",
             "visibility":true,
-            "group":"background",
-            "fixed":true,
+            //"group":"background",
+            "fixed":false,
+            //"transparent":true,
             "selected":false
          },
          {
@@ -61,8 +62,9 @@
             "name":"orto",
             "title":"Ortofotoimatge de Catalunya / ICC",
             "visibility":false,
-            "group":"background",
-            "fixed":true,
+            //"group":"background",
+            "fixed":false,
+            //"transparent":true,
             "selected":false
          },
          {

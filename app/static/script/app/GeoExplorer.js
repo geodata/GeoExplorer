@@ -424,6 +424,24 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             border: false 
         });
 
+        var coordsPanel = new Ext.BoxComponent({
+            autoEl: {
+                tag: "div",
+                cls: "olControlCoords overlay-element"
+            }
+        });
+
+        coordsPanel.on('render', function(){
+            var coords = new OpenLayers.Control.MousePosition({
+                div: coordsPanel.getEl().dom,
+                numDigits: 0,
+                prefix: "x: ",
+                separator: "<br/>y: "
+            });
+            this.mapPanel.map.addControl(coords);
+            coords.activate();
+        }, this);
+
         this.mapPanel.map.events.register('zoomend', this, function() {
             var scale = zoomStore.queryBy(function(record) {
                 return this.mapPanel.map.getZoom() == record.data.level;
@@ -445,7 +463,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             cls: 'map-overlay',
             items: [
                 scaleLinePanel,
-                zoomSelectorWrapper
+                zoomSelectorWrapper,
+                coordsPanel
             ]
         });
 
@@ -453,6 +472,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         mapOverlay.on("afterlayout", function(){
             scaleLinePanel.getEl().dom.style.position = 'relative';
             scaleLinePanel.getEl().dom.style.display = 'inline';
+            coordsPanel.getEl().dom.style.position = 'relative';
+            coordsPanel.getEl().dom.style.display = 'inline';
 
             mapOverlay.getEl().on("click", function(x){x.stopEvent();});
             mapOverlay.getEl().on("mousedown", function(x){x.stopEvent();});

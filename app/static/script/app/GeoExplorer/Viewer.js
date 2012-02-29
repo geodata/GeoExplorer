@@ -110,5 +110,40 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
         tools.push(aboutButton);
 
         return tools;
+    },
+
+    /**
+     * api: method[print]
+     * Create the various parts that compose the layout.
+     */
+    createTextWindow: function(evt, target) {
+        // event fires two times, so we skip creating an extra window
+        // TODO: rewrite this
+        if(Ext.get("gdxp_extwin")) {
+            evt.preventDefault( );
+            return;
+        }
+        var toolbar = new Ext.Toolbar({
+            defaults:{
+                iconAlign: 'top'
+            },
+            items: [
+                new Ext.Toolbar.Fill(), // <--- we fill the empty space
+                {text:'Imprimir',iconCls:'gxp-icon-print',handler: function(){
+                                                            var printwin = window.open(target.href);
+                                                            printwin.print();
+                                                        }}]
+        });
+        var gdxp_win = new Ext.Window({modal: true,
+                                layout: "fit",
+                                id: "gdxp_extwin",
+                                autoScroll: true,
+                                width: 800,
+                                height: 500,
+                                bbar: toolbar,
+                                autoLoad : {url :target.href,scripts: true } });
+        //alert(target.href);
+        gdxp_win.show();
+        evt.preventDefault( );
     }
 });

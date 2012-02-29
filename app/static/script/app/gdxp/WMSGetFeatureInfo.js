@@ -12,6 +12,9 @@ gdxp.WMSGetFeatureInfo = Ext.extend(gxp.plugins.WMSGetFeatureInfo, {
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
 
+        // patch for catastro layer
+        if(evt.object.url == "http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx") text = text.replace("<a", "<a target='_blank'");
+
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
@@ -47,6 +50,8 @@ gdxp.WMSGetFeatureInfo = Ext.extend(gxp.plugins.WMSGetFeatureInfo, {
             collapsible: true
         });
         popup.doLayout();
+
+        if(Ext.get("gdxp_newwindow")) Ext.get("gdxp_newwindow").on("click", GeoExplorer.Viewer.prototype.createTextWindow);
     }
     
 });

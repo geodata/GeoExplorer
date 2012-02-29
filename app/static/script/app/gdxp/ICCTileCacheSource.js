@@ -133,13 +133,18 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
                 {name: "source", type: "string"},
                 {name: "title", type: "string", mapping: "name"},
                 {name: "abstract", type: "string", mapping: "attribution"},
-                {name: "group", type: "string", defaultValue: "background"},
-                {name: "fixed", type: "boolean", defaultValue: true},
-                {name: "selected", type: "boolean"}
+                //{name: "group", type: "string", defaultValue: "background"},
+                // not fixed, we want to be able to move layers to default group
+                {name: "fixed", type: "boolean", defaultValue: false},
+                {name: "selected", type: "boolean", defaultValue: true},
+                {name: "transparent", type: "boolean", defaultValue: true}
             ]
         });
         this.store.each(function(l) {
-            l.set("group", "background");
+            //l.set("group", "background");
+            l.set("properties", "gxp_wmslayerpanel");
+            //l.set("queryable", true);
+            l.set("about", true);
             l.set("name", l.get("layer").params.LAYERS);
         });
         this.fireEvent("ready", this);
