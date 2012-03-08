@@ -13,7 +13,9 @@ gdxp.WMSGetFeatureInfo = Ext.extend(gxp.plugins.WMSGetFeatureInfo, {
         var popupKey = evt.xy.x + "." + evt.xy.y;
 
         // patch for catastro layer
-        if(evt.object.url == "http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx") text = text.replace("<a", "<a target='_blank'");
+        if(evt.object.url == "http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" 
+            || evt.object.url == "http://www1.sedecatastro.gob.es/Cartografia/WMS/ServidorWMS.aspx")
+            text = text.replace("<a", "<a target='_blank'");
 
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({

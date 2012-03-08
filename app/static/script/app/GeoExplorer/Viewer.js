@@ -131,7 +131,8 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                 new Ext.Toolbar.Fill(), // <--- we fill the empty space
                 {text:'Imprimir',iconCls:'gxp-icon-print',handler: function(){
                                                             var printwin = window.open(target.href);
-                                                            printwin.print();
+                                                            //only open the window, dont show dialog
+                                                            //printwin.print();
                                                         }}]
         });
         var gdxp_win = new Ext.Window({modal: true,
