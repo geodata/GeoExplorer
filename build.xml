@@ -6,7 +6,7 @@
     </description>
 
     <property name="build" location="build"/>
-    <property name="app.proxy.geoserver" value="http://geoserver6:8080/geoserver/"/>
+    <property name="app.proxy.geoserver" value="http://loop.geodata.es:8080/geoserver/"/>
     <property name="app.port" value="69"/>
 
     <target name="init">
