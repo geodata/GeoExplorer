@@ -7,7 +7,7 @@ GeoExt.Lang.add("ca", {
     },
     "gdxp.UTMSearch.prototype": {
         titleText: "UTM",
-        labelText: "Introduïu el parell de coordenades i premeu ENTER (exemple: X '415165', Y '4592355')"
+        labelText: "Introduïu el parell de coordenades i premeu ENTER (exemple: X '325017', Y '4720317')"
     },
     "gdxp.CatastroSearch.prototype": {
         titleText: "Cadastre",

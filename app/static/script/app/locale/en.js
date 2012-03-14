@@ -22,12 +22,14 @@ GeoExt.Lang.add("en", {
         contactText: "Contact",
         aboutThisMapText: "About this Map",
         searchersTitleText: 'Search engines',
-        toponimSearchTitleText: 'Placenames',
-        toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
+        toponimSearchTitleText: 'Lakes',
+        toponimSearchLabelText: 'Open to see all lakes; type text to narrow search (for example, "cavallers")',
+        codiSearchTitleText: 'Codes',
+        codiSearchLabelText: 'Open to see all lake codes; type text to narrow search (for example, "PY0077")',
         equipamentSearchTitleText: 'Equipment',
         equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")',
         equipamentTipusSearchTitleText: 'Type',
-        equipamentPOISearchTitleText: 'Equipment'
+        equipamentPOISearchTitleText: 'Lake code'
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Export Map",

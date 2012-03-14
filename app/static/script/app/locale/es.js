@@ -22,12 +22,14 @@ GeoExt.Lang.add("es", {
         contactText: "Contacto",
         aboutThisMapText: "Acerca de este mapa",
         searchersTitleText: 'Buscadores',
-        toponimSearchTitleText: 'Topónimos',
-        toponimSearchLabelText: 'Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, "can")',
+        toponimSearchTitleText: 'Estanques',
+        toponimSearchLabelText: 'Despliegue para seleccionar un lago; esriba para restringir la búsqueda (por ejemplo, "cavallers")',
+        codiSearchTitleText: 'Códigos',
+        codiSearchLabelText: 'Despliegue para seleccionar un código de lago; esriba para restringir la búsqueda (por ejemplo, "PY0077")',
         equipamentSearchTitleText: 'Equipamientos',
         equipamentSearchLabelText: 'Despliegue para seleccionar un equipamiento; esriba para restringir la bússqueda (por ejemplo, "casa")',
-        equipamentTipusSearchTitleText: 'Tipo',
-        equipamentPOISearchTitleText: 'Equipamiento'
+        equipamentTipusSearchTitleText: 'Cuenca',
+        equipamentPOISearchTitleText: 'Estanque'
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exportar Mapa",

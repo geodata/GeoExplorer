@@ -7,7 +7,7 @@ GeoExt.Lang.add("en", {
     },
     "gdxp.UTMSearch.prototype": {
         titleText: "UTM",
-        labelText: "Type coordinate pair and press ENTER (example: X '415165', Y '4592355')"
+        labelText: "Type coordinate pair and press ENTER (example: X '325017', Y '4720317')"
     }, 
     "gdxp.CatastroSearch.prototype": {
         titleText: "Cadastre",

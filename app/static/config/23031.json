@@ -3,8 +3,8 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa i planejament de Castellbisbal - base ICC",
-      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
+      "title":"Observatori Limnològic Pirenaic del Canvi Global - base ICC",
+      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica del Observatori Limnològic Pirenaic del Canvi Global.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
    "defaultSourceType":"gxp_wmscsource",
@@ -15,7 +15,7 @@
          "projection":"EPSG:23031"
       },
       "local":{
-         "title": "GeoServer Castellbisbal",
+         "title": "GeoServer LOOP",
          "url":"/geoserver/ows",
          "ptype": "gxp_wmscsource"
       }

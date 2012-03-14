@@ -217,12 +217,12 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
 
-        /* OVERVIEW */        
+        /* OVERVIEW         
         this.mapPanel.add({
             xtype: 'gdxp_iccoverviewmap',
             map: this.mapPanel.map
         });
-        /* ~OVERVIEW */
+         ~OVERVIEW */
 
         /* SEARCHERS */
         var searchersContainer = {
@@ -247,16 +247,21 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 },
                 items: [ // The search engines
                     {
-                        xtype: 'gdxp_streetsearch',
-                        baseURL: "http://oslo.geodata.es/geosearch/castellbisbal"
-                    },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
                         baseURL: "/geoserver/wfs?",
-                        layer: "castellbisbal:top_toponimia",
-                        field: "toponim"
+                        layer: "pirineus:estanys",
+                        field: "NOM"
                     },{
+                        xtype: 'gdxp_textfieldsearch',
+                        titleText: this.codiSearchTitleText,
+                        labelText: this.codiSearchLabelText,
+                        baseURL: "/geoserver/wfs?",
+                        layer: "pirineus:estanys",
+                        field: "CODI"
+                    },
+                    /*{
                         xtype: 'gdxp_doublefieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         typeLabelText: this.equipamentTipusSearchTitleText,
@@ -264,27 +269,16 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         baseURL: "/geoserver/wfs?",
                         //s'ha de publicar a geoserver una capa falsa amb els tipus d'equipaments
                         // i sense geometria, pq CQL no accepta DISTINCT
-                        typeLayer: "castellbisbal:v_tipuseq",
-                        poiLayer: "castellbisbal:eq_equipaments",
-                        typeField: "tipus",
-                        poiField: "nom"
-                    },
-                    /*
-                    {
-                        xtype: 'gdxp_textfieldsearch',
-                        titleText: this.equipamentSearchTitleText,
-                        labelText: this.equipamentSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
-                        layer: "castellbisbal:eq_equipaments",
-                        field: "nom"
-                    }*/
-                    {
-                        xtype: 'gdxp_catastrosearch'
-                    },{
+                        typeLayer: "pirineus:v_tipus",
+                        poiLayer: "pirineus:estanys",
+                        typeField: "CONCA",
+                        poiField: "NOM"
+                    },*/
+                        {
                         xtype: 'gdxp_utmsearch'
                     },{
                         xtype: 'gdxp_googlesearch',
-                        bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
+                        bounds: new OpenLayers.Bounds(-2.33, 42.15, 3.35, 43.48)
                     }
                 ]
             }]

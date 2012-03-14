@@ -7,7 +7,7 @@ GeoExt.Lang.add("es", {
     },
     "gdxp.UTMSearch.prototype": {
         titleText: "UTM",
-        labelText: "Introduzca el par de coordenadas y pulse ENTER (ejemplo: X '415165', Y '4592355')"
+        labelText: "Introduzca el par de coordenadas y pulse ENTER (ejemplo: X '325017', Y '4720317')"
     },
     "gdxp.CatastroSearch.prototype": {
         titleText: "Catastro",

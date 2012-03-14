@@ -22,12 +22,14 @@ GeoExt.Lang.add("ca", {
         contactText: "Contacte",
         aboutThisMapText: "Quant a aquest mapa",
         searchersTitleText: 'Cercadors',
-        toponimSearchTitleText: 'Topònims',
-        toponimSearchLabelText: 'Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, "can")',
+        toponimSearchTitleText: 'Estanys',
+        toponimSearchLabelText: 'Desplegueu per seleccionar un estany; escriviu per constrènyer la cerca (per exemple, "cavallers")',
+        codiSearchTitleText: 'Codis',
+        codiSearchLabelText: 'Desplegueu per seleccionar un codi d\'estany; escriviu per constrènyer la cerca (per exemple, "PY0077")',
         equipamentSearchTitleText: 'Equipaments',
         equipamentSearchLabelText: 'Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, "casa")',
-        equipamentTipusSearchTitleText: 'Tipus',
-        equipamentPOISearchTitleText: 'Equipament'
+        equipamentTipusSearchTitleText: 'Conca',
+        equipamentPOISearchTitleText: 'Codi de llac'
 
     },
     "GeoExplorer.Composer.prototype": {

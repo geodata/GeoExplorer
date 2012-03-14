@@ -69,7 +69,7 @@ gdxp.Search = Ext.extend(Ext.Panel, {
      *  The zoom scale denominator used when rendering a
      *  search result. Defaults to 2500.
      */    
-    zoomToScale: 2500,
+    zoomToScale: 10000,
     
     /** private: property[layout]
      */

@@ -3,15 +3,15 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa i planejament de Castellbisbal - base Google",
-      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
+      "title":"Observatori Limnològic Pirenaic del Canvi Global - base Google",
+      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica de l'Observatori Limnològic Pirenaic del Canvi Global.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
    "defaultSourceType":"gxp_wmscsource",
    "sources":{
         "local": {
             "url": "/geoserver/ows",
-            "title": "GeoServer Castellbisbal",
+            "title": "GeoServer LOOP",
             "ptype": "gxp_wmscsource"
         },
         "mapquest": {
