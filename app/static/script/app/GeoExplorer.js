@@ -248,14 +248,14 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 items: [ // The search engines
                     {
                         xtype: 'gdxp_streetsearch',
-                        streetLayer: "castellbisbal:car_eixos_opengeo",
-                        portalLayer: "castellbisbal:car_portals_opengeo"
+                        streetLayer: "portal:car_eixos_opengeo",
+                        portalLayer: "portal:car_portals_opengeo"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
                         baseURL: "/geoserver/wfs?",
-                        layer: "castellbisbal:top_toponimia",
+                        layer: "portal:top_toponimia",
                         field: "toponim"
                     },{
                         xtype: 'gdxp_doublefieldsearch',
@@ -263,8 +263,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         typeLabelText: this.equipamentTipusSearchTitleText,
                         poiLabelText: this.equipamentPOISearchTitleText,
                         baseURL: "/geoserver/wfs?",
-                        typeLayer: "castellbisbal:v_tipuseq",
-                        poiLayer: "castellbisbal:eq_equipaments",
+                        typeLayer: "intranet:v_tipuseq",
+                        poiLayer: "intranet:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
                     }/*,{
@@ -272,7 +272,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
                         baseURL: "/geoserver/wfs?",
-                        layer: "castellbisbal:eq_equipaments",
+                        layer: "intranet:eq_equipaments",
                         field: "nom"
                     }*/,{
                         xtype: 'gdxp_catastrosearch'
