@@ -99,7 +99,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_qualificacions",
+            "name":"portal:plan_qualificacions",
             "title":"Planejament - Qualificacions",
             "visibility":true,
             "opacity":1,
@@ -111,7 +111,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_rg_sect2",
+            "name":"portal:plan_rg_sect2",
             "title":"Planejament - Règim del sòl",
             "visibility":true,
             "opacity":1,
@@ -123,7 +123,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_rg_sect",
+            "name":"portal:plan_rg_sect",
             "title":"Planejament - Sectors",
             "visibility":true,
             "opacity":1,
@@ -135,7 +135,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_pati_illa",
+            "name":"portal:plan_pati_illa",
             "title":"Planejament - Pati d'illa",
             "visibility":true,
             "opacity":1,
@@ -147,7 +147,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_galib",
+            "name":"portal:plan_galib",
             "title":"Planejament - Gàlib edificatori (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
@@ -159,7 +159,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_profunditat",
+            "name":"portal:plan_profunditat",
             "title":"Planejament - Profunditat edificatòria (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
@@ -171,7 +171,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_alcades",
+            "name":"portal:plan_alcades",
             "title":"Planejament - Número de plantes (visible a 1:10.000)",
             "visibility":true,
             "opacity":1,
@@ -183,7 +183,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_cotes",
+            "name":"portal:plan_cotes",
             "title":"Planejament - Cotes (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
@@ -195,7 +195,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_cataleg_ambit",
+            "name":"portal:plan_cataleg_ambit",
             "title":"Planejament - Catàleg d'elements a protegir: Àmbit",
             "visibility":true,
             "opacity":1,
@@ -207,7 +207,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:plan_cataleg_element",
+            "name":"portal:plan_cataleg_element",
             "title":"Planejament - Catàleg d'elements a protegir: Element (visible a 1:10.000)",
             "visibility":true,
             "opacity":1,
@@ -219,7 +219,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l67_ctbb_bcn",
+            "name":"portal:mob_bus_linia_l67_ctbb_bcn",
             "title":"Autobús - Línia 67 (Polígon Industrial - Barcelona)",
             "visibility":false,
             "opacity":1,
@@ -231,7 +231,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_n51",
+            "name":"portal:mob_bus_linia_n51",
             "title":"Autobús - Línia Bus Nit (N51)",
             "visibility":false,
             "opacity":1,
@@ -243,7 +243,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_c7_ctbb_trsa_sbll",
+            "name":"portal:mob_bus_linia_c7_ctbb_trsa_sbll",
             "title":"Autobús - Línia C7 (Polígon Industrial - Terrassa - Sabadell)",
             "visibility":false,
             "opacity":1,
@@ -255,7 +255,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l3_ctbb_rubi",
+            "name":"portal:mob_bus_linia_l3_ctbb_rubi",
             "title":"Autobús - Línia 3 (Polígon Industrial - Rubí)",
             "visibility":false,
             "opacity":1,
@@ -267,7 +267,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l2_comu",
+            "name":"portal:mob_bus_linia_l2_comu",
             "title":"Autobús - Línia 2 (tram comú)",
             "visibility":false,
             "opacity":1,
@@ -279,7 +279,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l2_teresita",
+            "name":"portal:mob_bus_linia_l2_teresita",
             "title":"Autobús - Línia 2 (Teresita)",
             "visibility":false,
             "opacity":1,
@@ -291,7 +291,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l2_santeugini_costablanca",
+            "name":"portal:mob_bus_linia_l2_santeugini_costablanca",
             "title":"Autobús - Línia 2 (Santeugini - Costa Blanca)",
             "visibility":false,
             "opacity":1,
@@ -303,7 +303,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l2_sert_costa",
+            "name":"portal:mob_bus_linia_l2_sert_costa",
             "title":"Autobús - Línia 2 (Sert - Can Costa)",
             "visibility":false,
             "opacity":1,
@@ -315,7 +315,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_linia_l1_nucli_estacio",
+            "name":"portal:mob_bus_linia_l1_nucli_estacio",
             "title":"Autobús - Línia 1",
             "visibility":false,
             "opacity":1,
@@ -327,7 +327,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_bus_parades",
+            "name":"portal:mob_bus_parades",
             "title":"Autobús - Parades d'autobús",
             "visibility":false,
             "opacity":1,
@@ -339,7 +339,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:xv_carpr",
+            "name":"portal:xv_carpr",
             "title":"Xarxa de carreteres",
             "visibility":false,
             "opacity":1,
@@ -351,7 +351,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:mob_sentits_circulacio",
+            "name":"portal:mob_sentits_circulacio",
             "title":"Sentits de circulació (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
@@ -363,7 +363,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:car_eixos_opengeo",
+            "name":"portal:car_eixos_opengeo",
             "title":"Carrerer - Eixos carrer (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
@@ -375,7 +375,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:car_portals_opengeo",
+            "name":"portal:car_portals_opengeo",
             "title":"Carrerer - Portals (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
@@ -387,7 +387,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:su_hidr_hidrants_2009",
+            "name":"portal:su_hidr_hidrants_2009",
             "title":"Hidrants 2009",
             "visibility":false,
             "opacity":1,
@@ -399,7 +399,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:top_toponimia",
+            "name":"portal:top_toponimia",
             "title":"Toponímia (visible a 1:10.000)",
             "visibility":false,
             "opacity":1,
@@ -411,7 +411,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:adm_tm_atermenament_2010",
+            "name":"portal:adm_tm_atermenament_2010",
             "title":"TM atermenament 2010",
             "visibility":false,
             "opacity":1,
@@ -423,7 +423,7 @@
          },
          {
             "source":"local",
-            "name":"castellbisbal:adm_tm_poum_2007",
+            "name":"portal:adm_tm_poum_2007",
             "title":"TM POUM 2007",
             "visibility":true,
             "opacity":1,
