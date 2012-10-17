@@ -419,7 +419,7 @@
          "outputTarget":"legend",
          "outputConfig":{
             "autoScroll":true,
-            "title":"Mostra Llegenda"
+            "title":"Mostra llegenda"
          }
       },
       {
@@ -596,7 +596,7 @@
       },
       {
          "leaf":true,
-         "text":"Mostra Llegenda",
+         "text":"Mostra llegenda",
          "checked":true,
          "iconCls":"gxp-icon-legend",
          "ptype":"gxp_legend",

@@ -17,7 +17,6 @@
          "baseParams":{
             "SERVICE":"WMS",
             "REQUEST":"GetCapabilities",
-            "TILED":true,
             "VERSION":"1.1.1"
          }
       },
@@ -107,7 +106,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -119,7 +118,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -131,7 +130,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -143,7 +142,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -155,7 +154,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -167,7 +166,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -179,7 +178,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -191,7 +190,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -203,7 +202,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -215,7 +214,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -227,7 +226,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -239,7 +238,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -251,7 +250,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -263,7 +262,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -275,7 +274,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -287,7 +286,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -299,7 +298,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -311,7 +310,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -323,7 +322,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -335,7 +334,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -347,7 +346,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -359,7 +358,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -371,7 +370,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -383,7 +382,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -395,7 +394,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -407,7 +406,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -419,7 +418,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          },
          {
             "source":"local",
@@ -431,7 +430,7 @@
             "format":"image/png",
             "styles":"",
             "transparent":true,
-            "tiled":false
+            "tiled":true
          }
       ],
       "center":[
@@ -453,7 +452,7 @@
          "outputTarget":"legend",
          "outputConfig":{
             "autoScroll":true,
-            "title":"Mostra Llegenda"
+            "title":"Mostra llegenda"
          }
       },
       {
@@ -630,7 +629,7 @@
       },
       {
          "leaf":true,
-         "text":"Mostra Llegenda",
+         "text":"Mostra llegenda",
          "checked":true,
          "iconCls":"gxp-icon-legend",
          "ptype":"gxp_legend",
