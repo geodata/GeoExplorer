@@ -131,7 +131,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
                     this.loadPortals(record.id);
                 },
                 beforequery: function(e) {
-                    e.query = "etiqueta" + " LIKE '%" + e.query + "%'"; //CQL_FILTEr=etiqueta LIKE '%25major%25'
+                    e.query = "etiqueta" + " ILIKE '%" + e.query + "%'"; //CQL_FILTEr=etiqueta LIKE '%25major%25'
                 }, 
                 scope: this
             }

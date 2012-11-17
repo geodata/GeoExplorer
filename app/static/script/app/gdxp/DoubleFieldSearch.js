@@ -152,8 +152,8 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
                     // This would implement minChars -- commented out
                     // if(e.query.length > 1) {
                         // CQL syntax for "text starts with..."
-                        //e.query = this.typeField + " LIKE '" + e.query + "%'";
-                        e.query = this.typeField + " LIKE '" + "%'";
+                        //e.query = this.typeField + " ILIKE '" + e.query + "%'";
+                        e.query = this.typeField + " ILIKE '" + "%'";
                     //} else {
                     //    return false;
                     //}
