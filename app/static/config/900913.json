@@ -9,14 +9,27 @@
    },
    "defaultSourceType":"gxp_wmscsource",
    "sources":{
-      "local":{
-         "url":"/geoserver/ows",
-         "title":"GeoServer Castellbisbal",
+      "portal":{
+         "title":"Portal Territorial Castellbisbal",
+         "url":"http://mapes.castellbisbal.org/geoserver/portal/gwc/service/wms",
          "ptype":"gxp_wmscsource",
          "projection":"EPSG:900913",
          "baseParams":{
             "SERVICE":"WMS",
             "REQUEST":"GetCapabilities",
+            "TILED":true,
+            "VERSION":"1.1.1"
+         }
+      },
+      "ortofotos":{
+         "title":"Portal Territorial Castellbisbal",
+         "url":"http://mapes.castellbisbal.cat/geoserver/icc/gwc/service/wms",
+         "ptype":"gxp_wmscsource",
+         "projection":"EPSG:900913",
+         "baseParams":{
+            "SERVICE":"WMS",
+            "REQUEST":"GetCapabilities",
+            "TILED":true,
             "VERSION":"1.1.1"
          }
       },
@@ -97,340 +110,340 @@
             "selected":false
          },
          {
-            "source":"local",
-            "name":"portal:plan_qualificacions",
+            "source":"portal",
+            "name":"plan_qualificacions",
             "title":"Planejament - Qualificacions",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_rg_sect2",
+            "source":"portal",
+            "name":"plan_rg_sect2",
             "title":"Planejament - Règim del sòl",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_rg_sect",
+            "source":"portal",
+            "name":"plan_rg_sect",
             "title":"Planejament - Sectors",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_pati_illa",
+            "source":"portal",
+            "name":"plan_pati_illa",
             "title":"Planejament - Pati d'illa",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_galib",
+            "source":"portal",
+            "name":"plan_galib",
             "title":"Planejament - Gàlib edificatori (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_profunditat",
+            "source":"portal",
+            "name":"plan_profunditat",
             "title":"Planejament - Profunditat edificatòria (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_alcades",
+            "source":"portal",
+            "name":"plan_alcades",
             "title":"Planejament - Número de plantes (visible a 1:10.000)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_cotes",
+            "source":"portal",
+            "name":"plan_cotes",
             "title":"Planejament - Cotes (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_cataleg_ambit",
+            "source":"portal",
+            "name":"plan_cataleg_ambit",
             "title":"Planejament - Catàleg d'elements a protegir: Àmbit",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:plan_cataleg_element",
+            "source":"portal",
+            "name":"plan_cataleg_element",
             "title":"Planejament - Catàleg d'elements a protegir: Element (visible a 1:10.000)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l67_ctbb_bcn",
+            "source":"portal",
+            "name":"mob_bus_linia_l67_ctbb_bcn",
             "title":"Autobús - Línia 67 (Polígon Industrial - Barcelona)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_n51",
+            "source":"portal",
+            "name":"mob_bus_linia_n51",
             "title":"Autobús - Línia Bus Nit (N51)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_c7_ctbb_trsa_sbll",
+            "source":"portal",
+            "name":"mob_bus_linia_c7_ctbb_trsa_sbll",
             "title":"Autobús - Línia C7 (Polígon Industrial - Terrassa - Sabadell)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l3_ctbb_rubi",
+            "source":"portal",
+            "name":"mob_bus_linia_l3_ctbb_rubi",
             "title":"Autobús - Línia 3 (Polígon Industrial - Rubí)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_comu",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_comu",
             "title":"Autobús - Línia 2 (tram comú)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_teresita",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_teresita",
             "title":"Autobús - Línia 2 (Teresita)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_santeugini_costablanca",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_santeugini_costablanca",
             "title":"Autobús - Línia 2 (Santeugini - Costa Blanca)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_sert_costa",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_sert_costa",
             "title":"Autobús - Línia 2 (Sert - Can Costa)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l1_nucli_estacio",
+            "source":"portal",
+            "name":"mob_bus_linia_l1_nucli_estacio",
             "title":"Autobús - Línia 1",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_parades",
+            "source":"portal",
+            "name":"mob_bus_parades",
             "title":"Autobús - Parades d'autobús",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:xv_carpr",
+            "source":"portal",
+            "name":"xv_carpr",
             "title":"Xarxa de carreteres",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:mob_sentits_circulacio",
+            "source":"portal",
+            "name":"mob_sentits_circulacio",
             "title":"Sentits de circulació (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:car_eixos_opengeo",
+            "source":"portal",
+            "name":"car_eixos_opengeo",
             "title":"Carrerer - Eixos carrer (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:car_portals_opengeo",
+            "source":"portal",
+            "name":"car_portals_opengeo",
             "title":"Carrerer - Portals (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:su_hidr_hidrants_2009",
+            "source":"portal",
+            "name":"su_hidr_hidrants_2009",
             "title":"Hidrants 2009",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:top_toponimia",
+            "source":"portal",
+            "name":"top_toponimia",
             "title":"Toponímia (visible a 1:10.000)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:adm_tm_atermenament_2010",
+            "source":"portal",
+            "name":"adm_tm_atermenament_2010",
             "title":"TM atermenament 2010",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          },
          {
-            "source":"local",
-            "name":"portal:adm_tm_poum_2007",
+            "source":"portal",
+            "name":"adm_tm_poum_2007",
             "title":"TM POUM 2007",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+
          }
       ],
       "center":[
