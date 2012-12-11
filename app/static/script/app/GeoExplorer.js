@@ -249,29 +249,30 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                     {
                         xtype: 'gdxp_streetsearch',
                         streetLayer: "portal:car_eixos_opengeo",
-                        portalLayer: "portal:car_portals_opengeo"
+                        portalLayer: "portal:car_portals_opengeo",
+                        baseURL: "/geoserver/portal/wfs?"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
+                        baseURL: "/geoserver/portal/wfs?",
                         layer: "portal:top_toponimia",
                         field: "toponim"
-                    },{
+                    }/*,{
                         xtype: 'gdxp_doublefieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         typeLabelText: this.equipamentTipusSearchTitleText,
                         poiLabelText: this.equipamentPOISearchTitleText,
-                        baseURL: "/geoserver/wfs?",
-                        typeLayer: "intranet:v_tipuseq",
-                        poiLayer: "intranet:eq_equipaments",
+                        baseURL: "/geoserver/portal/wfs?",
+                        typeLayer: "portal:v_tipuseq",
+                        poiLayer: "portal:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
-                    }/*,{
+                    }*//*,{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
+                        baseURL: "/geoserver/portal/wfs?",
                         layer: "intranet:eq_equipaments",
                         field: "nom"
                     }*/,{
