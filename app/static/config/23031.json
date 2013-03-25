@@ -17,8 +17,9 @@
       "portal":{
          "title":"Portal Territorial Castellbisbal",
          "url": "http://mapes.castellbisbal.cat/geoserver/portal/gwc/service/wms",
-         "ptype":"gxp_wmscsource",
+         "ptype":"gdxp_wmscsource",
          "projection":"EPSG:23031",
+         "bbox":[258000,4485000,536000,4752000],
          "baseParams":{
             "SERVICE":"WMS",
             "REQUEST":"GetCapabilities",
