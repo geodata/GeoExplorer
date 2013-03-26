@@ -53,7 +53,7 @@ gdxp.WMSGetFeatureInfo = Ext.extend(gxp.plugins.WMSGetFeatureInfo, {
         });
         popup.doLayout();
 
-        if(Ext.get("gdxp_newwindow")) Ext.get("gdxp_newwindow").on("click", GeoExplorer.Viewer.prototype.createTextWindow);
+        Ext.select(".gdxp_newwindow").on("click", GeoExplorer.Viewer.prototype.createTextWindow);
     }
     
 });
