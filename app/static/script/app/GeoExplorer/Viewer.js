@@ -135,16 +135,21 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                                                             //printwin.print();
                                                         }}]
         });
+
+        // don't load the content of the page with autoLoad: we use an iframe
+        var gdxp_win_width = 800; 
+        var gdxp_win_height = 500;
         var gdxp_win = new Ext.Window({modal: true,
                                 layout: "fit",
                                 id: "gdxp_extwin",
                                 autoScroll: true,
-                                width: 800,
-                                height: 500,
+                                width: gdxp_win_width,
+                                height: gdxp_win_height,
                                 bbar: toolbar,
-                                autoLoad : {url :target.href,scripts: true } });
-        //alert(target.href);
+                                html: "<iframe src='" + target.href + "' width='99%' height='98%' frameborder='no'><p>This browser does not support <i>frames</i>.</p></iframe>"});
+                                //autoLoad : {url :target.href,scripts: true } });
+
         gdxp_win.show();
-        evt.preventDefault( );
+        evt.preventDefault( );        
     }
 });
