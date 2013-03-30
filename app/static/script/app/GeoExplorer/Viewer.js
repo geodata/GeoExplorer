@@ -136,7 +136,7 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                                                         }}]
         });
         
-        // we don't load the content of the page with autoLoad: we use an iframe
+        // don't load the content of the page with autoLoad: we use an iframe
         var gdxp_win_width = 800; 
         var gdxp_win_height = 500;
         var gdxp_win = new Ext.Window({modal: true,
