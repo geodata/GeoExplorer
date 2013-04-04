@@ -356,13 +356,25 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             activeItem: 0
         });
         
+        var featureGridPanel = new Ext.Panel({
+        	title: "Features",
+		    layout: "fit",
+		    region: "south",
+		    id: "south",
+		    height: 250,
+		    collapsible: true,
+		    collapsed: true,
+		    split: true
+        });
+        
         this.portalItems = [{
             region: "center",
             layout: "border",
             tbar: this.toolbar,
             items: [
                 this.mapPanelContainer,
-                westPanel
+                westPanel,
+                featureGridPanel
             ]
         }];
         
