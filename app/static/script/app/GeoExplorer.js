@@ -258,6 +258,26 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         baseURL: "/geoserver/portal/wfs?",
                         layer: "portal:top_toponimia",
                         field: "toponim"
+                    },{
+                        xtype: 'gdxp_doublefieldsearch',
+                        titleText: this.comercialSearchTitleText,
+                        typeLabelText: this.equipamentTipusSearchTitleText,
+                        poiLabelText: this.comercialPOISearchTitleText,
+                        baseURL: "/geoserver/wfs?",
+                        typeLayer: "portal:comercial_tipus",
+                        poiLayer: "portal:v_comercial",
+                        typeField: "descripcio",
+                        poiField: "nom"
+                    },{
+                        xtype: 'gdxp_doublefieldsearch',
+                        titleText: this.industrialSearchTitleText,
+                        typeLabelText: this.equipamentTipusSearchTitleText,
+                        poiLabelText: this.industrialPOISearchTitleText,
+                        baseURL: "/geoserver/wfs?",
+                        typeLayer: "portal:industrial_tipus",
+                        poiLayer: "portal:v_industrial",
+                        typeField: "descr_ca",
+                        poiField: "nom"
                     }/*,{
                         xtype: 'gdxp_doublefieldsearch',
                         titleText: this.equipamentSearchTitleText,
