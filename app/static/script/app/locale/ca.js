@@ -27,7 +27,11 @@ GeoExt.Lang.add("ca", {
         equipamentSearchTitleText: 'Equipaments',
         equipamentSearchLabelText: 'Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, "casa")',
         equipamentTipusSearchTitleText: 'Tipus',
-        equipamentPOISearchTitleText: 'Equipament'
+        equipamentPOISearchTitleText: 'Equipament',
+        comercialSearchTitleText: 'Comerços',
+        industrialSearchTitleText: 'Indústries',
+        comercialPOISearchTitleText: 'Comerç',
+        industrialPOISearchTitleText: 'Indústria'
 
     },
     "GeoExplorer.Composer.prototype": {

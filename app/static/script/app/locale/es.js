@@ -27,7 +27,11 @@ GeoExt.Lang.add("es", {
         equipamentSearchTitleText: 'Equipamientos',
         equipamentSearchLabelText: 'Despliegue para seleccionar un equipamiento; esriba para restringir la bússqueda (por ejemplo, "casa")',
         equipamentTipusSearchTitleText: 'Tipo',
-        equipamentPOISearchTitleText: 'Equipamiento'
+        equipamentPOISearchTitleText: 'Equipamiento',
+        comercialSearchTitleText: 'Comercios',
+        industrialSearchTitleText: 'Industrias',
+        comercialPOISearchTitleText: 'Comercio',
+        industrialPOISearchTitleText: 'Industria'
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exportar Mapa",
