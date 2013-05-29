@@ -278,7 +278,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         poiLayer: "portal:v_industrial",
                         typeField: "descr_ca",
                         poiField: "nom"
-                    }*//*,{
+                    }*/,{
                         xtype: 'gdxp_doublefieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         typeLabelText: this.equipamentTipusSearchTitleText,
@@ -288,7 +288,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         poiLayer: "portal:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
-                    }*//*,{
+                    }/*,{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
