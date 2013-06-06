@@ -283,8 +283,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         typeLabelText: this.equipamentTipusSearchTitleText,
                         poiLabelText: this.equipamentPOISearchTitleText,
                         baseURL: "/geoserver/wfs?",
-                        typeLayer: "intranet:v_tipuseq",
-                        poiLayer: "intranet:eq_equipaments",
+                        typeLayer: "portal:v_tipuseq",
+                        poiLayer: "portal:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
                     }/*,{
