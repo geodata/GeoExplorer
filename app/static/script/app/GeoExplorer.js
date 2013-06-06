@@ -250,15 +250,15 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         xtype: 'gdxp_streetsearch',
                         streetLayer: "portal:car_eixos_opengeo",
                         portalLayer: "portal:car_portals_opengeo",
-                        baseURL: "/geoserver/portal/wfs?"
+                        baseURL: "/geoserver/wfs?"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
-                        baseURL: "/geoserver/portal/wfs?",
+                        baseURL: "/geoserver/wfs?",
                         layer: "portal:top_toponimia",
                         field: "toponim"
-                    },/*{
+                    }/*,{
                         xtype: 'gdxp_doublefieldsearch',
                         titleText: this.comercialSearchTitleText,
                         typeLabelText: this.equipamentTipusSearchTitleText,
@@ -288,14 +288,14 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         poiLayer: "portal:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
-                    }/*,{
+                    },/*{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
                         baseURL: "/geoserver/portal/wfs?",
                         layer: "intranet:eq_equipaments",
                         field: "nom"
-                    }*/,{
+                    },*/{
                         xtype: 'gdxp_catastrosearch'
                     },{
                         xtype: 'gdxp_utmsearch'
