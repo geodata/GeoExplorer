@@ -250,12 +250,12 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                         xtype: 'gdxp_streetsearch',
                         streetLayer: "portal:car_eixos_opengeo",
                         portalLayer: "portal:car_portals_opengeo",
-                        baseURL: "/geoserver/wfs?"
+                        baseURL: "/geoserver/portal/wfs?"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
+                        baseURL: "/geoserver/portal/wfs?",
                         layer: "portal:top_toponimia",
                         field: "toponim"
                     }/*,{
