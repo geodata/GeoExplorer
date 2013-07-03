@@ -4,7 +4,7 @@ var auth = require("../auth");
 
 exports.app = function(req) {
     var request = new Request(req);
-    var details = auth.getDetails(request);
+    var status = auth.getStatus(request);
     var response;
     /*
     if (details.status === 401) {
@@ -18,6 +18,10 @@ exports.app = function(req) {
         };
     } else {
     */    response = Response.skin(module.resolve("../skins/composer.html"));
+          response.status = status || 404;
+          
+          // Reset GeoServer session, because we set JSESSIONID on '/' rather than '/geoserver'
+          response.headers['Set-Cookie'] = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/geoserver";          
     //}
     return response;
 };

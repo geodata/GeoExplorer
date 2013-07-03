@@ -14,6 +14,32 @@ function getAuthUrl(request) {
     return url + "rest";
 }
 
+function getGeoServerUrl(request) {
+    var url = java.lang.System.getProperty("app.proxy.geoserver");
+    if (url) {
+        if (url.charAt(url.length-1) !== "/") {
+            url = url + "/";
+        }
+    } else {
+        url = request.scheme + "://" + request.host + (request.port ? ":" + request.port : "") + "/geoserver/";
+    }
+    return url;
+}
+
+function getLoginUrl(request) {
+    return getGeoServerUrl(request) + "j_spring_security_check";
+}
+
+//get status (ACK!) by parsing Location header
+function parseStatus(exchange) {
+    var status = 200;
+    var location = exchange.headers.get("Location");
+    if (/error=true/.test(location)) {
+        status = 401;
+    }
+    return status;
+}
+
 var getDetails = exports.getDetails = function(request) {
     var url = getAuthUrl(request);
     var status = 401;
@@ -44,7 +70,7 @@ var getDetails = exports.getDetails = function(request) {
             headers: headers
         });
         exchange.wait();
-        var cookie = "true"; //exchange.headers.get("Set-Cookie");
+        var cookie = exchange.headers.get("Set-Cookie");
         if (cookie) {
             token = cookie.split(";").shift();
         } else {
@@ -68,5 +94,36 @@ var getDetails = exports.getDetails = function(request) {
         token: token, 
         url: url
     };
+};
+
+exports.authenticate = function(request) {
+    var params = request.postParams;
+    var status = 401;
+    var client = new Client(undefined, false);
+    var token;
+    if (params.username && params.password) {
+        var url = getLoginUrl(request);
+        var exchange = client.request({
+            url: url,
+            method: "POST",
+            async: false,
+            data: {
+                username: params.username,
+                password: params.password
+            }
+        });
+        exchange.wait();
+        status = parseStatus(exchange);
+        if (status === 200) {
+            var cookie = exchange.headers.get("Set-Cookie");
+            if (cookie) {
+                token = cookie.split(";").shift();
+            }
+        }
+    }
+    return {
+        token: token,
+        status: status
+    }
 };
 
