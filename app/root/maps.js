@@ -287,7 +287,9 @@ var deleteMap = exports.deleteMap = function(id, request) {
     return result;
 };
 
-exports.app = function(request) {
+exports.app = function(request, pathInfo) {
+    // TODO: make it so this is unnecessary
+    request.pathInfo = pathInfo || "";
     var resp;
     var method = request.method;
     var handler = handlers[method];

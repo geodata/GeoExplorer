@@ -4,7 +4,7 @@ var auth = require("../auth");
 
 exports.app = function(req) {
     var request = new Request(req);
-    var status = auth.getStatus(request);
+    var status = auth.getStatus(req);
     var response;
     /*
     if (details.status === 401) {
