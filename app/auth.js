@@ -24,10 +24,10 @@ function getAuthUrl(request) {
 
 // get status (ACK!) by parsing Location header
 function parseStatus(exchange) {
-    var status = 200;
+    var status = 401; // Defaults to unauthorized
     var location = exchange.headers.get("Location");
-    if (/error=true/.test(location)) {
-        status = 401;
+    if (exchange.status == 302 && /error=true/.test(location) == false) {
+        status = 200; // If redirecting without error, authorize
     }
     return status;
 }
