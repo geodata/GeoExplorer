@@ -89,7 +89,7 @@ var createProxyRequestProps = exports.createProxyRequestProps = function(config)
         var data;
         var method = request.method;
         if (method == "PUT" || method == "POST") {
-            if (request.headers.get("content-length")) {
+            if (headers.get("content-length")) {
                 data = request.input;
             }
         }
