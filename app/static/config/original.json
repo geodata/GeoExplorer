@@ -13,18 +13,11 @@
             "title": "Local GeoServer",
             "ptype": "gxp_wmscsource"
         },
-        "suite": {
-            "url": "http://v2.suite.opengeo.org/geoserver/ows",
-            "title": "Remote Suite GeoServer"
-        },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
         },
         "osm": {
             "ptype": "gxp_osmsource"
-        },
-        "google": {
-            "ptype": "gxp_googlesource"
         },
         "bing": {
             "ptype": "gxp_bingsource"
@@ -42,11 +35,6 @@
             20037508.34, 20037508.34
         ],
         "layers": [{
-            "source": "google",
-            "title": "Google Roadmap",
-            "name": "ROADMAP",
-            "group": "background"
-        }, {
             "source": "ol",
             "group": "background",
             "fixed": true,

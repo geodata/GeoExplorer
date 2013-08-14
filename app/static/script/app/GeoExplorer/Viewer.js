@@ -54,7 +54,8 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                 border: false
             },
             items: [
-                this.mapPanel,
+                this.mapPanel//,
+                /*
                 new gxp.GoogleEarthPanel({
                     mapPanel: this.mapPanel,
                     listeners: {
@@ -62,7 +63,7 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                             return record.get("group") !== "background";
                         }
                     }
-                })
+                }) */
             ],
             activeItem: 0
         });
@@ -109,5 +110,46 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
         tools.push(aboutButton);
 
         return tools;
+    },
+
+    /**
+     * api: method[print]
+     * Create the various parts that compose the layout.
+     */
+    createTextWindow: function(evt, target) {
+        // event fires two times, so we skip creating an extra window
+        // TODO: rewrite this
+        if(Ext.get("gdxp_extwin")) {
+            evt.preventDefault( );
+            return;
+        }
+        var toolbar = new Ext.Toolbar({
+            defaults:{
+                iconAlign: 'top'
+            },
+            items: [
+                new Ext.Toolbar.Fill(), // <--- we fill the empty space
+                {text:'Imprimir',iconCls:'gxp-icon-print',handler: function(){
+                                                            var printwin = window.open(target.href);
+                                                            //only open the window, dont show dialog
+                                                            //printwin.print();
+                                                        }}]
+        });
+        
+        // don't load the content of the page with autoLoad: we use an iframe
+        var gdxp_win_width = 800; 
+        var gdxp_win_height = 500;
+        var gdxp_win = new Ext.Window({modal: true,
+                                layout: "fit",
+                                id: "gdxp_extwin",
+                                autoScroll: true,
+                                width: gdxp_win_width,
+                                height: gdxp_win_height,
+                                bbar: toolbar,
+                                html: "<iframe src='" + target.href + "' width='99%' height='98%' frameborder='no'><p>This browser does not support <i>frames</i>.</p></iframe>"});
+                                //autoLoad : {url :target.href,scripts: true } });
+        //alert(target.href);
+        gdxp_win.show();
+        evt.preventDefault( );
     }
 });

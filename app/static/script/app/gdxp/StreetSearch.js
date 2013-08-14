@@ -57,7 +57,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
      *  
      *  GeoSearch service base URL. Required.
      */   
-    baseURL: null,
+    baseURL: "/geoserver/wfs",
     
     /** private: property[streetDataStore]
      *  ``Ext.data.Store`` Where streets are loaded
@@ -91,13 +91,25 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
                 url: this.baseURL,
                 method: "GET"
             }),
-            baseParams: {op: "getStreets"},
+            baseParams: {
+                service: "WFS",
+                version: "1.1",
+                outputFormat: "json",
+                request: "getFeature",
+                typeName: this.streetLayer
+            },
             reader: new Ext.data.JsonReader({
-                root: ''
+                root: 'features'
             }, [
-                {name: 'id', mapping: 'id'},
-                {name: 'name', mapping: 'name'}
-            ])
+                {name: 'sortname', mapping: 'properties.name'},
+                {name: 'id', mapping: 'properties.codi'},
+                {name: 'name', mapping: 'properties.etiqueta'}
+            ]),
+            sortInfo: {
+                field: 'sortname',
+                direction: 'ASC'
+            },
+            remoteSort: false
         });
 
         this.streetCombo = new Ext.form.ComboBox({
@@ -105,7 +117,8 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
             anchor: "100%",
             store: this.streetDataStore,
             minChars: 3,
-            queryParam: 'name',
+            queryParam: 'cql_filter',
+            valueField:'id',
             displayField:'name',
             typeAhead: false,
             loadingText: this.loadingText,
@@ -117,6 +130,9 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
                 select: function(combo, record, index) {
                     this.loadPortals(record.id);
                 },
+                beforequery: function(e) {
+                    e.query = "etiqueta" + " ILIKE '%" + e.query + "%'"; //CQL_FILTEr=etiqueta LIKE '%25major%25'
+                }, 
                 scope: this
             }
         });
@@ -127,17 +143,24 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
                 method: "GET"
             }),
             baseParams: {
-                op: "getNumbers"
+                service: "WFS",
+                version: "1.1",
+                outputFormat: "json",
+                request: "getFeature",
+                typeName: this.portalLayer
             },
             reader: new Ext.data.JsonReader({
-                root: 'data',
-                successProperty: 'success',
-                idProperty: 'value'
+                root: 'features'
             }, [
-                {name: 'number', mapping: 'value'},
-                {name: 'x', mapping: 'x'},
-                {name: 'y', mapping: 'y'}
-            ])
+                {name: 'number', mapping: 'properties.numero'},
+                {name: 'x', mapping: 'properties.utm_x'},
+                {name: 'y', mapping: 'properties.utm_y'}
+            ]),
+            sortInfo: {
+                field: 'number',
+                direction: 'ASC'
+            },
+            remoteSort: false
         });
 
         this.portalCombo = new Ext.form.ComboBox({
@@ -153,7 +176,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
             store: this.portalDataStore,
             listeners: {
                 select: function(combo, record, index) {
-                    var text = this.streetCombo.getValue() + " " + record.get("number")
+                    var text = this.streetCombo.getRawValue() + " " + record.get("number")
                     this.showLocation(record.get("x"), record.get("y"), text);
                 },
                 scope: this
@@ -172,7 +195,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
      */       
     loadPortals: function(streetId) {
         this.portalDataStore.reload({
-            params: {street: streetId}
+            params: {'cql_filter': "codi" + "='" + this.streetCombo.getValue() + "'"}
         });
     }
 });

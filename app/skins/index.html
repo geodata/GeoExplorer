@@ -26,14 +26,14 @@
             "Confirm Deletion": {"es": "Confirme la eliminación", "ca": "Confirmeu l'eliminació"},
             "Are you sure you want to delete this map?": {"es": "¿Está seguro de querer borrar este mapa", "ca": "Esteu segur de voler esborrar aquest mapa?"},
             "Dashboard": {"es": "Panel de Control", "ca": "Panell de Control"},
-            "New Map (Google base)": {"es": "Nuevo Mapa Google", "ca": "Nou Mapa Google"},
-            "New Map (ICC base)": {"es": "Nuevo Mapa ICC", "ca": "Nou Mapa ICC"},
+            "New Map (Web Mercator)": {"es": "Nuevo Mapa (Web Mercator)", "ca": "Nou Mapa (Web Mercator)"},
+            "New Map (UTM 31N)": {"es": "Nuevo Mapa (UTM 31N)", "ca": "Nou Mapa (UTM 31N)"},
             "User": {"es": "Usuario", "ca": "Usuari"},
             "Password": {"es": "Contraseña", "ca": "Clau"},
             "Login": {"es": "Login", "ca": "Login"},
             "Invalid username or password.": {"es": "Usuario o contraseña errónea.", "ca": "Usuari o clau errònia."},
-            "Document Tree": {"es": "Árbol de Documentos", "ca": "Arbre de Documents"},
-            "Map Table": {"es": "Tabla de Mapas", "ca": "Taula de Mapes"},
+            "Document Tree": {"es": "Árbol de Documentos", "ca": "Arbre de documents"},
+            "Map Table": {"es": "Tabla de Mapas", "ca": "Taula de mapes"},
             "The Application": {"es": "La Aplicación", "ca": "L'aplicació"},
             "About": {"es": "Acerca de...", "ca": "Quant a..."},
             "How to Browse": {"es": "Cómo Navegar", "ca": "Com Navegar"}
@@ -162,7 +162,7 @@
                     },
                     hidden: (status === 401)
                 },{
-                    text: _("New Map (Google base)"),
+                    text: _("New Map (Web Mercator)"),
                     id: "new-map-900913-button",
                     iconCls: "add",
                     handler: function() {
@@ -170,7 +170,7 @@
                     },
                     hidden: (status === 401)
                 },{
-                    text: _("New Map (ICC base)"),
+                    text: _("New Map (UTM 31N)"),
                     id: "new-map-23031-button",
                     iconCls: "add",
                     handler: function() {
@@ -194,8 +194,11 @@
                 dataUrl: 'documents.json',
                 root: {
                 nodeType: 'async',
-                    text: 'Arbre de Documents'
+                    text: 'Arbre de documents'
                 }
+            });
+            new Ext.tree.TreeSorter(docTree, {
+                dir: "ASC"
             });
             docTree.getRootNode().expand();
             

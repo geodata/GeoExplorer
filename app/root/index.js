@@ -4,8 +4,8 @@ var auth = require("../auth");
 
 exports.app = function(env) {
     var request = new Request(env);
-    var details = auth.getDetails(request);
+    var status = auth.getStatus(request);
     return Response.skin(module.resolve("../skins/index.html"), {
-        status: details.status
+        status: status
     });
 };

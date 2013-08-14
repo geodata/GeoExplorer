@@ -113,7 +113,7 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
                     // This would implement minChars -- commented out
                     // if(e.query.length > 1) {
                         // CQL syntax for "text starts with..."
-                        e.query = this.field + " LIKE '" + e.query + "%'";
+                        e.query = this.field + " ILIKE '" + e.query + "%'";
                     //} else {
                     //    return false;
                     //}

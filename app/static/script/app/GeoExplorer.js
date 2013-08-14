@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2009-2011 The Open Planning Project
  */
 
@@ -231,6 +231,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             region: 'north',
             layout: 'fit',
             height: 180,
+            cls: "searchers",
             split: true,
             collapsible: true,
             border: false,
@@ -248,44 +249,61 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 items: [ // The search engines
                     {
                         xtype: 'gdxp_streetsearch',
-                        baseURL: "http://oslo.geodata.es/geosearch/castellbisbal"
+                        streetLayer: "portal:car_eixos_opengeo",
+                        portalLayer: "portal:car_portals_opengeo",
+                        baseURL: "/geoserver/portal/wfs?"
                     },{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.toponimSearchTitleText,
                         labelText: this.toponimSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
-                        layer: "castellbisbal:top_toponimia",
+                        baseURL: "/geoserver/portal/wfs?",
+                        layer: "portal:top_toponimia",
                         field: "toponim"
+                    }/*,{
+                        xtype: 'gdxp_doublefieldsearch',
+                        titleText: this.comercialSearchTitleText,
+                        typeLabelText: this.equipamentTipusSearchTitleText,
+                        poiLabelText: this.comercialPOISearchTitleText,
+                        baseURL: "/geoserver/portal/wfs?",
+                        typeLayer: "portal:comercial_tipus",
+                        poiLayer: "portal:v_comercial",
+                        typeField: "descripcio",
+                        poiField: "nom"
                     },{
+                        xtype: 'gdxp_doublefieldsearch',
+                        titleText: this.industrialSearchTitleText,
+                        typeLabelText: this.equipamentTipusSearchTitleText,
+                        poiLabelText: this.industrialPOISearchTitleText,
+                        baseURL: "/geoserver/portal/wfs?",
+                        typeLayer: "portal:industrial_tipus",
+                        poiLayer: "portal:v_industrial",
+                        typeField: "descr_ca",
+                        poiField: "nom"
+                    }*/,{
                         xtype: 'gdxp_doublefieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         typeLabelText: this.equipamentTipusSearchTitleText,
                         poiLabelText: this.equipamentPOISearchTitleText,
-                        baseURL: "/geoserver/wfs?",
-                        //s'ha de publicar a geoserver una capa falsa amb els tipus d'equipaments
-                        // i sense geometria, pq CQL no accepta DISTINCT
-                        typeLayer: "castellbisbal:v_tipuseq",
-                        poiLayer: "castellbisbal:eq_equipaments",
+                        baseURL: "/geoserver/portal/wfs?",
+                        typeLayer: "portal:v_tipuseq",
+                        poiLayer: "portal:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
-                    },
-                    /*
-                    {
+                    },/*{
                         xtype: 'gdxp_textfieldsearch',
                         titleText: this.equipamentSearchTitleText,
                         labelText: this.equipamentSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
-                        layer: "castellbisbal:eq_equipaments",
+                        baseURL: "/geoserver/portal/wfs?",
+                        layer: "intranet:eq_equipaments",
                         field: "nom"
-                    }*/
-                    {
+                    },*/{
                         xtype: 'gdxp_catastrosearch'
                     },{
                         xtype: 'gdxp_utmsearch'
-                    },{
+                    }/*,{
                         xtype: 'gdxp_googlesearch',
                         bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
-                    }
+                    }*/
                 ]
             }]
         };
@@ -322,7 +340,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 item.disable();
             });
         });
-
+        /*
         var googleEarthPanel = new gxp.GoogleEarthPanel({
             mapPanel: this.mapPanel,
             listeners: {
@@ -345,6 +363,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 layersContainer.getTopToolbar().setDisabled(false);
             }
         }, this);
+        */
 
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
@@ -353,8 +372,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 border: false
             },
             items: [
-                this.mapPanel,
-                googleEarthPanel
+                this.mapPanel//,
+                //googleEarthPanel
             ],
             activeItem: 0
         });
@@ -427,6 +446,24 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             border: false 
         });
 
+        var coordsPanel = new Ext.BoxComponent({
+            autoEl: {
+                tag: "div",
+                cls: "olControlCoords overlay-element"
+            }
+        });
+
+        coordsPanel.on('render', function(){
+            var coords = new OpenLayers.Control.MousePosition({
+                div: coordsPanel.getEl().dom,
+                numDigits: 0,
+                prefix: "x: ",
+                separator: "<br/>y: "
+            });
+            this.mapPanel.map.addControl(coords);
+            coords.activate();
+        }, this);
+
         this.mapPanel.map.events.register('zoomend', this, function() {
             var scale = zoomStore.queryBy(function(record) {
                 return this.mapPanel.map.getZoom() == record.data.level;
@@ -448,7 +485,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             cls: 'map-overlay',
             items: [
                 scaleLinePanel,
-                zoomSelectorWrapper
+                zoomSelectorWrapper,
+                coordsPanel
             ]
         });
 
@@ -456,6 +494,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         mapOverlay.on("afterlayout", function(){
             scaleLinePanel.getEl().dom.style.position = 'relative';
             scaleLinePanel.getEl().dom.style.display = 'inline';
+            coordsPanel.getEl().dom.style.position = 'relative';
+            coordsPanel.getEl().dom.style.display = 'inline';
 
             mapOverlay.getEl().on("click", function(x){x.stopEvent();});
             mapOverlay.getEl().on("mousedown", function(x){x.stopEvent();});
@@ -471,9 +511,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
      */
     createTools: function() {
         
-
+        /*
         var toolGroup = this.toggleGroup;
-
+        
         var enable3DButton = new Ext.Button({
             iconCls: "icon-3D",
             tooltip: this.switch3dText,
@@ -490,12 +530,12 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             },
             scope: this
         });
-    
+        */
         var tools = [
-            "-",
-            enable3DButton
+            "-"//,
+            //enable3DButton
         ];
-
+        
         return tools;
     },
     

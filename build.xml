@@ -4,10 +4,10 @@
     <description>
         GeoExplorer Build File
     </description>
-
     <property name="build" location="build"/>
-    <property name="app.proxy.geoserver" value="http://demo.geodata.es:8080/geoserver/"/>
-    <property name="app.port" value="69"/>
+    <property name="geoexplorer.data" value="./"/>
+    <property name="app.proxy.geoserver" value="http://mapes.castellbisbal.org/geoserver/"/>
+    <property name="app.port" value="6969"/>
 
     <target name="init">
 
@@ -90,6 +90,7 @@
 
     <target name="debug">
         <java jar="externals/ringojs/run.jar" fork="true">
+            <sysproperty key="GEOEXPLORER_DATA" path="${geoexplorer.data}"/>
             <sysproperty key="app.proxy.geoserver" value="${app.proxy.geoserver}"/>
             <sysproperty key="ringo.home" path="externals/ringojs"/>
             <arg path="app/main.js"/>
@@ -99,6 +100,7 @@
 
     <target name="debugall">
         <java jar="externals/ringojs/run.jar" fork="true">
+            <sysproperty key="GEOEXPLORER_DATA" path="${geoexplorer.data}"/>
             <sysproperty key="app.proxy.geoserver" value="${app.proxy.geoserver}"/>
             <sysproperty key="ringo.home" path="externals/ringojs"/>
             <arg value="-d"/>

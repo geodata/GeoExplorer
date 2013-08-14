@@ -89,8 +89,8 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
         var options = {
             projection: "EPSG:23031",
             maxExtent: new OpenLayers.Bounds(258000, 4485000, 536000, 4752000),
-            maxResolution: 550,
-            resolutions: [550, 275, 100, 50, 25, 10, 5, 2, 1, 0.5, 0.25],
+            maxResolution: 100,
+            resolutions: [100, 50, 25, 10, 5, 2, 1, 0.5, 0.25],
             units: "m",
             buffer: 0,
             transitionEffect: "resize",
@@ -100,7 +100,7 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
         var layers = [
             new OpenLayers.Layer.WMS(
                 "Mapa topogràfic de Catalunya / ICC",
-                "http://sagitari.icc.cat/tilecache/tilecache.py",
+                "http://mapcache.icc.cat/map/bases/service",
                 OpenLayers.Util.applyDefaults({
                     layers: "topo"
                 }, params),
@@ -108,7 +108,7 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
             ),
             new OpenLayers.Layer.WMS(
                 "Ortofotoimatge de Catalunya / ICC",
-                "http://sagitari.icc.cat/tilecache/tilecache.py",
+                "http://mapcache.icc.cat/map/bases/service",
                 OpenLayers.Util.applyDefaults({
                     layers: "orto"
                 }, params),
@@ -116,12 +116,12 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
             ),
             new OpenLayers.Layer.WMS(
                 "Mapa geològic de Catalunya / IGC",
-                "http://sagitari.icc.cat/tilecache/tilecache.py",
+                "http://mapcache.icc.cat/map/bases/service",
                 OpenLayers.Util.applyDefaults({
                     layers: "geol"                  
                 }, params),
                 OpenLayers.Util.applyDefaults({
-                    resolutions: [550, 275, 100, 50, 25, 10, 5],
+                    resolutions: [100, 50, 25, 10, 5],
                     attribution: this.igcAttribution
                 }, options)
             )
@@ -133,13 +133,18 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
                 {name: "source", type: "string"},
                 {name: "title", type: "string", mapping: "name"},
                 {name: "abstract", type: "string", mapping: "attribution"},
-                {name: "group", type: "string", defaultValue: "background"},
-                {name: "fixed", type: "boolean", defaultValue: true},
-                {name: "selected", type: "boolean"}
+                //{name: "group", type: "string", defaultValue: "background"},
+                // not fixed, we want to be able to move layers to default group
+                {name: "fixed", type: "boolean", defaultValue: false},
+                {name: "selected", type: "boolean", defaultValue: true},
+                {name: "transparent", type: "boolean", defaultValue: true}
             ]
         });
         this.store.each(function(l) {
-            l.set("group", "background");
+            //l.set("group", "background");
+            l.set("properties", "gxp_wmslayerpanel");
+            //l.set("queryable", true);
+            l.set("about", true);
             l.set("name", l.get("layer").params.LAYERS);
         });
         this.fireEvent("ready", this);
