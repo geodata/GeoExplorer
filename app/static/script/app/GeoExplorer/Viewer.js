@@ -135,7 +135,7 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                                                             //printwin.print();
                                                         }}]
         });
-        
+
         // don't load the content of the page with autoLoad: we use an iframe
         var gdxp_win_width = 800; 
         var gdxp_win_height = 500;
@@ -148,7 +148,7 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                                 bbar: toolbar,
                                 html: "<iframe src='" + target.href + "' width='99%' height='98%' frameborder='no'><p>This browser does not support <i>frames</i>.</p></iframe>"});
                                 //autoLoad : {url :target.href,scripts: true } });
-        //alert(target.href);
+
         gdxp_win.show();
         evt.preventDefault( );
     }
