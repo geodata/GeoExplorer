@@ -26,8 +26,7 @@
             "Confirm Deletion": {"es": "Confirme la eliminación", "ca": "Confirmeu l'eliminació"},
             "Are you sure you want to delete this map?": {"es": "¿Está seguro de querer borrar este mapa", "ca": "Esteu segur de voler esborrar aquest mapa?"},
             "Dashboard": {"es": "Panel de Control", "ca": "Panell de Control"},
-            "New Map (Web Mercator)": {"es": "Nuevo Mapa (Web Mercator)", "ca": "Nou Mapa (Web Mercator)"},
-            "New Map (UTM 31N)": {"es": "Nuevo Mapa (UTM 31N)", "ca": "Nou Mapa (UTM 31N)"},
+            "New Map": {"es": "Nuevo Mapa", "ca": "Nou Mapa"},
             "User": {"es": "Usuario", "ca": "Usuari"},
             "Password": {"es": "Contraseña", "ca": "Clau"},
             "Login": {"es": "Login", "ca": "Login"},
@@ -60,6 +59,35 @@
             } else {
                 hideLoginLink();
             }
+            
+            var templateMenu = [];
+            
+            var templateStore = new Ext.data.JsonStore({
+                url: "templates.json",
+                fields: [
+                    "id", "title"
+                ],
+                autoLoad: true,
+                listeners: {
+                	load: function(state, records) {
+                		for(var i=0, len=records.length; i<len; i++) {
+                			templateMenu.push({
+								id: records[i].json.id,
+                				text: records[i].json.title,
+                				handler: function(r) {
+                					window.open("composer?lang="+lang+"#config/"+r.id);
+                				}
+                			});
+                		}
+                		
+                		var btn = Ext.getCmp('new-map-button');
+            			btn.menu = new Ext.menu.Menu(templateMenu);
+						btn.menu.on("show", btn.onMenuShow, btn);
+						btn.menu.on("hide", btn.onMenuHide, btn);
+                	}
+            	} 
+            });
+            
             var mapStore = new Ext.data.JsonStore({
                 url: "maps",
                 root: "maps",
@@ -166,27 +194,17 @@
                     }
                 }],
                 buttons: [{
+                    text: _("New Map"),
+                    id: "new-map-button",
+                    iconCls: "add",
+                    menu: [],
+                    hidden: (status === 401)
+                }, {
                     text: _("Dashboard"),
                     id: "dashboard-button",
                     iconCls: "dashboard",
                     handler: function() {
                         window.open("/dashboard/");
-                    },
-                    hidden: (status === 401)
-                },{
-                    text: _("New Map (Web Mercator)"),
-                    id: "new-map-900913-button",
-                    iconCls: "add",
-                    handler: function() {
-                        window.open("composer?lang="+lang+"#config/900913");
-                    },
-                    hidden: (status === 401)
-                },{
-                    text: _("New Map (UTM 31N)"),
-                    id: "new-map-23031-button",
-                    iconCls: "add",
-                    handler: function() {
-                        window.open("composer?lang="+lang+"#config/23031");
                     },
                     hidden: (status === 401)
                 }]
@@ -304,8 +322,9 @@
                                     var cm = mapGrid.getColumnModel();
                                     cm.setHidden(cm.getIndexById("editcolumn"), false);
                                     cm.setHidden(cm.getIndexById("removecolumn"), false);
-                                    Ext.getCmp("new-map-23031-button").show();
-                                    Ext.getCmp("new-map-900913-button").show();
+                                    //Ext.getCmp("new-map-23031-button").show();
+                                    //Ext.getCmp("new-map-900913-button").show();
+                                    Ext.getCmp("new-map-button").show();
                                     Ext.getCmp("dashboard-button").show();
                                     win.close();
                                 },
