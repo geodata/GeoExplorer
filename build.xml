@@ -6,7 +6,7 @@
     </description>
     <property name="build" location="build"/>
     <property name="geoexplorer.data" value="./"/>
-    <property name="app.proxy.geoserver" value="http://mapes.castellbisbal.org/geoserver/"/>
+    <property name="app.proxy.geoserver" value="http://eajuntament.roses.cat:8080/geoserver/"/>
     <property name="app.port" value="6969"/>
 
     <target name="init">
