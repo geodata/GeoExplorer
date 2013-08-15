@@ -25,11 +25,31 @@ function getAuthUrl(request) {
 // get status (ACK!) by parsing Location header
 function parseStatus(exchange) {
     var status = 401; // Defaults to unauthorized
+    var token = "";
     var location = exchange.headers.get("Location");
     if (exchange.status == 302 && /error=true/.test(location) == false) {
         status = 200; // If redirecting without error, authorize
+        
+        /* Get session cookie from j_spring_security_check */
+        var cookie = exchange.headers.get("Set-Cookie");
+        /* If not, try to get cookie from redirection */
+        if (!cookie) {       	
+	        var exchange2 = clientRequest({
+	            url: location,
+	            method: "GET",
+	            async: false
+	        });
+	        exchange2.wait();
+	        var cookie = exchange2.headers.get("Set-Cookie");
+	    }
+	    if (cookie) {
+            token = cookie.split(";").shift();
+        }
     }
-    return status;
+    return {
+        token: token,
+        status: status
+    };
 }
 
 exports.getStatus = function(request) {
@@ -63,16 +83,10 @@ exports.authenticate = function(request) {
             }
         });
         exchange.wait();
-        status = parseStatus(exchange);
-        if (status === 200) {
-            var cookie = exchange.headers.get("Set-Cookie");
-            if (cookie) {
-                token = cookie.split(";").shift();
-            }
-        }
-    }
-    return {
-        token: token,
-        status: status
-    }
+        var details = parseStatus(exchange);
+        return details;
+   } else {
+   	   // Here, could check for session cookie
+       return {status: 401}
+   }
 };

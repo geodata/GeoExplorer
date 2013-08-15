@@ -8,7 +8,7 @@ exports.app = function(request) {
     var details = auth.authenticate(request);
     var status = details.status;
     var cookie;
-    if (status === 200) {
+    if (status === 200 && details.token) {
         cookie = details.token;
     } else {
         // clear any previously set cookie
