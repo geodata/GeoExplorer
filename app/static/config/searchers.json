@@ -1,0 +1,620 @@
+﻿{
+   "proxy":"proxy/?url=",
+   "printService":"/geoserver/pdf/",
+   "alignToGrid":true,
+   "about":{
+      "title":"Mapa i planejament de Castellbisbal - proj. UTM 31N",
+      "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
+      "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
+   },
+   "defaultSourceType":"gxp_wmscsource",
+   "sources":{
+      "icc-tilecache":{
+         "title":"Tile Caché ICC",
+         "ptype":"gdxp_icc_tilecache",
+         "projection":"EPSG:23031"
+      },
+      "portal":{
+         "title":"Portal Territorial Castellbisbal",
+         "url": "http://mapes.castellbisbal.cat/geoserver/portal/gwc/service/wms",
+         "ptype":"gdxp_wmscsource",
+         "projection":"EPSG:23031",
+         "bbox":[258000,4485000,536000,4752000],
+         "baseParams":{
+            "SERVICE":"WMS",
+            "REQUEST":"GetCapabilities",
+            "TILED":true,
+            "VERSION":"1.1.1"
+         }
+      },
+      "ortofotos":{
+         "title":"GeoServer Castellbisbal",
+         "url":"http://mapes.castellbisbal.org/geoserver/icc/gwc/service/wms",
+         "ptype":"gxp_wmscsource",
+         "projection":"EPSG:23031",
+         "baseParams":{
+            "SERVICE":"WMS",
+            "REQUEST":"GetCapabilities",
+            "TILED":true,
+            "VERSION":"1.1.1"
+         }
+      }      
+   },
+   "map":{
+      "projection":"EPSG:23031",
+      "units":"m",
+      "resolutions":[
+         25,
+         10,
+         5,
+         2,
+         1,
+         0.5,
+         0.25
+      ],
+      "maxResolution":25,
+      "maxExtent":[
+         398800,
+         4587400,
+         424400,
+         4600200
+      ],
+      "layers":[
+         {
+            "source":"icc-tilecache",
+            "name":"topo",
+            "title":"Mapa topogràfic de Catalunya / ICC",
+            "visibility":true,
+            "fixed":false,
+            "selected":false
+         },
+         {
+            "source":"icc-tilecache",
+            "name":"orto",
+            "title":"Ortofotoimatge de Catalunya / ICC",
+            "visibility":false,
+            "fixed":false,
+            "selected":false
+         },
+         {
+            "source":"portal",
+            "name":"plan_qualificacions",
+            "title":"Planejament - Qualificacions",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"portal",
+            "name":"plan_rg_sect2",
+            "title":"Planejament - Règim del sòl",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_rg_sect",
+            "title":"Planejament - Sectors",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_pati_illa",
+            "title":"Planejament - Pati d'illa",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_galib",
+            "title":"Planejament - Gàlib edificatori (visible a 1:2.500)",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+         },
+         {
+            "source":"portal",
+            "name":"plan_profunditat",
+            "title":"Planejament - Profunditat edificatòria (visible a 1:2.500)",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_alcades",
+            "title":"Planejament - Número de plantes (visible a 1:10.000)",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_cotes",
+            "title":"Planejament - Cotes (visible a 1:2.500)",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_cataleg_ambit",
+            "title":"Planejament - Catàleg d'elements a protegir: Àmbit",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"plan_cataleg_element",
+            "title":"Planejament - Catàleg d'elements a protegir: Element (visible a 1:10.000)",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_n51",
+            "title":"Autobús - Línia Bus Nit (N51)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l67_ctbb_bcn",
+            "title":"Autobús - Línia 67 (Polígon Industrial - Barcelona)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_c7_ctbb_trsa_sbll",
+            "title":"Autobús - Línia C7 (Polígon Industrial - Terrassa - Sabadell)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l3_ctbb_rubi",
+            "title":"Autobús - Línia 3 (Polígon Industrial - Rubí)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l2_comu",
+            "title":"Autobús - Línia 2 (tram comú)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l2_teresita",
+            "title":"Autobús - Línia 2 (Teresita)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l2_santeugini_costablanca",
+            "title":"Autobús - Línia 2 (Santeugini - Costa Blanca)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l2_sert_costa",
+            "title":"Autobús - Línia 2 (Sert - Can Costa)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_l1_nucli_estacio",
+            "title":"Autobús - Línia 1",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_parades",
+            "title":"Autobús - Parades d'autobús",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"xv_carpr",
+            "title":"Xarxa de carreteres",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_sentits_circulacio",
+            "title":"Sentits de circulació (visible a 1:2.500)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"car_eixos_opengeo",
+            "title":"Carrerer - Eixos carrer (visible a 1:2.500)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"car_portals_opengeo",
+            "title":"Carrerer - Portals (visible a 1:2.500)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"su_hidr_hidrants_2009",
+            "title":"Hidrants 2009",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"top_toponimia",
+            "title":"Toponímia (visible a 1:10.000)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"adm_tm_atermenament_2010",
+            "title":"TM atermenament 2010",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"adm_tm_poum_2007",
+            "title":"TM POUM 2007",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         }
+      ],
+      "center":[
+         413570.813,
+         4592753.5
+      ],
+      "zoom":2
+   },
+   "tools":[
+      {
+         "ptype":"gxp_layertree",
+         "outputConfig":{
+            "id":"layertree"
+         },
+         "outputTarget":"tree"
+      },
+      {
+         "ptype":"gxp_legend",
+         "outputTarget":"legend",
+         "outputConfig":{
+            "autoScroll":true,
+            "title":"Mostra llegenda"
+         }
+      },
+      {
+         "ptype":"gxp_addlayers",
+         "actionTarget":"tree.tbar",
+         "upload":true
+      },
+      {
+         "ptype":"gxp_removelayer",
+         "actionTarget":[
+            "tree.tbar",
+            "layertree.contextMenu"
+         ]
+      },
+      {
+         "ptype":"gxp_layerproperties",
+         "actionTarget":[
+            "tree.tbar",
+            "layertree.contextMenu"
+         ]
+      },
+      {
+         "ptype":"gxp_styler",
+         "actionTarget":[
+            "tree.tbar",
+            "layertree.contextMenu"
+         ]
+      },
+      {
+         "ptype":"gxp_zoomtolayerextent",
+         "actionTarget":{
+            "target":"layertree.contextMenu",
+            "index":0
+         }
+      },
+      {
+         "ptype":"gxp_navigation",
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":6
+         }
+      },
+      {
+         "ptype":"gdxp_wmsgetfeatureinfo",
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":7
+         }
+      },
+      {
+         "ptype":"gxp_featuremanager",
+         "id":"featuremanager",
+         "maxFeatures":20
+      },
+      {
+         "ptype":"gxp_featureeditor",
+         "featureManager":"featuremanager",
+         "autoLoadFeatures":true,
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":8
+         }
+      },
+      {
+         "ptype":"gxp_measure",
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":10
+         }
+      },
+      {
+         "ptype":"gxp_zoom",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":11
+         }
+      },
+      {
+         "ptype":"gxp_navigationhistory",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":13
+         }
+      },
+      {
+         "ptype":"gxp_zoomtoextent",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":15
+         }
+      },
+      {
+         "ptype":"gxp_print",
+         "printService":"/geoserver/pdf/",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":5
+         }
+      }
+   ],
+   "viewerTools":[
+      {
+         "leaf":true,
+         "text":"Desplaça mapa",
+         "checked":true,
+         "iconCls":"gxp-icon-pan",
+         "ptype":"gxp_navigation",
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":2
+         }
+      },
+      {
+         "leaf":true,
+         "text":"Consulta elements",
+         "checked":true,
+         "iconCls":"gxp-icon-getfeatureinfo",
+         "ptype":"gdxp_wmsgetfeatureinfo",
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":3
+         }
+      },
+      {
+         "leaf":true,
+         "text":"Mesura",
+         "checked":true,
+         "iconCls":"gxp-icon-measure-length",
+         "ptype":"gxp_measure",
+         "toggleGroup":"toolGroup",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":4
+         }
+      },
+      {
+         "leaf":true,
+         "text":"Apropa / Allunya",
+         "checked":true,
+         "iconCls":"gxp-icon-zoom-in",
+         "ptype":"gxp_zoom",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":5
+         }
+      },
+      {
+         "leaf":true,
+         "text":"Vista anterior / Vista següent",
+         "checked":true,
+         "iconCls":"gxp-icon-zoom-previous",
+         "ptype":"gxp_navigationhistory",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":7
+         }
+      },
+      {
+         "leaf":true,
+         "text":"Mostra l'extensió total",
+         "checked":true,
+         "iconCls":"gxp-icon-zoomtoextent",
+         "ptype":"gxp_zoomtoextent",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":9
+         }
+      },
+      {
+         "leaf":true,
+         "text":"Mostra llegenda",
+         "checked":true,
+         "iconCls":"gxp-icon-legend",
+         "ptype":"gxp_legend",
+         "actionTarget":{
+            "target":"paneltbar",
+            "index":10
+         }
+      }
+   ]
+}
