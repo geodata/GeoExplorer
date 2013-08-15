@@ -3,7 +3,7 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa i planejament de Castellbisbal - proj. UTM 31N",
+      "title":"Portal Territorial de Castellbisbal - proj. UTM 31N",
       "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },

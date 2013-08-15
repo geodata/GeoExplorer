@@ -3,7 +3,7 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa i planejament de Castellbisbal - proj. Web Mercator",
+      "title":"Intranet de Castellbisbal - proj. Web Mercator",
       "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
