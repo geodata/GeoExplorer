@@ -248,38 +248,35 @@
                     url: "login",
                     frame: true,
                     labelWidth: 60,
-                    defaultType: "textfield",
-                    items: [{
-                        fieldLabel: _("User"),
-                        name: "username",
-                        width: 140,
-                        allowBlank: false
-                    }, {
-                        fieldLabel: _("Password"),
-                        name: "password",
-                        width: 140,
-                        inputType: "password",
-                        allowBlank: false
-                    }]
-                });
-                
-                var win = new Ext.Window({
-                    title: _("Login"),
-                    layout: "fit",
-                    width: 230,
-                    height: 130,
-                    plain: true,
-                    border: false,
-                    modal: true,
-                    items: [panel],
-                    buttons: [{
-                        text: _("Login"),
-                        handler: function(button) {
-                            var form = panel.getForm();
-                            button.disable();
-                            submitLogin(
-                                form.getValues(), 
-                                function success(response) {
+					items: [{
+						fieldLabel: _("User"),
+						name: 'username',
+						width: 140,
+						el: 'username',
+						allowBlank: false,
+						xtype:'textfield',
+						autoShow: true
+					}, {
+						fieldLabel: _("Password"),
+						name: 'password',
+						el: 'password',
+						width: 140,
+						xtype:'textfield',
+						allowBlank: false,
+						inputType: 'password',
+						autoShow: true
+					}, {
+						width: 80,
+						style: "float:right;padding-top:10px;",
+						text: _("Login"),
+                        type: "submit",
+                        xtype:'button',
+                        handler: function (button) {
+		                    button.disable();
+		                    var form = panel.getForm();
+		                    submitLogin(
+		                        form.getValues(),
+		                        function success(response) {
                                     var cookie = response.getResponseHeader("Set-Cookie");
                                     if (cookie) {
                                         document.cookie = cookie;
@@ -300,9 +297,20 @@
                                     });
                                     button.enable();
                                 }
-                            );
-                        }
-                    }]
+		                    );
+		                }
+					}]
+                });
+                
+                var win = new Ext.Window({
+                    title: _("Login"),
+                    layout: "fit",
+                    width: 230,
+                    height: 130,
+                    plain: true,
+                    border: false,
+                    modal: true,
+                    items: [panel]
                 });
                 win.show();
             }
@@ -321,4 +329,11 @@
     </script>
 
 <% subskin content %>
-<div id="langchooser">[ <a href="?lang=ca">ca</a> | <a href="?lang=es">es</a> | <a href="?lang=en">en</a> ]</div> <a id="login" href="login">Login</a>
+<div id="langchooser">[ <a href="?lang=ca">ca</a> | <a href="?lang=es">es</a> | <a href="?lang=en">en</a> ]</div> <a id="login" href="#">Login</a>
+
+<!-- Force 'remember password' triggering. See:
+	http://stackoverflow.com/questions/14957772/make-browser-to-remember-name-password-in-form-by-extjs-3 -->
+<form>
+  <input type="text" id="username" name="username" value="" class="x-hidden"/>
+  <input type="password" id="password" name="password" value="" class="x-hidden"/>
+</form>
