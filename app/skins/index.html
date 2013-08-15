@@ -42,6 +42,18 @@
         
         Ext.onReady(function() {
             Ext.QuickTips.init();
+	        Ext.fly("login").on({
+                click: function(event, target) {
+                    showLoginDialog();
+                    event.stopEvent();
+                }
+            });
+	        Ext.fly("logout").on({
+                click: function(event, target) {
+                    logout();
+                    event.stopEvent();
+                }
+            });
             var status = <% status %>;
             if (status === 401) {
                 displayLoginLink();
@@ -233,15 +245,22 @@
             });
             
             function displayLoginLink() {
-                Ext.fly("login").on({
-                    click: function(event, target) {
-                        showLoginDialog();
-                        event.stopEvent();
-                    }
-                });
+                Ext.fly("login").show();
+                Ext.fly("logout").hide();
             }
             function hideLoginLink() {
                 Ext.fly("login").hide();
+                Ext.fly("logout").show();
+            }
+            function logout() {
+            	// Call login with no params
+            	// Will return an unauthorized and unset session cookie
+        		Ext.Ajax.request({
+				   url: 'login',
+				   failure: function() {
+                       displayLoginLink();
+				   }
+				});
             }
             function showLoginDialog() {
                 var panel = new Ext.FormPanel({
@@ -329,7 +348,7 @@
     </script>
 
 <% subskin content %>
-<div id="langchooser">[ <a href="?lang=ca">ca</a> | <a href="?lang=es">es</a> | <a href="?lang=en">en</a> ]</div> <a id="login" href="#">Login</a>
+<div id="langchooser">[ <a href="?lang=ca">ca</a> | <a href="?lang=es">es</a> | <a href="?lang=en">en</a> ]</div> <a id="login" href="#">Login</a> <a id="logout" href="#">Logout</a>
 
 <!-- Force 'remember password' triggering. See:
 	http://stackoverflow.com/questions/14957772/make-browser-to-remember-name-password-in-form-by-extjs-3 -->

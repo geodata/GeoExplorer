@@ -53,7 +53,7 @@ img.icon-removemap {
     background-image: url(img/geoexplorer.png);
 }
 
-#login {
+#login, #logout {
     font-size: 12px;
     display: block;
     position: absolute;
