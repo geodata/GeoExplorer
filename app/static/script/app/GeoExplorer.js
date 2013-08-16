@@ -220,128 +220,6 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         });
         /* ~OVERVIEW */
 
-        /* SEARCHERS */
-        var searchersContainer = {
-            xtype: 'panel', // The searchers container
-            title: this.searchersTitleText,
-            region: 'north',
-            layout: 'fit',
-            height: 180,
-            cls: "searchers",
-            split: true,
-            collapsible: true,
-            border: false,
-            autoScroll: true,
-            ascending: true,
-            labelAlign: 'top',
-            items: [{
-                xtype: 'tabpanel', // The tabs
-                enableTabScroll: true,
-                border: false,
-                activeTab: 0,
-                defaults: {
-                    map: this.mapPanel.map,
-                    lang: GeoExt.Lang.locale
-                },
-                items: [
-                    {
-                        xtype: "gdxp_streetsearch",
-                        streetLayer: "portal:car_eixos_opengeo",
-                        portalLayer: "portal:car_portals_opengeo",
-                        baseURL: "/geoserver/portal/wfs?"
-                    },{
-                        xtype: 'gdxp_textfieldsearch',
-                        texts: {
-                        	ca: {
-                        		title: "Topònims",
-                        		label: "Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, \"can\")"
-                        	}, en: {
-                        		title: "Placenames",
-                        		label: "Open to select a placename; type text to narrow search (for example, \"can\")"
-                        	}, es: {
-                        		title: "Topónimos",
-                        		label: "Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, \"can\")"
-                        	}
-                        },
-                        baseURL: "/geoserver/portal/wfs?",
-                        layer: "portal:top_toponimia",
-                        field: "toponim"
-                    },{
-                        xtype: "gdxp_doublefieldsearch",
-                        texts: {
-                        	ca: {
-                        		title: "Comerços",
-                        		type: "Tipus",
-                        		poi: "Comerç"
-                        	}, en: {
-                        		title: "Commerce",
-                        		type: "Type",
-                        		poi: "Name"
-                        	}, es: {
-                        		title: "Comercios",
-                        		type: "Tipo",
-                        		poi: "Comercio"
-                        	}
-                        },
-                        baseURL: "/geoserver/portal/wfs?",
-                        typeLayer: "portal:comercial_tipus",
-                        poiLayer: "portal:v_comercial",
-                        typeField: "descripcio",
-                        poiField: "nom"
-                    },{
-                        xtype: "gdxp_doublefieldsearch",
-                        texts: {
-                        	ca: {
-                        		title: "Indústries",
-                        		type: "Tipus",
-                        		poi: "Indústria"
-                        	}, en: {
-                        		title: "Industry",
-                        		type: "Type",
-                        		poi: "Name"
-                        	}, es: {
-                        		title: "Industrias",
-                        		type: "Tipo",
-                        		poi: "Industria"
-                        	}
-                        },
-                        baseURL: "/geoserver/portal/wfs?",
-                        typeLayer: "portal:industrial_tipus",
-                        poiLayer: "portal:v_industrial",
-                        typeField: "descr_ca",
-                        poiField: "nom"
-                    },{
-                        xtype: "gdxp_doublefieldsearch",
-                        texts: {
-                        	ca: {
-                        		title: "Equipaments",
-                        		type: "Tipus",
-                        		poi: "Equipament"
-                        	}, en: {
-                        		title: "Equipment",
-                        		type: "Type",
-                        		poi: "Name"
-                        	}, es: {
-                        		title: "Equipamientos",
-                        		type: "Tipo",
-                        		poi: "Equipamiento"
-                        	}
-                        },
-                        baseURL: "/geoserver/portal/wfs?",
-                        typeLayer: "portal:v_tipuseq",
-                        poiLayer: "portal:eq_equipaments",
-                        typeField: "tipus",
-                        poiField: "nom"
-                    },{
-                        xtype: "gdxp_catastrosearch"
-                    },{
-                        xtype: "gdxp_utmsearch"
-                    }
-                ]
-            }]
-        };
-        /* ~SEARCHERS */
-
         var westPanel = new Ext.Panel({
             border: false,
             layout: "border",
@@ -352,11 +230,40 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             collapseMode: "mini",
             header: false,
             items: [
-                searchersContainer,
                 {region: 'center', autoScroll: true, tbar: [], border: false, id: 'tree', title: this.layersText},
                 {region: 'south', xtype: "container", layout: "fit", border: false, height: 200, id: 'legend'}
            ]
         });
+        
+        /* SEARCHERS */
+        if(this.searchers) {
+	        westPanel.add({
+	            xtype: 'panel', // The searchers container
+	            title: this.searchersTitleText,
+	            region: 'north',
+	            layout: 'fit',
+	            height: 180,
+	            cls: "searchers",
+	            split: true,
+	            collapsible: true,
+	            border: false,
+	            autoScroll: true,
+	            ascending: true,
+	            labelAlign: 'top',
+	            items: [{
+	                xtype: 'tabpanel', // The tabs
+	                enableTabScroll: true,
+	                border: false,
+	                activeTab: 0,
+	                defaults: {
+	                    map: this.mapPanel.map,
+	                    lang: GeoExt.Lang.locale
+	                },
+	                items: this.searchers
+	            }]
+	        });
+		}
+        /* ~SEARCHERS */
         
         this.toolbar = new Ext.Toolbar({
             disabled: true,
