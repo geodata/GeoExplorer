@@ -64,10 +64,6 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     contactText: "Contact",
     aboutThisMapText: "About this Map",
     searchersTitleText: 'Search engines',
-    toponimSearchTitleText: 'Placenames',
-    toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
-    equipamentSearchTitleText: 'Equipment',
-    equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")',
     // End i18n.
     
     /**
@@ -244,66 +240,103 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 border: false,
                 activeTab: 0,
                 defaults: {
-                    map: this.mapPanel.map
+                    map: this.mapPanel.map,
+                    lang: GeoExt.Lang.locale
                 },
-                items: [ // The search engines
+                items: [
                     {
-                        xtype: 'gdxp_streetsearch',
+                        xtype: "gdxp_streetsearch",
                         streetLayer: "portal:car_eixos_opengeo",
                         portalLayer: "portal:car_portals_opengeo",
                         baseURL: "/geoserver/portal/wfs?"
                     },{
                         xtype: 'gdxp_textfieldsearch',
-                        titleText: this.toponimSearchTitleText,
-                        labelText: this.toponimSearchLabelText,
+                        texts: {
+                        	ca: {
+                        		title: "Topònims",
+                        		label: "Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, \"can\")"
+                        	}, en: {
+                        		title: "Placenames",
+                        		label: "Open to select a placename; type text to narrow search (for example, \"can\")"
+                        	}, es: {
+                        		title: "Topónimos",
+                        		label: "Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, \"can\")"
+                        	}
+                        },
                         baseURL: "/geoserver/portal/wfs?",
                         layer: "portal:top_toponimia",
                         field: "toponim"
                     },{
-                        xtype: 'gdxp_doublefieldsearch',
-                        titleText: this.comercialSearchTitleText,
-                        typeLabelText: this.equipamentTipusSearchTitleText,
-                        poiLabelText: this.comercialPOISearchTitleText,
+                        xtype: "gdxp_doublefieldsearch",
+                        texts: {
+                        	ca: {
+                        		title: "Comerços",
+                        		type: "Tipus",
+                        		poi: "Comerç"
+                        	}, en: {
+                        		title: "Commerce",
+                        		type: "Type",
+                        		poi: "Name"
+                        	}, es: {
+                        		title: "Comercios",
+                        		type: "Tipo",
+                        		poi: "Comercio"
+                        	}
+                        },
                         baseURL: "/geoserver/portal/wfs?",
                         typeLayer: "portal:comercial_tipus",
                         poiLayer: "portal:v_comercial",
                         typeField: "descripcio",
                         poiField: "nom"
                     },{
-                        xtype: 'gdxp_doublefieldsearch',
-                        titleText: this.industrialSearchTitleText,
-                        typeLabelText: this.equipamentTipusSearchTitleText,
-                        poiLabelText: this.industrialPOISearchTitleText,
+                        xtype: "gdxp_doublefieldsearch",
+                        texts: {
+                        	ca: {
+                        		title: "Indústries",
+                        		type: "Tipus",
+                        		poi: "Indústria"
+                        	}, en: {
+                        		title: "Industry",
+                        		type: "Type",
+                        		poi: "Name"
+                        	}, es: {
+                        		title: "Industrias",
+                        		type: "Tipo",
+                        		poi: "Industria"
+                        	}
+                        },
                         baseURL: "/geoserver/portal/wfs?",
                         typeLayer: "portal:industrial_tipus",
                         poiLayer: "portal:v_industrial",
                         typeField: "descr_ca",
                         poiField: "nom"
                     },{
-                        xtype: 'gdxp_doublefieldsearch',
-                        titleText: this.equipamentSearchTitleText,
-                        typeLabelText: this.equipamentTipusSearchTitleText,
-                        poiLabelText: this.equipamentPOISearchTitleText,
+                        xtype: "gdxp_doublefieldsearch",
+                        texts: {
+                        	ca: {
+                        		title: "Equipaments",
+                        		type: "Tipus",
+                        		poi: "Equipament"
+                        	}, en: {
+                        		title: "Equipment",
+                        		type: "Type",
+                        		poi: "Name"
+                        	}, es: {
+                        		title: "Equipamientos",
+                        		type: "Tipo",
+                        		poi: "Equipamiento"
+                        	}
+                        },
                         baseURL: "/geoserver/portal/wfs?",
                         typeLayer: "portal:v_tipuseq",
                         poiLayer: "portal:eq_equipaments",
                         typeField: "tipus",
                         poiField: "nom"
-                    }/*,{
-                        xtype: 'gdxp_textfieldsearch',
-                        titleText: this.equipamentSearchTitleText,
-                        labelText: this.equipamentSearchLabelText,
-                        baseURL: "/geoserver/portal/wfs?",
-                        layer: "intranet:eq_equipaments",
-                        field: "nom"
-                    }*/,{
-                        xtype: 'gdxp_catastrosearch'
                     },{
-                        xtype: 'gdxp_utmsearch'
-                    }/*,{
-                        xtype: 'gdxp_googlesearch',
-                        bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
-                    }*/
+                        xtype: "gdxp_catastrosearch"
+                    },{
+                        xtype: "gdxp_utmsearch"
+                    }
                 ]
             }]
         };

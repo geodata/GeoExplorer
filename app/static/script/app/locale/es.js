@@ -21,17 +21,7 @@ GeoExt.Lang.add("es", {
         descriptionText: "Descripción",
         contactText: "Contacto",
         aboutThisMapText: "Acerca de este mapa",
-        searchersTitleText: 'Buscadores',
-        toponimSearchTitleText: 'Topónimos',
-        toponimSearchLabelText: 'Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, "can")',
-        equipamentSearchTitleText: 'Equipamientos',
-        equipamentSearchLabelText: 'Despliegue para seleccionar un equipamiento; esriba para restringir la bússqueda (por ejemplo, "casa")',
-        equipamentTipusSearchTitleText: 'Tipo',
-        equipamentPOISearchTitleText: 'Equipamiento',
-        comercialSearchTitleText: 'Comercios',
-        industrialSearchTitleText: 'Industrias',
-        comercialPOISearchTitleText: 'Comercio',
-        industrialPOISearchTitleText: 'Industria'
+        searchersTitleText: "Buscadores"
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exportar Mapa",

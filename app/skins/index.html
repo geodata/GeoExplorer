@@ -3,16 +3,6 @@
     <link rel="stylesheet" type="text/css" href="theme/app/index.css"/>
     <link rel="stylesheet" type="text/css" href="theme/app/filetype.css"/>
     <script>
-        /* i18n */
-        Ext.getUrlParam = function(param) {
-            var params = Ext.urlDecode(location.search.substring(1));
-            return param ? params[param] : params;
-        };
-        
-        var lang = navigator.language || navigator.userLanguage;
-        lang = lang.split("-")[0].toLowerCase() || "ca";
-        lang = Ext.getUrlParam('lang') || lang;
-
         function _(t) { return (texts[t] && texts[t][lang]) || t; };
 
         var texts = {

@@ -13,6 +13,16 @@
         <!-- proj4js resources -->
         <script type="text/javascript" src="externals/proj4js/lib/proj4js-compressed.js"></script>
         <script type="text/javascript" src="externals/proj4js/lib/defs/EPSG23031.js"></script>
+        <script>
+	        /* i18n */
+	        Ext.getUrlParam = function(param) {
+	            var params = Ext.urlDecode(location.search.substring(1));
+	            return param ? params[param] : params;
+	        };
+
+			// Get lang from URL param. Default to catalan.
+	        var lang = Ext.getUrlParam('lang') || "ca";
+        </script>
         <% render extrahead %>
     </head>
     <body>

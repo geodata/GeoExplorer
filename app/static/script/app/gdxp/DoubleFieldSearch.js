@@ -132,7 +132,7 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
         });
 
         this.typeCombo = new Ext.form.ComboBox({
-            fieldLabel: this.typeLabelText,
+            fieldLabel: (this.texts && this.texts[this.lang] && this.texts[this.lang].type) || this.typeLabelText,
             editable: false,
             anchor: "100%",
             store: this.typeDataStore,
@@ -163,7 +163,7 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
         });
 
         this.poiCombo = new Ext.form.ComboBox({
-            fieldLabel: this.poiLabelText,
+            fieldLabel: (this.texts && this.texts[this.lang] && this.texts[this.lang].poi) || this.poiLabelText,
             editable: false,
             anchor: "100%",
             store: this.poiDataStore,
