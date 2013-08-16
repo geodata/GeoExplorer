@@ -47,7 +47,7 @@
         
         // Load initial map config
         var hash = window.location.hash.substr(1);
-        var match = hash.match(/^config\/(\.+)$/);
+        var match = hash.match(/^config\/(.+)$/);
         var url = (match && match[1]) || "demo";
         Ext.Ajax.request({
             url: './config/' + url + '.json',
