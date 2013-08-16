@@ -24,9 +24,9 @@ var pass = exports.pass = function(config) {
     if (typeof config == "string") {
         config = {url: config};
     }
-    return function(request) {
+    return function(request, pathInfo) {
         var query = request.queryString;
-        var path = request.pathInfo && request.pathInfo.substring(1) || "";
+        var path = pathInfo || "";
         var newUrl = config.url + path + (query ? "?" + query : "");
         return proxyPass(objects.merge({
             request: request, 
