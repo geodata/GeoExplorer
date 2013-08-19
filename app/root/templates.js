@@ -19,6 +19,20 @@ var createResponse = function(data, status) {
     };
 };
 
+var getRootPath = function(request) {
+    var dataDir;
+    if (request) {
+        dataDir = request.env.servlet.getServletConfig().getInitParameter("GEOEXPLORER_DATA");
+    }
+    if (!dataDir) {
+        dataDir = String(
+            System.getProperty("GEOEXPLORER_DATA") || 
+            System.getenv("GEOEXPLORER_DATA") || "."
+        );
+    }
+    return FILE.join(dataDir, "templates");
+};
+
 var templateList = function(dir) {
     var list = [];
     FILE.list(dir).forEach(function(file){
@@ -36,7 +50,21 @@ var templateList = function(dir) {
 };
 
 exports.app = function(request, base, extra) {
-    var dataDir = FILE.absolute("app/static/config");
-    var list = templateList(dataDir);
-    return createResponse(list);
+	var dataDir = getRootPath(request);
+	if (extra.equals(".json")) {
+    	var list = templateList(dataDir);
+    	return createResponse(list);
+    } else {
+        var file = FILE.join(dataDir, extra);
+        if (FILE.isFile(file)) {
+            // TODO: open file
+            return {
+                status: 200,
+                headers: {},
+                body: FILE.open(file, "rb")
+            }
+        } else {
+            throw {notfound: true};
+        }  	
+    }
 };

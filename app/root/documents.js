@@ -65,7 +65,7 @@ exports.app = function(request, base, extra) {
         var tree = fileTree(docRoot);
         return createResponse(tree);
     } else { // Download a Document, or 404
-            var file = FILE.join(docRoot, extra);
+        var file = FILE.join(docRoot, extra);
         if (FILE.isFile(file)) {
             // TODO: open file
             return {

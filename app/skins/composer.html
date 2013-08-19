@@ -47,10 +47,10 @@
         
         // Load initial map config
         var hash = window.location.hash.substr(1);
-        var match = hash.match(/^config\/(.+)$/);
+        var match = hash.match(/^templates\/(.+)$/);
         var url = (match && match[1]) || "demo";
         Ext.Ajax.request({
-            url: './config/' + url + '.json',
+            url: './templates/' + url + '.json',
             success: function(response) {
                 var initialConfig = Ext.decode(response.responseText);
                 app = new GeoExplorer.Composer(initialConfig);

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="geoexplorer" default="dist" basedir=".">
-
     <description>
         GeoExplorer Build File
     </description>
     <property name="build" location="build"/>
-    <property name="geoexplorer.data" value="./"/>
-    <property name="app.proxy.geoserver" value="http://eajuntament.roses.cat:8080/geoserver/"/>
-    <!--property name="app.proxy.geoserver" value="http://192.168.50.12:8080/geoserver/"/-->
+    <property name="geoexplorer.data" value="profiles/default"/>
     <property name="app.port" value="6969"/>
+
+	<!-- Override from external properties file -->
+	<property file="${geoexplorer.data}/build/build.properties" />
 
     <target name="init">
 
@@ -52,6 +52,10 @@
             <fileset dir="src/main/webapp/">
             </fileset>
         </copy>
+       
+		<copy file="{geoexplorer.data}/build/web.xml"
+			  tofile="${build}/${ant.project.name}/WEB-INF/web.xml" />	
+        
         <copy todir="${build}/${ant.project.name}/WEB-INF/lib" flatten="true" includeEmptyDirs="false">
             <fileset dir="externals/ringojs/lib"/>
         </copy>
