@@ -239,7 +239,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         if(this.searchers) {
         	// Make a copy of searchers before manipulating
         	var searchers = [];
-        	for (i in this.searchers) {
+        	for (i=0; i<this.searchers.length; i++) {
         		searchers.push(Ext.apply({},this.searchers[i]));
         	}
 	        westPanel.add({

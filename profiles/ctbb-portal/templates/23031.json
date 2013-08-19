@@ -417,6 +417,65 @@
       ],
       "zoom":2
    },
+      "searchers":[
+      {
+         "xtype":"gdxp_streetsearch",
+         "streetLayer":"portal:car_eixos_opengeo",
+         "portalLayer":"portal:car_portals_opengeo",
+         "baseURL":"/geoserver/portal/wfs?"
+      },
+      {
+         "xtype":"gdxp_textfieldsearch",
+         "texts":{
+            "ca":{
+               "title":"Topònims",
+               "label":"Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, \"can\")"
+            },
+            "en":{
+               "title":"Placenames",
+               "label":"Open to select a placename; type text to narrow search (for example, \"can\")"
+            },
+            "es":{
+               "title":"Topónimos",
+               "label":"Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, \"can\")"
+            }
+         },
+         "baseURL":"/geoserver/portal/wfs?",
+         "layer":"portal:top_toponimia",
+         "field":"toponim"
+      },
+      {
+         "xtype":"gdxp_doublefieldsearch",
+         "texts":{
+            "ca":{
+               "title":"Equipaments",
+               "type":"Tipus",
+               "poi":"Equipament"
+            },
+            "en":{
+               "title":"Equipment",
+               "type":"Type",
+               "poi":"Name"
+            },
+            "es":{
+               "title":"Equipamientos",
+               "type":"Tipo",
+               "poi":"Equipamiento"
+            }
+         },
+         "baseURL":"/geoserver/portal/wfs?",
+         "typeLayer":"portal:v_tipuseq",
+         "poiLayer":"portal:eq_equipaments",
+         "typeField":"tipus",
+         "poiField":"nom"
+      },
+      {
+         "xtype":"gdxp_catastrosearch"
+      },
+      {
+         "xtype":"gdxp_utmsearch"
+      }
+   ],
    "tools":[
       {
          "ptype":"gxp_layertree",

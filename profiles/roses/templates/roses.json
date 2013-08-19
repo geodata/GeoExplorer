@@ -289,6 +289,27 @@
       ],
       "zoom":0
    },
+   "searchers":[
+      {
+         "xtype":"gdxp_streetsearch",
+         "baseURL":"/geoserver/referencia/wfs?",
+         "streetLayer":"referencia:eixos",
+         "portalLayer":"referencia:portals",
+         "streetIdField":"CCAR",
+         "streetNameField":"NOMBRE", 
+         "streetSortField":"NOMBRE",
+         "portalStreetIdField":"CARRER_ID",
+         "portalNumberField":"NUMERO",
+         "portalXField":"X",
+         "portalYField":"Y"
+      },
+      {
+         "xtype":"gdxp_catastrosearch"
+      },
+      {
+         "xtype":"gdxp_utmsearch"
+      }
+   ],
    "tools":[
       {
          "ptype":"gxp_layertree",
