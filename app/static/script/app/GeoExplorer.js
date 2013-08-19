@@ -237,6 +237,11 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         
         /* SEARCHERS */
         if(this.searchers) {
+        	// Make a copy of searchers before manipulating
+        	var searchers = [];
+        	for (i in this.searchers) {
+        		searchers.push(Ext.apply({},this.searchers[i]));
+        	}
 	        westPanel.add({
 	            xtype: 'panel', // The searchers container
 	            title: this.searchersTitleText,
@@ -259,7 +264,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
 	                    map: this.mapPanel.map,
 	                    lang: GeoExt.Lang.locale
 	                },
-	                items: this.searchers
+	                items: searchers
 	            }]
 	        });
 		}
@@ -328,7 +333,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             ]
         }];
         
-        GeoExplorer.superclass.initPortal.apply(this, arguments);        
+        GeoExplorer.superclass.initPortal.apply(this, arguments);
     },
     
     /** private: method[createMapOverlay]
