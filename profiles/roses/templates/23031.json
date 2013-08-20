@@ -3,7 +3,7 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"POUM Roses",
+      "title":"POUM Roses - proj. UTM 31N",
       "abstract":"Visor del POUM de l'Ajuntament de Roses.",
       "contact":"Per a més informació, contacteu el servei de SIG de l'Ajuntament de Roses."
    },
@@ -16,7 +16,7 @@
       },
       "roses":{
          "title":"GeoServer Roses",         
-         "url":"http://eajuntament.roses.cat:8080/geoserver/wms",
+         "url":"http://eajuntament.roses.cat:8080/geoserver/gwc/service/wms",
          "ptype":"gdxp_wmscsource",
          "projection":"EPSG:23031",
          "bbox":[
@@ -62,10 +62,9 @@
             "opacity":1,
             "group":"background",
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -75,10 +74,9 @@
             "opacity":1,
             "group":"background",
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -88,10 +86,9 @@
             "opacity":1,
             "group":"background",
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -101,10 +98,9 @@
             "opacity":1,
             "group":"background",
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"icc-tilecache",
@@ -120,11 +116,10 @@
             "source":"icc-tilecache",
             "name":"topo",
             "title":"Mapa topogràfic de Catalunya / ICC",
-            "visibility":false,
+            "visibility":true,
             "opacity":1,
             "group":"background",
-            "fixed":false,
-            "selected":false
+            "fixed":true
          },
          {
             "source":"roses",
@@ -133,10 +128,9 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -145,10 +139,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -157,10 +150,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -169,10 +161,9 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -181,10 +172,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -193,10 +183,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -205,10 +194,9 @@
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -217,10 +205,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -229,10 +216,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -241,10 +227,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -253,10 +238,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -265,10 +249,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          },
          {
             "source":"roses",
@@ -277,10 +260,9 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":false
+            "transparent":true
          }
       ],
       "center":[
