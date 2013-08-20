@@ -55,16 +55,16 @@ you can set the `app.proxy.geoserver` system property as follows:
 
 Running GeoExplorer as described above is not suitable for production because JavaScript
 files will be loaded dynamically.  Before moving your application to a production environment,
-run ant with the "dist" target.  The "dist" target will result in a directory that can be
+run ant with the "dist" target.  The "dist" target will result in a war file that can be
 dropped in a servlet container.
 
     you@prompt:~$ cd geoexplorer
     you@prompt:~/geoexplorer$ ant dist
 
-Move the build/geoexplorer directory to your production environment (e.g. a  servlet container).
+Move the geoexplorer.war file to your production environment (e.g. a servlet container).
 
 GeoExplorer writes to a geoexplorer.db when saving maps. The location of this file is determined
-by the `GEOEXPLORER_DATA` value at runtime.  This value can be set as a servlet initialization
+by the `GEOEXPLORER_DATA` value at runtime. This value can be set as a servlet initialization
 parameter or a Java system property.
 
 The `GEOEXPLORER_DATA` value must be a path to a directory that is writable by the process that

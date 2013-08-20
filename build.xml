@@ -53,9 +53,6 @@
             </fileset>
         </copy>
        
-		<copy file="{geoexplorer.data}/build/web.xml"
-			  tofile="${build}/${ant.project.name}/WEB-INF/web.xml" />	
-        
         <copy todir="${build}/${ant.project.name}/WEB-INF/lib" flatten="true" includeEmptyDirs="false">
             <fileset dir="externals/ringojs/lib"/>
         </copy>
@@ -91,6 +88,19 @@
         <copy todir="${build}/geoexplorer/WEB-INF/app/static/externals/proj4js/lib/defs">
             <fileset dir="app/static/externals/proj4js/lib/defs"/>
         </copy>
+        
+        <!--copy file="${geoexplorer.data}/build/web.xml"
+              tofile="${build}/${ant.project.name}/WEB-INF/web.xml"
+              overwrite="true"/-->        
+        
+        <war destfile="${ant.project.name}.war" webxml="${geoexplorer.data}/build/web.xml">
+        	<webinf dir="${build}/${ant.project.name}/WEB-INF/">
+        		<include name="weblogic.xml"/>
+        		<include name="app/**"/>
+        	</webinf>
+            <lib dir="${build}/${ant.project.name}/WEB-INF/lib"/>
+        </war>       
+        
 	</target>
 
     <target name="debug">
