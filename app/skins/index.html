@@ -15,7 +15,6 @@
             "Delete Map": {"es": "Borrar Mapa", "ca": "Esborra Mapa"},
             "Confirm Deletion": {"es": "Confirme la eliminación", "ca": "Confirmeu l'eliminació"},
             "Are you sure you want to delete this map?": {"es": "¿Está seguro de querer borrar este mapa", "ca": "Esteu segur de voler esborrar aquest mapa?"},
-            "Dashboard": {"es": "Panel de Control", "ca": "Panell de Control"},
             "New Map": {"es": "Nuevo Mapa", "ca": "Nou Mapa"},
             "User": {"es": "Usuario", "ca": "Usuari"},
             "Password": {"es": "Contraseña", "ca": "Clau"},
@@ -190,11 +189,11 @@
                     menu: [],
                     hidden: (status === 401)
                 }, {
-                    text: _("Dashboard"),
+                    text: "Geoserver",
                     id: "dashboard-button",
                     iconCls: "dashboard",
                     handler: function() {
-                        window.open("/dashboard/");
+                        window.open("/geoserver/web/");
                     },
                     hidden: (status === 401)
                 }]
@@ -266,7 +265,13 @@
         		Ext.Ajax.request({
 				   url: 'login',
 				   failure: function() {
-                       displayLoginLink();
+                      document.cookie = undefined;
+                      displayLoginLink();
+                      var cm = mapGrid.getColumnModel();
+                      cm.setHidden(cm.getIndexById("editcolumn"), true);
+                      cm.setHidden(cm.getIndexById("removecolumn"), true);
+                      Ext.getCmp("new-map-button").hide();
+                      Ext.getCmp("dashboard-button").hide();
 				   }
 				});
             }
