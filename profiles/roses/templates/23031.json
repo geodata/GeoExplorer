@@ -3,7 +3,7 @@
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"POUM Roses - proj. UTM 31N",
+      "title":"POUM Roses",
       "abstract":"Visor del POUM de l'Ajuntament de Roses.",
       "contact":"Per a més informació, contacteu el servei de SIG de l'Ajuntament de Roses."
    },
@@ -15,8 +15,8 @@
          "projection":"EPSG:23031"
       },
       "roses":{
-         "title":"GeoServer Roses",         
-         "url":"http://eajuntament.roses.cat:8080/geoserver/gwc/service/wms",
+         "title":"GeoServer Roses",
+         "url":"http://eajuntament.roses.cat:8080/geoserver/wms",
          "ptype":"gdxp_wmscsource",
          "projection":"EPSG:23031",
          "bbox":[
@@ -55,52 +55,14 @@
       ],
       "layers":[
          {
-            "source":"roses",
-            "name":"referencia:topo2010",
-            "title":"Topografia 1:1000 (2010)",
-            "visibility":false,
+            "source":"icc-tilecache",
+            "name":"topo",
+            "title":"Mapa topogràfic de Catalunya / ICC",
+            "visibility":true,
             "opacity":1,
             "group":"background",
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"referencia:topo2007",
-            "title":"Topografia 1:1000 (2007)",
-            "visibility":false,
-            "opacity":1,
-            "group":"background",
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"referencia:topo2001",
-            "title":"Topografia 1:1000 (2001)",
-            "visibility":false,
-            "opacity":1,
-            "group":"background",
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"referencia:topo1997",
-            "title":"Topografia 1:1000 (1997)",
-            "visibility":false,
-            "opacity":1,
-            "group":"background",
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "fixed":false,
+            "selected":false
          },
          {
             "source":"icc-tilecache",
@@ -113,46 +75,53 @@
             "selected":false
          },
          {
-            "source":"icc-tilecache",
-            "name":"topo",
-            "title":"Mapa topogràfic de Catalunya / ICC",
-            "visibility":true,
+            "source":"roses",
+            "name":"referencia:topo2001",
+            "title":"Topografia 1:1000",
+            "visibility":false,
             "opacity":1,
             "group":"background",
-            "fixed":true
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
-            "name":"poum:aiguamolls",
-            "title":"PE Aiguamolls",
+            "name":"referencia:carrerer",
+            "title":"Carrerer",
             "visibility":true,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
-            "name":"poum:ambit_mari",
-            "title":"Qualificació àmbit marí",
-            "visibility":false,
+            "name":"poum:natura2000",
+            "title":"Xarxa Natura 2000",
+            "visibility":true,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
-            "name":"poum:bens_masies",
-            "title":"Béns i masies",
-            "visibility":false,
+            "name":"poum:qualificacio",
+            "title":"Qualificació",
+            "visibility":true,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
@@ -163,113 +132,123 @@
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"poum:cotes_galib",
-            "title":"Acotacions i gàlib màxim",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"poum:natura2000",
-            "title":"Xarxa Natura 2000",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"poum:pncc",
-            "title":"PNCC",
-            "visibility":true,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"poum:qualificacio",
-            "title":"Qualificació",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
             "name":"poum:sectors",
             "title":"Sectors",
-            "visibility":false,
+            "visibility":true,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
             "name":"poum:servituds",
             "title":"Proteccions",
-            "visibility":false,
+            "visibility":true,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
-         },
-         {
-            "source":"roses",
-            "name":"poum:zmt",
-            "title":"ZMT",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png8",
-            "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
             "name":"poum:vialitat",
             "title":"Vialitat",
-            "visibility":false,
+            "visibility":true,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
          },
          {
             "source":"roses",
-            "name":"referencia:carrerer",
-            "title":"Carrerer",
+            "name":"poum:ambit_mari",
+            "title":"Qualificació àmbit marí",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":true
+         },
+         {
+            "source":"roses",
+            "name":"poum:cotes_galib",
+            "title":"Acotacions i gàlib màxim",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":true
+         },
+         {
+            "source":"roses",
+            "name":"poum:zmt",
+            "title":"ZMT",
+            "visibility":true,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":true
+         },
+         {
+            "source":"roses",
+            "name":"poum:aiguamolls",
+            "title":"PE Aiguamolls",
             "visibility":false,
             "opacity":1,
             "selected":false,
             "format":"image/png8",
             "styles":"",
-            "transparent":true
+            "transparent":true,
+            "tiled":true
+         },
+         {
+            "source":"roses",
+            "name":"poum:pncc",
+            "title":"PNCC",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":true
+         },
+         {
+            "source":"roses",
+            "name":"poum:bens_masies",
+            "title":"Béns i masies",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":true
          }
       ],
       "center":[
-         515269.7105,
-         4682281.505
+         514628.5,
+         4679120
       ],
-      "zoom":0
+      "zoom":5
    },
    "searchers":[
       {
@@ -278,7 +257,7 @@
          "streetLayer":"referencia:eixos",
          "portalLayer":"referencia:portals",
          "streetIdField":"CCAR",
-         "streetNameField":"NOMBRE", 
+         "streetNameField":"NOMBRE",
          "streetSortField":"NOMBRE",
          "portalStreetIdField":"CARRER_ID",
          "portalNumberField":"NUMERO",
@@ -491,5 +470,6 @@
             "index":10
          }
       }
-   ]
+   ],
+   "modified":1377084101383
 }
