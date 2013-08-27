@@ -16,7 +16,7 @@
       },
       "roses":{
          "title":"GeoServer Roses",
-         "url":"http://eajuntament.roses.cat:8080/geoserver/wms",
+         "url":"/geoserver/wms",
          "ptype":"gdxp_wmscsource",
          "projection":"EPSG:23031",
          "bbox":[
@@ -283,7 +283,7 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"topografic_orto",
             "transparent":true,
             "tiled":true
@@ -307,7 +307,7 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"topografic_orto",
             "transparent":true,
             "tiled":true
@@ -319,7 +319,7 @@
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"topografic_orto",
             "transparent":true,
             "tiled":true
