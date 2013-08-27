@@ -116,7 +116,7 @@ gdxp.WMSCSource = Ext.extend(gxp.plugins.WMSCSource, {
     getConfigForRecord: function(record) {
         var config = gxp.plugins.WMSCSource.superclass.getConfigForRecord.apply(this, arguments);
         return Ext.apply(config, {
-            tiled: !!record.getLayer().params.TILED
+            tiled: record.getLayer().params.TILED || true
         });
     }
     
