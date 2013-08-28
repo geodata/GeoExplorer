@@ -53,20 +53,14 @@
       "catastro":{
          "title":"Catastro",
          "url":"http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx?",
-         "ptype":"gdxp_wmscsource",
+         "ptype":"gxp_wmssource",
          "baseParams":{
             "SERVICE":"WMS",
             "REQUEST":"GetCapabilities",
-            "TILED":true,
+            "TILED":false,
             "VERSION":"1.1.1"
          },
-         "projection":"EPSG:23031",
-         "bbox":[
-            258000,
-            4485000,
-            536000,
-            4752000
-         ]
+         "projection":"EPSG:23031"
       }
    },
    "map":{
