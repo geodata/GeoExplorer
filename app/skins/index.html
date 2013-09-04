@@ -46,7 +46,8 @@
                 url: "maps",
                 root: "maps",
                 fields: [
-                    "id", "title", "abstract", 
+                    //"id", 
+                    "title", "abstract", 
                     {name: "created", type: "date", dateFormat: "time"},
                     {name: "modified", type: "date", dateFormat: "time"}
                 ],
@@ -64,14 +65,15 @@
                     forceFit: true,
                     emptyText: _("No maps found.")
                 },
-                columns: [{
+                columns: [
+                /*{
                     header: "ID",
                     dataIndex: "id",
                     width: 40,
                     fixed: true,
                     sortable: true,
                     align: "center"
-                }, {
+                },*/ {
                     id: "title",
                     header: _("Title"),
                     align: "left",
@@ -202,7 +204,7 @@
                     {
                         region: 'north',
                         height: 95,
-                        html: '<div class="logo"><h2>GeoExplorer Castellbisbal</h2></div>'
+                        html: '<div class="logo"><h2>Portal territorial</h2></div>'
                     },
                     docTree,
                     {
