@@ -60,3 +60,10 @@ img.icon-removemap {
     top: 20px;
     right: 20px;
 }
+
+
+div.footnote {
+	font: 11px tahoma,arial,helvetica,sans-serif;
+	color: #666;
+	padding: 5px 20px;
+}
