@@ -183,8 +183,10 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
                 beforequery: function(e) {
                     // This would implement minChars -- commented out
                     // if(e.query.length > 1) {
+                        //escape single quotes
+                        var value = this.typeCombo.getValue().replace("'", "''");
                         // CQL syntax
-                        e.query = this.typeField + "='" + this.typeCombo.getValue() + "'";
+                        e.query = this.typeField + "='" + value + "'"; 
                     //} else {
                     //    return false;
                     //}
