@@ -212,7 +212,16 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         // TODO: make a proper component out of this
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
-
+        
+        var lat = OpenLayers.Util.getParameters()["lat"];
+        var lon = OpenLayers.Util.getParameters()["lon"];
+        var zoom = OpenLayers.Util.getParameters()["zoomlevel"];
+        
+        //center and zoom params
+        if(lon && lat) this.mapPanel.center = new OpenLayers.LonLat(lon, lat);
+        if(zoom) this.mapPanel.zoom = zoom;   
+        
+        
         /* OVERVIEW */        
         this.mapPanel.add({
             xtype: 'gdxp_iccoverviewmap',
