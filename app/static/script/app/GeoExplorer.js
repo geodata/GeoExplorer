@@ -217,10 +217,41 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var lon = OpenLayers.Util.getParameters()["x"];
         var zoom = OpenLayers.Util.getParameters()["zoomlevel"];
         
+        var ref = OpenLayers.Util.getParameters()["ref"]; 
+        
         //center and zoom params
         if(lon && lat) this.mapPanel.center = new OpenLayers.LonLat(lon, lat);
         if(zoom) this.mapPanel.zoom = zoom;   
         
+        if(ref) {
+            Ext.Ajax.request({
+                url: './geoserver/intranet/wfs?service=WFS&version=1.1&outputFormat=json&request=getFeature&typeName=intranet%3Acad_parce_ajuntament&cql_filter=rc%20ILIKE%20%27%25' + ref + '%27',
+                success: function(response) {
+                    var parser = new OpenLayers.Format.GeoJSON();
+                    var vectorsArray = parser.read(response.responseText);
+                    
+                    if(vectorsArray[0]) {
+                        //we take the first result of the vector
+                        var bounds = vectorsArray[0].geometry.getBounds();
+                        
+                        app.on("ready", function(){
+                            app.mapPanel.map.zoomToExtent(bounds);
+                        });                    
+                    } else {
+                        //alert('No feature with id ' + ref);
+                        Ext.Msg.show({
+                            title: 'Feature not found',
+                            msg: 'No feature with id ' + ref,
+                            icon: Ext.MessageBox.WARNING
+                        });
+                    }
+    
+                },
+                failure: function() {
+                    alert('Error while querying ' + ref);
+                }
+            });        
+        }
         
         /* OVERVIEW */        
         this.mapPanel.add({
