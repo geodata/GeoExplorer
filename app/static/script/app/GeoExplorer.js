@@ -213,8 +213,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
         
-        var lat = OpenLayers.Util.getParameters()["lat"];
-        var lon = OpenLayers.Util.getParameters()["lon"];
+        var lat = OpenLayers.Util.getParameters()["y"];
+        var lon = OpenLayers.Util.getParameters()["x"];
         var zoom = OpenLayers.Util.getParameters()["zoomlevel"];
         
         //center and zoom params
