@@ -43,7 +43,7 @@
                 }
             });
             var status = <% status %>;
-            if (status === 401) {
+            if (status !== 200) {
                 displayLoginLink();
             } else {
                 hideLoginLink();
@@ -143,7 +143,7 @@
                 }, {
                     xtype: "actioncolumn",
                     id: "editcolumn",
-                    hidden: (status === 401),
+                    hidden: (status !== 200),
                     width: 30,
                     iconCls: "icon-editmap",
                     tooltip: _("Edit Map"),
@@ -154,7 +154,7 @@
                 }, {
                     xtype: "actioncolumn",
                     id: "removecolumn",
-                    hidden: (status === 401),
+                    hidden: (status !== 200),
                     width: 30,
                     iconCls: "icon-removemap",
                     tooltip: _("Delete Map"),
@@ -188,7 +188,7 @@
                     id: "new-map-button",
                     iconCls: "add",
                     menu: [],
-                    hidden: (status === 401)
+                    hidden: (status !== 200)
                 }, {
                     text: "Geoserver",
                     id: "dashboard-button",
@@ -196,7 +196,7 @@
                     handler: function() {
                         window.open("/geoserver/web/");
                     },
-                    hidden: (status === 401)
+                    hidden: (status !== 200)
                 }]
             });
             
