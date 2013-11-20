@@ -62,7 +62,8 @@ exports.app = function(request, base, extra) {
     if (!extra) { // Return HTML page
         return Response.skin(module.resolve("../skins/documents.html"));
     } else if (extra.equals(".json")) { // Return JSON
-        var tree = fileTree(docRoot);
+        var publicTree = FILE.join(docRoot, "public");
+        var tree = fileTree(publicTree);
         return createResponse(tree);
     } else { // Download a Document, or 404
         var file = FILE.join(docRoot, extra);
