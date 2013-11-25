@@ -351,10 +351,12 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var popup = (OpenLayers.Util.getParameters()["popup"] != 0);
         
         //set center and zoom params
-        if(zoom) this.mapPanel.zoom = parseInt(zoom);   
-        var point = new OpenLayers.LonLat(parseInt(lon), parseInt(lat));
-        if(point) {
-            this.mapPanel.center = point;
+        if(zoom) this.mapPanel.zoom = parseInt(zoom);
+        if(lat && lon) {
+            var x = parseInt(lon);
+            var y = parseInt(lat);
+            var point = new OpenLayers.LonLat(x, y);
+            if(x && y) this.mapPanel.center = point;
             //show popup on x and y
             if(popup) {
                 app.on("ready", function(){ 
