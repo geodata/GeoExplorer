@@ -63,7 +63,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     descriptionText: "Description",
     contactText: "Contact",
     aboutThisMapText: "About this Map",
-    searchersTitleText: 'Search engines',
+    searchersTitleText: "Search engines",
+    interfaceCoords: "Coordinates",
     // End i18n.
     
     /**
@@ -213,14 +214,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
         
-        var lat = OpenLayers.Util.getParameters()["y"];
-        var lon = OpenLayers.Util.getParameters()["x"];
-        var zoom = OpenLayers.Util.getParameters()["zoomlevel"];
-        
-        //center and zoom params
-        if(lon && lat) this.mapPanel.center = new OpenLayers.LonLat(lon, lat);
-        if(zoom) this.mapPanel.zoom = zoom;   
-        
+        this.checkInterface();
         
         /* OVERVIEW */        
         this.mapPanel.add({
@@ -343,6 +337,39 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         }];
         
         GeoExplorer.superclass.initPortal.apply(this, arguments);
+    },
+    
+    /** private: method[checkInterface]
+     * Checks whether we have params on URL and zooms on feature or on specific X and Y.
+     */
+    checkInterface: function() {    
+    
+        var lat = OpenLayers.Util.getParameters()["y"];
+        var lon = OpenLayers.Util.getParameters()["x"];
+        var zoom = OpenLayers.Util.getParameters()["zoomlevel"];
+        //we show a popup by default, unless "popup=0" is specified
+        var popup = (OpenLayers.Util.getParameters()["popup"] != 0);
+        
+        //set center and zoom params
+        if(zoom) this.mapPanel.zoom = zoom;   
+        var point = new OpenLayers.LonLat(lon, lat);
+        if(lon && lat) {
+            this.mapPanel.center = point;
+            //show popup on x and y
+            if(popup) {
+                app.on("ready", function(){ 
+                    var popup = new GeoExt.Popup({
+                        layout: "fit",
+                        width: "128",
+                        location: point,
+                        map: this.mapPanel.map,
+                        title: this.interfaceCoords,
+                        html: "X: "+point.lon+", Y: "+point.lat
+                    });
+                    popup.show();
+                });
+            }
+        }
     },
     
     /** private: method[createMapOverlay]

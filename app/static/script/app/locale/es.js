@@ -21,7 +21,8 @@ GeoExt.Lang.add("es", {
         descriptionText: "Descripción",
         contactText: "Contacto",
         aboutThisMapText: "Acerca de este mapa",
-        searchersTitleText: "Buscadores"
+        searchersTitleText: "Buscadores",
+        interfaceCoords: "Coordenadas"
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exportar Mapa",
