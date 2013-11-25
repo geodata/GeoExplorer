@@ -340,7 +340,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     },
     
     /** private: method[checkInterface]
-     * Checks whether we have params on URL and zooms on feature or on specific X and Y.
+     * Checks whether we have params on URL and zooms on specific X and Y.
      */
     checkInterface: function() {    
     
@@ -351,9 +351,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var popup = (OpenLayers.Util.getParameters()["popup"] != 0);
         
         //set center and zoom params
-        if(zoom) this.mapPanel.zoom = zoom;   
-        var point = new OpenLayers.LonLat(lon, lat);
-        if(lon && lat) {
+        if(zoom) this.mapPanel.zoom = parseInt(zoom);   
+        var point = new OpenLayers.LonLat(parseInt(lon), parseInt(lat));
+        if(point) {
             this.mapPanel.center = point;
             //show popup on x and y
             if(popup) {
