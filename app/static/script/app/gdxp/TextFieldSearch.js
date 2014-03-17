@@ -93,7 +93,7 @@ gdxp.TextFieldSearch = Ext.extend(gdxp.Search, {
         });
 
         this.combo = new Ext.form.ComboBox({
-            fieldLabel: this.labelText,
+            fieldLabel: (this.texts && this.texts[this.lang] && this.texts[this.lang].label) || this.labelText,
             anchor: "100%",
             store: this.dataStore,
             queryParam: 'cql_filter',

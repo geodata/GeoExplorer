@@ -342,3 +342,12 @@ table.featureInfo caption{
     font-size: 10pt;
     font-family: tahoma,arial,helvetica,sans-serif;
 }
+
+/* ADDED STYLES (should be in a separate css file in gdxp) */
+.searchers .x-panel-header {
+	font-size: 15px;
+}
+
+.searchers .x-panel-header {
+	line-height: 24px;
+}

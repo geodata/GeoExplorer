@@ -5,10 +5,12 @@ var urls = [
     [(/^\/(login)/), require("./root/login").app],
     [(/^\/(proxy)/), require("./root/proxy").app],
     [(/^\/(maps(\/\d+)?)/), require("./root/maps").app],
+    [(/^\/(templates)(.+)?/), require("./root/templates").app],
     [(/^\/(composer)/), require("./root/composer").app],
     [(/^\/(gdviewer)/), require("./root/gdviewer").app],
     [(/^\/(viewer(.html)?)/), require("./root/viewer").app],
-    [(/^\/(documents)(.+)?/), require("./root/documents").app]
+    [(/^\/(documents)(.+)?/), require("./root/documents").app],
+    [(/^\/(custom)(.+)?/), require("./root/custom").app]
 ];
 
 // debug mode loads unminified scripts
@@ -32,7 +34,6 @@ if (java.lang.System.getProperty("app.debug")) {
         );
     }
 }
-
 
 exports.urls = urls;
 

@@ -38,11 +38,7 @@
     <script type="text/javascript" src="script/PrintPreview.js"></script>
 
     <script>
-        // optionally set locale based on query string parameter
-        if (GeoExt.Lang) {
-            //GeoExt.Lang.set(OpenLayers.Util.getParameters()["lang"] || GeoExt.Lang.locale);
-            GeoExt.Lang.set("ca");
-        }
+    	if (GeoExt.Lang) { GeoExt.Lang.set(lang) }
         Ext.BLANK_IMAGE_URL = "theme/app/img/blank.gif";
         OpenLayers.DOTS_PER_INCH = 127;
         OpenLayers.ImgPath = "externals/openlayers/img/";
@@ -51,10 +47,10 @@
         
         // Load initial map config
         var hash = window.location.hash.substr(1);
-        var match = hash.match(/^config\/(\w+)$/);
-        var url = (match && match[1]) || "original";
+        var match = hash.match(/^templates\/(.+)$/);
+        var url = (match && match[1]) || "demo";
         Ext.Ajax.request({
-            url: './config/' + url + '.json',
+            url: './templates/' + url + '.json',
             success: function(response) {
                 var initialConfig = Ext.decode(response.responseText);
                 app = new gdxp.Viewer(initialConfig);

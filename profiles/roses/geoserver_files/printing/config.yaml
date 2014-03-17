@@ -1,0 +1,236 @@
+dpis: [72, 127, 254]
+
+scales:
+    - 1000000
+    - 500000
+    - 200000
+    - 100000
+    - 50000
+    - 20000
+    - 10000
+    - 5000
+    - 2500
+    - 1000
+
+formats: ["pdf","png","gif","tiff"]
+
+hosts:
+    - !localMatch
+        dummy: true
+    - !ipMatch
+        ip: 0.0.0.0
+        mask: 0.0.0.0
+
+outputFilename: "GeoServer-Roses"
+
+layouts:
+    #===========================================================================
+    # A4 Vertical
+    #===========================================================================
+    A4 Vertical:
+        metaData: &commonMetadata
+            title: "${mapTitle}"
+            author: "GeoExplorer"
+            subject: "Map printed with GeoExplorer Roses"
+            keywords: "map,print"
+            creator: "GeoExplorer Roses"
+        mainPage:
+            pageSize: A4
+            header:
+                height: 50
+                items:
+                    - !columns
+                        widths: [120, 400]
+                        items: &mapHead
+                            - !image
+                                maxWidth: 120
+                                maxHeight: 25
+                                align: left
+                                vertAlign: top
+                                url: &logo 'http://eajuntament.roses.cat:8080/geoexplorer/custom/img/Roses_Logo_Gran.png'
+                            - !text
+                                text: "${mapTitle}"
+                                fontSize: 18
+                                align: center
+                                vertAlign: top
+                                font: Serif-Bold
+            items:
+                - !map
+                    width: 520
+                    height: 630
+                    spacingAfter: 8                    
+                - !columns
+                    spacingAfter: 8
+                    items: &mapFoot
+                        - !text
+                            text: 'Escala 1:${scale}'
+                            fontSize: 9
+                            align: center
+                            vertAlign: middle
+                        - !scalebar
+                            type: bar_sub
+                            barBgColor: white
+                            intervals: 5
+                            fontSize: 8
+                            maxSize: 200
+                            align: center
+                            vertAlign: middle
+                        - !image
+                            url: &nord 'http://eajuntament.roses.cat:8080/geoexplorer/custom/img/MNarrow.svg'
+                            maxWidth: 30
+                            maxHeight: 30
+                            align: center
+                            vertAlign: middle
+                - !text
+                    text: "${comment}"
+                    font: Serif
+                    fontSize: 12
+                - !legends
+                    maxIconWidth: 0
+                    maxIconHeight: 0
+                    classIndentation: 0
+                    layerSpace: 5
+                    layerFontSize: 10
+            footer: &pageFoot
+                height: 15
+                items:
+                    - !text
+                        text: '${now dd/MM/yyyy}'
+                        fontSize: 6
+                        align: right
+    #===========================================================================
+    # A4 Apaisat
+    #===========================================================================
+    A4 Apaisat:
+        metaData: *commonMetadata
+        mainPage:
+            pageSize: A4
+            landscape: true
+            header:
+                height: 50
+                items:
+                    - !columns
+                        widths: [120, 650]
+                        items: *mapHead
+            items:
+                - !map
+                    width: 770
+                    height: 385
+                    spacingAfter: 8
+                - !columns
+                    spacingAfter: 8
+                    items: *mapFoot
+                - !text
+                    text: "${comment}"
+                    font: Serif
+                    fontSize: 12
+            footer: *pageFoot
+
+    #===========================================================================
+    # A3 Vertical
+    #===========================================================================
+    A3 Vertical:
+        metaData: *commonMetadata
+        mainPage:
+            pageSize: A3
+            header:
+                height: 50
+                items:
+                    - !columns
+                        widths: [120, 650]
+                        items: *mapHead
+            items:
+                - !map
+                    width: 780
+                    height: 980
+                    spacingAfter: 8
+                - !columns
+                    spacingAfter: 8
+                    items: *mapFoot
+                - !text
+                    text: "${comment}"
+                    font: Serif
+                    fontSize: 12
+            footer: *pageFoot
+
+    #===========================================================================
+    # A3 Apaisat
+    #===========================================================================
+    A3 Apaisat:
+        metaData: *commonMetadata
+        mainPage:
+            pageSize: A3
+            landscape: true
+            header:
+                height: 50
+                items:
+                    - !columns
+                        widths: [120, 1000]
+                        items: *mapHead
+            items:
+                - !map
+                    width: 1120
+                    height: 630
+                    spacingAfter: 8
+                - !columns
+                    spacingAfter: 8
+                    items: *mapFoot
+                - !text
+                    text: "${comment}"
+                    font: Serif
+                    fontSize: 12
+            footer: *pageFoot
+
+    #===========================================================================
+    # Imatge 15x20
+    #===========================================================================
+    Imatge 15x20:
+        metaData: *commonMetadata
+        mainPage:
+            pageSize: 576 432
+            header:
+                height: 25
+                items:
+                    - !columns
+                        absoluteX: 5
+                        absoluteY: 431
+                        width: 572
+                        items:
+                            - !text
+                                text: "${mapTitle}"
+                                fontSize: 18
+                                align: center
+                                vertAlign: top
+                                font: Serif-Bold
+            items:
+                - !map
+                    width: 576
+                    height: 370
+                    absoluteX: 0
+                    absoluteY: 403
+                    spacingAfter: 0
+                - !columns
+                    absoluteX: 0
+                    absoluteY: 32
+                    width: 576
+                    items:
+                        - !image
+                            url: *logo
+                            maxWidth: 120
+                            maxHeight: 25
+                            align: center
+                            vertAlign: middle
+                        - !scalebar
+                            type: bar_sub
+                            barBgColor: white
+                            intervals: 5
+                            fontSize: 8
+                            maxSize: 200
+                            align: center
+                            vertAlign: middle
+                        - !image
+                            url: *nord
+                            maxWidth: 30
+                            maxHeight: 30
+                            align: center
+                            vertAlign: middle

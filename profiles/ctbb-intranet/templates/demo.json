@@ -1,5 +1,5 @@
 ﻿{
-    "proxy": "/geoserver/rest/proxy/?url=",
+    "proxy": "proxy/?url=",
     "printService": "/geoserver/pdf/",
     "about": {
         "title": "GeoExplorer Demo Map",

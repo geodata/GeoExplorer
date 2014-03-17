@@ -150,6 +150,6 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
                                 //autoLoad : {url :target.href,scripts: true } });
 
         gdxp_win.show();
-        evt.preventDefault( );        
+        evt.preventDefault( );
     }
 });

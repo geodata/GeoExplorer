@@ -132,7 +132,7 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
         });
 
         this.typeCombo = new Ext.form.ComboBox({
-            fieldLabel: this.typeLabelText,
+            fieldLabel: (this.texts && this.texts[this.lang] && this.texts[this.lang].type) || this.typeLabelText,
             editable: false,
             anchor: "100%",
             store: this.typeDataStore,
@@ -163,7 +163,7 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
         });
 
         this.poiCombo = new Ext.form.ComboBox({
-            fieldLabel: this.poiLabelText,
+            fieldLabel: (this.texts && this.texts[this.lang] && this.texts[this.lang].poi) || this.poiLabelText,
             editable: false,
             anchor: "100%",
             store: this.poiDataStore,
@@ -183,8 +183,10 @@ gdxp.DoubleFieldSearch = Ext.extend(gdxp.Search, {
                 beforequery: function(e) {
                     // This would implement minChars -- commented out
                     // if(e.query.length > 1) {
+                        //escape single quotes
+                        var value = this.typeCombo.getValue().replace("'", "''");
                         // CQL syntax
-                        e.query = this.typeField + "='" + this.typeCombo.getValue() + "'";
+                        e.query = this.typeField + "='" + value + "'"; 
                     //} else {
                     //    return false;
                     //}

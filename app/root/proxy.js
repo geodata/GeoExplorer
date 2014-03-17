@@ -1,16 +1,13 @@
-var Client = require("ringo/httpclient").Client;
-var Request = require("ringo/webapp/request").Request;
+var clientRequest = require("ringo/httpclient").request;
 var Headers = require("ringo/utils/http").Headers;
 var MemoryStream = require("io").MemoryStream;
 var objects = require("ringo/utils/objects");
 var responseForStatus = require("../util").responseForStatus;
-var defer = require("ringo/promise").defer;
 
 var URL = java.net.URL;
 
-var app = exports.app = function(env) {
+var app = exports.app = function(request) {
     var response;
-    var request = new Request(env);
     var url = request.queryParams.url;
     if (url) {
         response = proxyPass({
@@ -27,9 +24,10 @@ var pass = exports.pass = function(config) {
     if (typeof config == "string") {
         config = {url: config};
     }
-    return function(env, match) {
-        var request = new Request(env);
-        var newUrl = config.url + match + (request.queryString ? "?" + request.queryString : "");
+    return function(request, pathInfo) {
+        var query = request.queryString;
+        var path = pathInfo || "";
+        var newUrl = config.url + path + (query ? "?" + query : "");
         return proxyPass(objects.merge({
             request: request, 
             url: newUrl
@@ -88,6 +86,13 @@ var createProxyRequestProps = exports.createProxyRequestProps = function(config)
             headers.unset("Authorization");
             headers.unset("Cookie");
         }
+        var data;
+        var method = request.method;
+        if (method == "PUT" || method == "POST") {
+            if (headers.get("content-length")) {
+                data = request.input;
+            }
+        }
         props = {
             url: urlProps.url,
             method: request.method,
@@ -95,11 +100,11 @@ var createProxyRequestProps = exports.createProxyRequestProps = function(config)
             username: urlProps.username,
             password: urlProps.password,
             headers: headers,
-            data: request.contentLength && request.input
+            data: data
         };
     }
     return props;
-}
+};
 
 function proxyPass(config) {
     var response;
@@ -109,9 +114,7 @@ function proxyPass(config) {
         response = responseForStatus(400, "The url parameter value must be absolute url with same scheme as request.");
     } else {
         // re-issue request
-        var client = new Client();
-        // response = defer();
-        var exchange = client.request({
+        var exchange = clientRequest({
             url: outgoing.url,
             method: outgoing.method,
             username: outgoing.username,
@@ -119,28 +122,6 @@ function proxyPass(config) {
             headers: outgoing.headers,
             data: outgoing.data,
             async: false
-            // async: true,
-            // complete: function() {
-            //     if (exchange) {
-            //         var headers = new Headers(objects.clone(exchange.headers));
-            //         if (!config.allowAuth) {
-            //             // strip out authorization and cookie headers
-            //             headers.unset("WWW-Authenticate");
-            //             headers.unset("Set-Cookie");
-            //         }
-            //         response.resolve({
-            //             status: exchange.status,
-            //             headers: headers,
-            //             body: new MemoryStream(exchange.contentBytes)
-            //         });
-            //     } else {
-            //         response.resolve({
-            //             status: 408,
-            //             headers: {"Content-Type": "text/plain"},
-            //             body: ["Request Timeout"]
-            //         });
-            //     }
-            // }
         });
     }
     exchange.wait();

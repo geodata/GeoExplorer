@@ -1,0 +1,12 @@
+div.logo {
+    margin: 10px;
+    width: 100%;
+    height: 72px;
+    color: #C40038;
+    background: url('img/Roses_Logo.png') left no-repeat;
+    float: left;
+}
+
+div.logo h2:after {
+	content: "GeoExplorer Ajuntament de Roses";
+}

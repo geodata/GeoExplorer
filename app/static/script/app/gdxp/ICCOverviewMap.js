@@ -53,7 +53,7 @@ gdxp.ICCOverviewMap = Ext.extend(Ext.Panel, {
                         },
                         layers: [
                             new OpenLayers.Layer.WMS(
-                                "Topogràfic", "http://sagitari.icc.cat/tilecache/tilecache.py",
+                                "Topogràfic", "http://mapcache.icc.cat/map/bases/service",
                                 {layers: 'topo', format:"image/jpeg", exceptions:"application/vnd.ogc.se_xml"},
                                 {buffer:0, transitionEffect:'resize'}
                             )

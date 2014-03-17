@@ -21,14 +21,8 @@ GeoExt.Lang.add("ca", {
         descriptionText: "Descripció",
         contactText: "Contacte",
         aboutThisMapText: "Quant a aquest mapa",
-        searchersTitleText: 'Cercadors',
-        toponimSearchTitleText: 'Topònims',
-        toponimSearchLabelText: 'Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, "can")',
-        equipamentSearchTitleText: 'Equipaments',
-        equipamentSearchLabelText: 'Desplegueu per sel·leccionar un equipament; escriviu per constrènyer la cerca (per exemple, "casa")',
-        equipamentTipusSearchTitleText: 'Tipus',
-        equipamentPOISearchTitleText: 'Equipament'
-
+        searchersTitleText: "Cercadors",
+        interfaceCoords: "Coordenades"
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exporta el Mapa",

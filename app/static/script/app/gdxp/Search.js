@@ -52,6 +52,12 @@ gdxp.Search = Ext.extend(Ext.Panel, {
     /* ~i18n */
 
    
+    /** api: config[lang]
+     *  ``String``
+     *  The 2-letter language code in which text labels will be rendered. Defaults to "en" (English).
+     */
+    lang: "en",
+   
     /** api: config[map]
      *  ``OpenLayers.Map``
      *  The map to which search result is rendered. Required.
@@ -96,7 +102,7 @@ gdxp.Search = Ext.extend(Ext.Panel, {
      *  Assigns title and projection.
      */
     initComponent: function() {
-        this.title = this.titleText,
+        this.title = (this.texts && this.texts[this.lang] && this.texts[this.lang].title) || this.titleText,
         this.projection = this.projection || new OpenLayers.Projection("EPSG:23031");
 
         gdxp.Search.superclass.initComponent.apply(this, arguments);

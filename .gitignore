@@ -1,3 +1,4 @@
-build
-.project
+/build
+geoexplorer.war
 geoexplorer.db
+.project

@@ -63,11 +63,8 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     descriptionText: "Description",
     contactText: "Contact",
     aboutThisMapText: "About this Map",
-    searchersTitleText: 'Search engines',
-    toponimSearchTitleText: 'Placenames',
-    toponimSearchLabelText: 'Open to select a placename; type text to narrow search (for example, "can")',
-    equipamentSearchTitleText: 'Equipment',
-    equipamentSearchLabelText: 'Open to select an equipment; type text to narrow search (for example, "casa")',
+    searchersTitleText: "Search engines",
+    interfaceCoords: "Coordinates",
     // End i18n.
     
     /**
@@ -216,76 +213,15 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         // TODO: make a proper component out of this
         var mapOverlay = this.createMapOverlay();
         this.mapPanel.add(mapOverlay);
-
+        
+        this.checkInterface();
+        
         /* OVERVIEW */        
         this.mapPanel.add({
             xtype: 'gdxp_iccoverviewmap',
             map: this.mapPanel.map
         });
         /* ~OVERVIEW */
-
-        /* SEARCHERS */
-        var searchersContainer = {
-            xtype: 'panel', // The searchers container
-            title: this.searchersTitleText,
-            region: 'north',
-            layout: 'fit',
-            height: 180,
-            split: true,
-            collapsible: true,
-            border: false,
-            autoScroll: true,
-            ascending: true,
-            labelAlign: 'top',
-            items: [{
-                xtype: 'tabpanel', // The tabs
-                enableTabScroll: true,
-                border: false,
-                activeTab: 0,
-                defaults: {
-                    map: this.mapPanel.map
-                },
-                items: [ // The search engines
-                    {
-                        xtype: 'gdxp_streetsearch',
-                        streetLayer: "portal:car_eixos_opengeo",
-                        portalLayer: "portal:car_portals_opengeo"
-                    },{
-                        xtype: 'gdxp_textfieldsearch',
-                        titleText: this.toponimSearchTitleText,
-                        labelText: this.toponimSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
-                        layer: "portal:top_toponimia",
-                        field: "toponim"
-                    },{
-                        xtype: 'gdxp_doublefieldsearch',
-                        titleText: this.equipamentSearchTitleText,
-                        typeLabelText: this.equipamentTipusSearchTitleText,
-                        poiLabelText: this.equipamentPOISearchTitleText,
-                        baseURL: "/geoserver/wfs?",
-                        typeLayer: "intranet:v_tipuseq",
-                        poiLayer: "intranet:eq_equipaments",
-                        typeField: "tipus",
-                        poiField: "nom"
-                    }/*,{
-                        xtype: 'gdxp_textfieldsearch',
-                        titleText: this.equipamentSearchTitleText,
-                        labelText: this.equipamentSearchLabelText,
-                        baseURL: "/geoserver/wfs?",
-                        layer: "intranet:eq_equipaments",
-                        field: "nom"
-                    }*/,{
-                        xtype: 'gdxp_catastrosearch'
-                    },{
-                        xtype: 'gdxp_utmsearch'
-                    }/*,{
-                        xtype: 'gdxp_googlesearch',
-                        bounds: new OpenLayers.Bounds(1.919, 41.434, 2.008, 41.524) // CTBB
-                    }*/
-                ]
-            }]
-        };
-        /* ~SEARCHERS */
 
         var westPanel = new Ext.Panel({
             border: false,
@@ -297,11 +233,45 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             collapseMode: "mini",
             header: false,
             items: [
-                searchersContainer,
                 {region: 'center', autoScroll: true, tbar: [], border: false, id: 'tree', title: this.layersText},
                 {region: 'south', xtype: "container", layout: "fit", border: false, height: 200, id: 'legend'}
            ]
         });
+        
+        /* SEARCHERS */
+        if(this.searchers) {
+        	// Make a copy of searchers before manipulating
+        	var searchers = [];
+        	for (i=0; i<this.searchers.length; i++) {
+        		searchers.push(Ext.apply({},this.searchers[i]));
+        	}
+	        westPanel.add({
+	            xtype: 'panel', // The searchers container
+	            title: this.searchersTitleText,
+	            region: 'north',
+	            layout: 'fit',
+	            height: 180,
+	            cls: "searchers",
+	            split: true,
+	            collapsible: true,
+	            border: false,
+	            autoScroll: true,
+	            ascending: true,
+	            labelAlign: 'top',
+	            items: [{
+	                xtype: 'tabpanel', // The tabs
+	                enableTabScroll: true,
+	                border: false,
+	                activeTab: 0,
+	                defaults: {
+	                    map: this.mapPanel.map,
+	                    lang: GeoExt.Lang.locale
+	                },
+	                items: searchers
+	            }]
+	        });
+		}
+        /* ~SEARCHERS */
         
         this.toolbar = new Ext.Toolbar({
             disabled: true,
@@ -378,7 +348,42 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
             ]
         }];
         
-        GeoExplorer.superclass.initPortal.apply(this, arguments);        
+        GeoExplorer.superclass.initPortal.apply(this, arguments);
+    },
+    
+    /** private: method[checkInterface]
+     * Checks whether we have params on URL and zooms on specific X and Y.
+     */
+    checkInterface: function() {    
+    
+        var lat = OpenLayers.Util.getParameters()["y"];
+        var lon = OpenLayers.Util.getParameters()["x"];
+        var zoom = OpenLayers.Util.getParameters()["zoomlevel"];
+        //we show a popup by default, unless "popup=0" is specified
+        var popup = (OpenLayers.Util.getParameters()["popup"] != 0);
+        
+        //set center and zoom params
+        if(zoom) this.mapPanel.zoom = parseInt(zoom);
+        if(lat && lon) {
+            var x = parseInt(lon);
+            var y = parseInt(lat);
+            var point = new OpenLayers.LonLat(x, y);
+            if(x && y) this.mapPanel.center = point;
+            //show popup on x and y
+            if(popup) {
+                app.on("ready", function(){ 
+                    var popup = new GeoExt.Popup({
+                        layout: "fit",
+                        width: "128",
+                        location: point,
+                        map: this.mapPanel.map,
+                        title: this.interfaceCoords,
+                        html: "X: "+point.lon+", Y: "+point.lat
+                    });
+                    popup.show();
+                });
+            }
+        }
     },
     
     /** private: method[createMapOverlay]

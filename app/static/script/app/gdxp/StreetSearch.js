@@ -59,6 +59,14 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
      */   
     baseURL: "/geoserver/wfs",
     
+    streetIdField: "codi",
+    streetNameField: "etiqueta",
+    streetSortField: "name",
+    portalStreetIdField: "codi",
+    portalNumberField: "numero",
+    portalXField: "utm_x",
+    portalYField: "utm_y",
+    
     /** private: property[streetDataStore]
      *  ``Ext.data.Store`` Where streets are loaded
      */
@@ -101,9 +109,9 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
             reader: new Ext.data.JsonReader({
                 root: 'features'
             }, [
-                {name: 'sortname', mapping: 'properties.name'},
-                {name: 'id', mapping: 'properties.codi'},
-                {name: 'name', mapping: 'properties.etiqueta'}
+                {name: 'sortname', mapping: 'properties.'+this.streetSortField},
+                {name: 'id', mapping: 'properties.'+this.streetIdField},
+                {name: 'name', mapping: 'properties.'+this.streetNameField}
             ]),
             sortInfo: {
                 field: 'sortname',
@@ -131,7 +139,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
                     this.loadPortals(record.id);
                 },
                 beforequery: function(e) {
-                    e.query = "etiqueta" + " ILIKE '%" + e.query + "%'"; //CQL_FILTEr=etiqueta LIKE '%25major%25'
+                    e.query = this.streetNameField + " ILIKE '%" + e.query + "%'";
                 }, 
                 scope: this
             }
@@ -152,9 +160,9 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
             reader: new Ext.data.JsonReader({
                 root: 'features'
             }, [
-                {name: 'number', mapping: 'properties.numero'},
-                {name: 'x', mapping: 'properties.utm_x'},
-                {name: 'y', mapping: 'properties.utm_y'}
+                {name: 'number', mapping: 'properties.'+this.portalNumberField},
+                {name: 'x', mapping: 'properties.'+this.portalXField},
+                {name: 'y', mapping: 'properties.'+this.portalYField}
             ]),
             sortInfo: {
                 field: 'number',
@@ -195,7 +203,7 @@ gdxp.StreetSearch = Ext.extend(gdxp.Search, {
      */       
     loadPortals: function(streetId) {
         this.portalDataStore.reload({
-            params: {'cql_filter': "codi" + "='" + this.streetCombo.getValue() + "'"}
+            params: {'cql_filter': this.portalStreetIdField + "='" + this.streetCombo.getValue() + "'"}
         });
     }
 });

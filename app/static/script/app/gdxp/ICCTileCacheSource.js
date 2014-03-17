@@ -100,7 +100,7 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
         var layers = [
             new OpenLayers.Layer.WMS(
                 "Mapa topogràfic de Catalunya / ICC",
-                "http://sagitari.icc.cat/tilecache/tilecache.py",
+                "http://mapcache.icc.cat/map/bases/service",
                 OpenLayers.Util.applyDefaults({
                     layers: "topo"
                 }, params),
@@ -108,7 +108,7 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
             ),
             new OpenLayers.Layer.WMS(
                 "Ortofotoimatge de Catalunya / ICC",
-                "http://sagitari.icc.cat/tilecache/tilecache.py",
+                "http://mapcache.icc.cat/map/bases/service",
                 OpenLayers.Util.applyDefaults({
                     layers: "orto"
                 }, params),
@@ -116,7 +116,7 @@ gdxp.ICCTileCacheSource = Ext.extend(gxp.plugins.LayerSource, {
             ),
             new OpenLayers.Layer.WMS(
                 "Mapa geològic de Catalunya / IGC",
-                "http://sagitari.icc.cat/tilecache/tilecache.py",
+                "http://mapcache.icc.cat/map/bases/service",
                 OpenLayers.Util.applyDefaults({
                     layers: "geol"                  
                 }, params),

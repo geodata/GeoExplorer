@@ -27,7 +27,6 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
                 template: this.zoomSliderText
             })
         }];
-
         this.overrideTools = [
             {
                 ptype: "gxp_layertree",

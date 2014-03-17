@@ -3,10 +3,6 @@
     <link rel="stylesheet" type="text/css" href="theme/app/index.css"/>
     <link rel="stylesheet" type="text/css" href="theme/app/filetype.css"/>
     <script>
-        /* i18n */
-        //var lang = navigator.language || navigator.userLanguage;
-        //lang = lang.split("-")[0].toLowerCase();
-        var lang = "ca";
         function _(t) { return (texts[t] && texts[t][lang]) || t; };
 
         var texts = {
@@ -19,9 +15,7 @@
             "Delete Map": {"es": "Borrar Mapa", "ca": "Esborra Mapa"},
             "Confirm Deletion": {"es": "Confirme la eliminación", "ca": "Confirmeu l'eliminació"},
             "Are you sure you want to delete this map?": {"es": "¿Está seguro de querer borrar este mapa", "ca": "Esteu segur de voler esborrar aquest mapa?"},
-            "Dashboard": {"es": "Panel de Control", "ca": "Panell de Control"},
-            "New Map (Web Mercator)": {"es": "Nuevo Mapa (Web Mercator)", "ca": "Nou Mapa (Web Mercator)"},
-            "New Map (UTM 31N)": {"es": "Nuevo Mapa (UTM 31N)", "ca": "Nou Mapa (UTM 31N)"},
+            "New Map": {"es": "Nuevo Mapa", "ca": "Nou Mapa"},
             "User": {"es": "Usuario", "ca": "Usuari"},
             "Password": {"es": "Contraseña", "ca": "Clau"},
             "Login": {"es": "Login", "ca": "Login"},
@@ -36,12 +30,53 @@
         
         Ext.onReady(function() {
             Ext.QuickTips.init();
+	        Ext.fly("login").on({
+                click: function(event, target) {
+                    showLoginDialog();
+                    event.stopEvent();
+                }
+            });
+	        Ext.fly("logout").on({
+                click: function(event, target) {
+                    logout();
+                    event.stopEvent();
+                }
+            });
             var status = <% status %>;
-            if (status === 401) {
+            if (status !== 200) {
                 displayLoginLink();
             } else {
                 hideLoginLink();
             }
+            
+            var templateMenu = [];
+            
+            var templateStore = new Ext.data.JsonStore({
+                url: "templates.json",
+                fields: [
+                    "id", "title"
+                ],
+                autoLoad: true,
+                listeners: {
+                	load: function(state, records) {
+                		for(var i=0, len=records.length; i<len; i++) {
+                			templateMenu.push({
+								id: records[i].json.id,
+                				text: records[i].json.title,
+                				handler: function(r) {
+                					window.open("composer?lang="+lang+"#templates/"+r.id);
+                				}
+                			});
+                		}
+                		
+                		var btn = Ext.getCmp('new-map-button');
+            			btn.menu = new Ext.menu.Menu(templateMenu);
+						btn.menu.on("show", btn.onMenuShow, btn);
+						btn.menu.on("hide", btn.onMenuHide, btn);
+                	}
+            	} 
+            });
+            
             var mapStore = new Ext.data.JsonStore({
                 url: "maps",
                 root: "maps",
@@ -64,14 +99,15 @@
                     forceFit: true,
                     emptyText: _("No maps found.")
                 },
-                columns: [{
+                columns: [
+				/*{
                     header: "ID",
                     dataIndex: "id",
                     width: 40,
                     fixed: true,
                     sortable: true,
                     align: "center"
-                }, {
+                },*/ {
                     id: "title",
                     header: _("Title"),
                     align: "left",
@@ -102,23 +138,23 @@
                     align: "center",
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.open("gdviewer#maps/" + id);
+                        window.open("gdviewer?lang="+lang+"#maps/" + id);
                     }
                 }, {
                     xtype: "actioncolumn",
                     id: "editcolumn",
-                    hidden: (status === 401),
+                    hidden: (status !== 200),
                     width: 30,
                     iconCls: "icon-editmap",
                     tooltip: _("Edit Map"),
                     handler: function(grid, rowIndex, colIndex) {
                         var id = mapStore.getAt(rowIndex).get("id");
-                        window.open("composer#maps/" + id);
+                        window.open("composer?lang="+lang+"#maps/" + id);
                     }
                 }, {
                     xtype: "actioncolumn",
                     id: "removecolumn",
-                    hidden: (status === 401),
+                    hidden: (status !== 200),
                     width: 30,
                     iconCls: "icon-removemap",
                     tooltip: _("Delete Map"),
@@ -148,29 +184,19 @@
                     }
                 }],
                 buttons: [{
-                    text: _("Dashboard"),
+                    text: _("New Map"),
+                    id: "new-map-button",
+                    iconCls: "add",
+                    menu: [],
+                    hidden: (status !== 200)
+                }, {
+                    text: "Geoserver",
                     id: "dashboard-button",
                     iconCls: "dashboard",
                     handler: function() {
-                        window.open("/dashboard/");
+                        window.open("/geoserver/web/");
                     },
-                    hidden: (status === 401)
-                },{
-                    text: _("New Map (Web Mercator)"),
-                    id: "new-map-900913-button",
-                    iconCls: "add",
-                    handler: function() {
-                        window.open("composer#config/900913");
-                    },
-                    hidden: (status === 401)
-                },{
-                    text: _("New Map (UTM 31N)"),
-                    id: "new-map-23031-button",
-                    iconCls: "add",
-                    handler: function() {
-                        window.open("composer#config/23031");
-                    },
-                    hidden: (status === 401)
+                    hidden: (status !== 200)
                 }]
             });
             
@@ -202,7 +228,7 @@
                     {
                         region: 'north',
                         height: 95,
-                        html: '<div class="logo"><h2>GeoExplorer Castellbisbal</h2></div>'
+                        html: '<div class="logo"><h2></h2></div>'
                     },
                     docTree,
                     {
@@ -217,61 +243,73 @@
                         width: 320,
                         items: [{
                             title: _("How to Browse"),
-                            html: "<iframe style='border: none; height: 100%; width: 100%' src='howto.html' frameborder='0' border='0'><a target='_blank' href='howto.html'>"+this.aboutText+"</a></iframe>"
+                            html: "<iframe style='border: none; height: 100%; width: 100%' src='howto."+lang+".html' frameborder='0' border='0'><a target='_blank' href='howto.html'>"+this.aboutText+"</a></iframe>"
                         },{
                             title: _("About"),
-                            html: "<iframe style='border: none; height: 100%; width: 100%' src='about.html' frameborder='0' border='0'><a target='_blank' href='about.html'>"+this.aboutText+"</a></iframe>"
+                            html: "<iframe style='border: none; height: 100%; width: 100%' src='about."+lang+".html' frameborder='0' border='0'><a target='_blank' href='about.html'>"+this.aboutText+"</a></iframe>"
                         }]
                     }
                 ]
             });
             
             function displayLoginLink() {
-                Ext.fly("login").on({
-                    click: function(event, target) {
-                        showLoginDialog();
-                        event.stopEvent();
-                    }
-                });
+                Ext.fly("login").show();
+                Ext.fly("logout").hide();
             }
             function hideLoginLink() {
                 Ext.fly("login").hide();
+                Ext.fly("logout").show();
+            }
+            function logout() {
+            	// Call login with no params
+            	// Will return an unauthorized and unset session cookie
+        		Ext.Ajax.request({
+				   url: 'login',
+				   failure: function() {
+                      document.cookie = undefined;
+                      displayLoginLink();
+                      var cm = mapGrid.getColumnModel();
+                      cm.setHidden(cm.getIndexById("editcolumn"), true);
+                      cm.setHidden(cm.getIndexById("removecolumn"), true);
+                      Ext.getCmp("new-map-button").hide();
+                      Ext.getCmp("dashboard-button").hide();
+				   }
+				});
             }
             function showLoginDialog() {
                 var panel = new Ext.FormPanel({
                     url: "login",
                     frame: true,
                     labelWidth: 60,
-                    defaultType: "textfield",
-                    items: [{
-                        fieldLabel: _("User"),
-                        name: "username",
-                        allowBlank: false
-                    }, {
-                        fieldLabel: _("Password"),
-                        name: "password",
-                        inputType: "password",
-                        allowBlank: false
-                    }]
-                });
-                
-                var win = new Ext.Window({
-                    title: _("Login"),
-                    layout: "fit",
-                    width: 235,
-                    height: 130,
-                    plain: true,
-                    border: false,
-                    modal: true,
-                    items: [panel],
-                    buttons: [{
-                        text: _("Login"),
-                        handler: function(button) {
-                            var form = panel.getForm();
-                            button.disable();
-                            submitLogin(
-                                form.getValues(), 
-                                function success(response) {
+					items: [{
+						fieldLabel: _("User"),
+						name: 'username',
+						width: 140,
+						el: 'username',
+						allowBlank: false,
+						xtype:'textfield',
+						autoShow: true
+					}, {
+						fieldLabel: _("Password"),
+						name: 'password',
+						el: 'password',
+						width: 140,
+						xtype:'textfield',
+						allowBlank: false,
+						inputType: 'password',
+						autoShow: true
+					}, {
+						width: 80,
+						style: "float:right;padding-top:10px;",
+						text: _("Login"),
+                        type: "submit",
+                        xtype:'button',
+                        handler: function (button) {
+		                    button.disable();
+		                    var form = panel.getForm();
+		                    submitLogin(
+		                        form.getValues(),
+		                        function success(response) {
                                     var cookie = response.getResponseHeader("Set-Cookie");
                                     if (cookie) {
                                         document.cookie = cookie;
@@ -280,8 +318,9 @@
                                     var cm = mapGrid.getColumnModel();
                                     cm.setHidden(cm.getIndexById("editcolumn"), false);
                                     cm.setHidden(cm.getIndexById("removecolumn"), false);
-                                    Ext.getCmp("new-map-23031-button").show();
-                                    Ext.getCmp("new-map-900913-button").show();
+                                    //Ext.getCmp("new-map-23031-button").show();
+                                    //Ext.getCmp("new-map-900913-button").show();
+                                    Ext.getCmp("new-map-button").show();
                                     Ext.getCmp("dashboard-button").show();
                                     win.close();
                                 },
@@ -292,9 +331,20 @@
                                     });
                                     button.enable();
                                 }
-                            );
-                        }
-                    }]
+		                    );
+		                }
+					}]
+                });
+                
+                var win = new Ext.Window({
+                    title: _("Login"),
+                    layout: "fit",
+                    width: 230,
+                    height: 130,
+                    plain: true,
+                    border: false,
+                    modal: true,
+                    items: [panel]
                 });
                 win.show();
             }
@@ -313,4 +363,11 @@
     </script>
 
 <% subskin content %>
-<a id="login" href="login">Login</a>
+<div id="langchooser">[ <a href="?lang=ca">ca</a> | <a href="?lang=es">es</a> | <a href="?lang=en">en</a> ]</div> <a id="login" href="#">Login</a> <a id="logout" href="#">Logout</a>
+
+<!-- Force 'remember password' triggering. See:
+	http://stackoverflow.com/questions/14957772/make-browser-to-remember-name-password-in-form-by-extjs-3 -->
+<form>
+  <input type="text" id="username" name="username" value="" class="x-hidden"/>
+  <input type="password" id="password" name="password" value="" class="x-hidden"/>
+</form>

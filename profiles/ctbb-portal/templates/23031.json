@@ -1,444 +1,481 @@
 ﻿{
-   "proxy":"/geoserver/rest/proxy/?url=",
+   "proxy":"proxy/?url=",
    "printService":"/geoserver/pdf/",
    "alignToGrid":true,
    "about":{
-      "title":"Mapa i planejament de Castellbisbal - proj. Web Mercator",
+      "title":"Portal Territorial de Castellbisbal - proj. UTM 31N",
       "abstract":"Aquest aplicatiu permet accedir a la informació cartogràfica i planejament urbanístic de Castellbisbal.",
       "contact":"Per a més informació, contacteu <a href='http://www.geodata.es'>Geodata</a>."
    },
    "defaultSourceType":"gxp_wmscsource",
    "sources":{
-      "local":{
-         "url":"/geoserver/ows",
-         "title":"GeoServer Castellbisbal",
-         "ptype":"gxp_wmscsource",
-         "projection":"EPSG:900913",
+      "icc-tilecache":{
+         "title":"Tile Caché ICC",
+         "ptype":"gdxp_icc_tilecache",
+         "projection":"EPSG:23031"
+      },
+      "portal":{
+         "title":"Portal Territorial Castellbisbal",
+         "url": "http://mapes.castellbisbal.cat/geoserver/portal/gwc/service/wms",
+         "ptype":"gdxp_wmscsource",
+         "projection":"EPSG:23031",
+         "bbox":[258000,4485000,536000,4752000],
          "baseParams":{
             "SERVICE":"WMS",
             "REQUEST":"GetCapabilities",
+            "TILED":true,
             "VERSION":"1.1.1"
          }
       },
-      "mapquest":{
-         "title":"MapQuest",
-         "ptype":"gxp_mapquestsource",
-         "projection":"EPSG:900913"
-      },
-      "osm":{
-         "title":"OpenStreetMap",
-         "ptype":"gxp_osmsource",
-         "projection":"EPSG:900913"
-      },
-      "bing":{
-         "title":"Bing",
-         "ptype":"gxp_bingsource",
-         "projection":"EPSG:900913"
-      },
-      "ol":{
-         "ptype":"gxp_olsource",
-         "projection":"EPSG:900913"
-      }
+      "ortofotos":{
+         "title":"GeoServer Castellbisbal",
+         "url":"http://mapes.castellbisbal.org/geoserver/icc/gwc/service/wms",
+         "ptype":"gxp_wmscsource",
+         "projection":"EPSG:23031",
+         "baseParams":{
+            "SERVICE":"WMS",
+            "REQUEST":"GetCapabilities",
+            "TILED":true,
+            "VERSION":"1.1.1"
+         }
+      }      
    },
    "map":{
-      "projection":"EPSG:900913",
+      "projection":"EPSG:23031",
       "units":"m",
-      "maxResolution":1066,
+      "resolutions":[
+         25,
+         10,
+         5,
+         2,
+         1,
+         0.5,
+         0.25
+      ],
+      "maxResolution":25,
       "maxExtent":[
-         210814,
-         5077212,
-         230325,
-         5089792
+         398800,
+         4587400,
+         424400,
+         4600200
       ],
       "layers":[
          {
-            "source":"bing",
-            "name":"AerialWithLabels",
-            "title":"Bing Fotografia Aèria amb Etiquetes",
-            "visibility":false,
-            "group":"background",
-            "fixed":true,
-            "selected":false
-         },
-         {
-            "source":"bing",
-            "name":"Aerial",
-            "title":"Bing Fotografia Aèria",
-            "visibility":false,
-            "group":"background",
-            "fixed":true,
-            "selected":false
-         },
-         {
-            "source":"bing",
-            "name":"Road",
-            "title":"Bing Carrerer",
+            "source":"icc-tilecache",
+            "name":"topo",
+            "title":"Mapa topogràfic de Catalunya / ICC",
             "visibility":true,
-            "group":"background",
-            "fixed":true,
+            "fixed":false,
             "selected":false
          },
          {
-            "source":"osm",
-            "name":"mapnik",
-            "title":"OpenStreetMap",
+            "source":"icc-tilecache",
+            "name":"orto",
+            "title":"Ortofotoimatge de Catalunya / ICC",
             "visibility":false,
-            "group":"background",
-            "fixed":true,
+            "fixed":false,
             "selected":false
          },
          {
-            "source":"mapquest",
-            "name":"osm",
-            "title":"MapQuest - OSM",
-            "visibility":false,
-            "group":"background",
-            "fixed":true,
-            "selected":false
-         },
-         {
-            "source":"local",
-            "name":"portal:plan_qualificacions",
+            "source":"portal",
+            "name":"plan_qualificacions",
             "title":"Planejament - Qualificacions",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
          },
          {
-            "source":"local",
-            "name":"portal:plan_rg_sect2",
+            "source":"portal",
+            "name":"plan_rg_sect2",
             "title":"Planejament - Règim del sòl",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_rg_sect",
+            "source":"portal",
+            "name":"plan_rg_sect",
             "title":"Planejament - Sectors",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_pati_illa",
+            "source":"portal",
+            "name":"plan_pati_illa",
             "title":"Planejament - Pati d'illa",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_galib",
+            "source":"portal",
+            "name":"plan_galib",
             "title":"Planejament - Gàlib edificatori (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
          },
          {
-            "source":"local",
-            "name":"portal:plan_profunditat",
+            "source":"portal",
+            "name":"plan_profunditat",
             "title":"Planejament - Profunditat edificatòria (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_alcades",
+            "source":"portal",
+            "name":"plan_alcades",
             "title":"Planejament - Número de plantes (visible a 1:10.000)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_cotes",
+            "source":"portal",
+            "name":"plan_cotes",
             "title":"Planejament - Cotes (visible a 1:2.500)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_cataleg_ambit",
+            "source":"portal",
+            "name":"plan_cataleg_ambit",
             "title":"Planejament - Catàleg d'elements a protegir: Àmbit",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:plan_cataleg_element",
+            "source":"portal",
+            "name":"plan_cataleg_element",
             "title":"Planejament - Catàleg d'elements a protegir: Element (visible a 1:10.000)",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l67_ctbb_bcn",
-            "title":"Autobús - Línia 67 (Polígon Industrial - Barcelona)",
-            "visibility":false,
-            "opacity":1,
-            "selected":false,
-            "format":"image/png",
-            "styles":"",
-            "transparent":true,
-            "tiled":true
-         },
-         {
-            "source":"local",
-            "name":"portal:mob_bus_linia_n51",
+            "source":"portal",
+            "name":"mob_bus_linia_n51",
             "title":"Autobús - Línia Bus Nit (N51)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_c7_ctbb_trsa_sbll",
+            "source":"portal",
+            "name":"mob_bus_linia_l67_ctbb_bcn",
+            "title":"Autobús - Línia 67 (Polígon Industrial - Barcelona)",
+            "visibility":false,
+            "opacity":1,
+            "selected":false,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true
+            
+         },
+         {
+            "source":"portal",
+            "name":"mob_bus_linia_c7_ctbb_trsa_sbll",
             "title":"Autobús - Línia C7 (Polígon Industrial - Terrassa - Sabadell)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l3_ctbb_rubi",
+            "source":"portal",
+            "name":"mob_bus_linia_l3_ctbb_rubi",
             "title":"Autobús - Línia 3 (Polígon Industrial - Rubí)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_comu",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_comu",
             "title":"Autobús - Línia 2 (tram comú)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_teresita",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_teresita",
             "title":"Autobús - Línia 2 (Teresita)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_santeugini_costablanca",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_santeugini_costablanca",
             "title":"Autobús - Línia 2 (Santeugini - Costa Blanca)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l2_sert_costa",
+            "source":"portal",
+            "name":"mob_bus_linia_l2_sert_costa",
             "title":"Autobús - Línia 2 (Sert - Can Costa)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_linia_l1_nucli_estacio",
+            "source":"portal",
+            "name":"mob_bus_linia_l1_nucli_estacio",
             "title":"Autobús - Línia 1",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_bus_parades",
+            "source":"portal",
+            "name":"mob_bus_parades",
             "title":"Autobús - Parades d'autobús",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:xv_carpr",
+            "source":"portal",
+            "name":"xv_carpr",
             "title":"Xarxa de carreteres",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:mob_sentits_circulacio",
+            "source":"portal",
+            "name":"mob_sentits_circulacio",
             "title":"Sentits de circulació (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:car_eixos_opengeo",
+            "source":"portal",
+            "name":"car_eixos_opengeo",
             "title":"Carrerer - Eixos carrer (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:car_portals_opengeo",
+            "source":"portal",
+            "name":"car_portals_opengeo",
             "title":"Carrerer - Portals (visible a 1:2.500)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:su_hidr_hidrants_2009",
+            "source":"portal",
+            "name":"su_hidr_hidrants_2009",
             "title":"Hidrants 2009",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:top_toponimia",
+            "source":"portal",
+            "name":"top_toponimia",
             "title":"Toponímia (visible a 1:10.000)",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:adm_tm_atermenament_2010",
+            "source":"portal",
+            "name":"adm_tm_atermenament_2010",
             "title":"TM atermenament 2010",
             "visibility":false,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          },
          {
-            "source":"local",
-            "name":"portal:adm_tm_poum_2007",
+            "source":"portal",
+            "name":"adm_tm_poum_2007",
             "title":"TM POUM 2007",
             "visibility":true,
             "opacity":1,
             "selected":false,
-            "format":"image/png",
+            "format":"image/png8",
             "styles":"",
-            "transparent":true,
-            "tiled":true
+            "transparent":true
+            
          }
       ],
       "center":[
-         218575.82017259,
-         5083502
+         413570.813,
+         4592753.5
       ],
-      "zoom":13
+      "zoom":2
    },
+      "searchers":[
+      {
+         "xtype":"gdxp_streetsearch",
+         "streetLayer":"portal:car_eixos_opengeo",
+         "portalLayer":"portal:car_portals_opengeo",
+         "baseURL":"/geoserver/portal/wfs?"
+      },
+      {
+         "xtype":"gdxp_textfieldsearch",
+         "texts":{
+            "ca":{
+               "title":"Topònims",
+               "label":"Desplegueu per sel·leccionar un topònim; escriviu per constrènyer la cerca (per exemple, \"can\")"
+            },
+            "en":{
+               "title":"Placenames",
+               "label":"Open to select a placename; type text to narrow search (for example, \"can\")"
+            },
+            "es":{
+               "title":"Topónimos",
+               "label":"Despliegue para seleccionar un topónimo; esriba para restringir la bússqueda (por ejemplo, \"can\")"
+            }
+         },
+         "baseURL":"/geoserver/portal/wfs?",
+         "layer":"portal:top_toponimia",
+         "field":"toponim"
+      },
+      {
+         "xtype":"gdxp_doublefieldsearch",
+         "texts":{
+            "ca":{
+               "title":"Equipaments",
+               "type":"Tipus",
+               "poi":"Equipament"
+            },
+            "en":{
+               "title":"Equipment",
+               "type":"Type",
+               "poi":"Name"
+            },
+            "es":{
+               "title":"Equipamientos",
+               "type":"Tipo",
+               "poi":"Equipamiento"
+            }
+         },
+         "baseURL":"/geoserver/portal/wfs?",
+         "typeLayer":"portal:v_tipuseq",
+         "poiLayer":"portal:eq_equipaments",
+         "typeField":"tipus",
+         "poiField":"nom"
+      },
+      {
+         "xtype":"gdxp_catastrosearch"
+      },
+      {
+         "xtype":"gdxp_utmsearch"
+      }
+   ],
    "tools":[
       {
          "ptype":"gxp_layertree",
