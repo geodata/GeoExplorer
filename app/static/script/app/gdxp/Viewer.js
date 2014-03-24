@@ -26,7 +26,8 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
             plugins: new GeoExt.ZoomSliderTip({
                 template: this.zoomSliderText
             })
-        }];
+        }];     
+        
         this.overrideTools = [
             {
                 ptype: "gxp_layertree",
@@ -76,13 +77,17 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
             }, {
 	            ptype: "gxp_featuremanager",
 	            id: "featuremanager",
-	            paging: true,
+	            paging: false,
 	           	autoLoadFeatures: true,
 	           	autoZoomPage: true,
 	           	format: "JSON",
-	           	maxFeatures: 10,
+	           	//maxFeatures: 100,
 	           	pagingType: gxp.plugins.FeatureManager.QUADTREE_PAGING,
 	            autoSetLayer: true,
+	           	layer: {
+	           	    source: "local",
+	           	    name: "intranet:cad_parce_ajuntament"
+	           	}
 				/*filter: new OpenLayers.Filter.Function({ 
 					name  : 'boundary', 
 					params: [featureStore.geometryName] 
@@ -124,7 +129,8 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	            //showTotalResults: true,
 				featureManager: "featuremanager",
 				outputTarget: "south",
-				id: "featuregrid"/*,
+				id: "featuregrid"
+				/*
 				listeners : {
 	                'render': function() {
 	                    // Do Something, like Adding a ZoomTo Icon
