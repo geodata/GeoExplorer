@@ -65,6 +65,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
     aboutThisMapText: "About this Map",
     searchersTitleText: "Search engines",
     interfaceCoords: "Coordinates",
+    featureGridText: "Features",
     // End i18n.
     
     /**
@@ -327,7 +328,7 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         });
         
         var featureGridPanel = new Ext.Panel({
-        	title: "Features",
+        	title: this.featureGridText,
 		    layout: "fit",
 		    region: "south",
 		    id: "south",

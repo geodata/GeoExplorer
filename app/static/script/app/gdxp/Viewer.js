@@ -83,11 +83,20 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	           	format: "JSON",
 	           	//maxFeatures: 100,
 	           	pagingType: gxp.plugins.FeatureManager.QUADTREE_PAGING,
-	            autoSetLayer: true,
+	            autoSetLayer: true
+	            /*symbolizer: {
+	                    Polygon: {
+	                        strokeColor: "#ffffff",
+	                        strokeOpacity: 1,
+	                        strokeWidth: 3,
+	                        pointRadius: 6
+	                    }
+	            },*/
+	            /* si es vol una capa predefinida 
 	           	layer: {
 	           	    source: "local",
 	           	    name: "intranet:cad_parce_ajuntament"
-	           	}
+	           	}*/
 				/*filter: new OpenLayers.Filter.Function({ 
 					name  : 'boundary', 
 					params: [featureStore.geometryName] 
