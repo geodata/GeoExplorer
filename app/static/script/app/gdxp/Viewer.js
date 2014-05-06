@@ -82,16 +82,14 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	           	autoZoomPage: true,
 	           	format: "JSON",
 	           	//maxFeatures: 100,
-	           	pagingType: gxp.plugins.FeatureManager.QUADTREE_PAGING,
-	            autoSetLayer: true
-	            /*symbolizer: {
-	                    Polygon: {
-	                        strokeColor: "#ffffff",
-	                        strokeOpacity: 1,
-	                        strokeWidth: 3,
-	                        pointRadius: 6
-	                    }
-	            },*/
+	           	//pagingType: gxp.plugins.FeatureManager.QUADTREE_PAGING,
+	            autoSetLayer: true,
+                symbolizer: {
+                    pointRadius: 6,
+                    fillColor: "#ff0000",
+                    strokeWidth: 2,
+                    strokeColor: "#ffcc33"
+                }
 	            /* si es vol una capa predefinida 
 	           	layer: {
 	           	    source: "local",
@@ -127,9 +125,17 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	            }*/
 	        }, {
 	            ptype: "gxp_featuregrid",
-	            outputConfig: {
-					loadMask: true
-	            },
+                outputConfig: {
+                    id: "featuregrid",
+                    fieldVisibility: {
+                        "shape_area": false,
+                        "adr": false,
+                        "rc": true,
+                        "reg": true
+                    },
+                    loadMask: true
+                },
+                //alwaysDisplayOnMap: true, // removes 'mostra al mapa' button
 	            autoCollapse: true,
 	            autoExpand: true,
 	            autoLoadFeature: true,
@@ -137,20 +143,19 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	            selectOnMap: true,
 	            //showTotalResults: true,
 				featureManager: "featuremanager",
-				outputTarget: "south",
-				id: "featuregrid"
+				outputTarget: "south"
 				/*
 				listeners : {
 	                'render': function() {
 	                    // Do Something, like Adding a ZoomTo Icon
 	                }
 	            }*/
-			}
-	        //}, {
-			//    ptype: "gxp_zoomtoselectedfeatures",
-			//    featureManager: "featuremanager",
-			//    actionTarget: "featuregrid.contextMenu"
-		    //}
+			
+	        }, {
+			    ptype: "gxp_zoomtoselectedfeatures",
+			    featureManager: "featuremanager",
+			    actionTarget: "featuregrid.contextMenu"
+		    }
         ]; 
 
         gdxp.Viewer.superclass.constructor.apply(this, arguments);
