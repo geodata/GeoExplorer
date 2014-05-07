@@ -128,8 +128,8 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
                 outputConfig: {
                     id: "featuregrid",
                     fieldVisibility: {
-                        "shape_area": false,
-                        "adr": false,
+                        "shape_area": true,
+                        "adr": true,
                         "rc": true,
                         "reg": true
                     },
