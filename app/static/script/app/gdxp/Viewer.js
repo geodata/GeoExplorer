@@ -26,7 +26,8 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
             plugins: new GeoExt.ZoomSliderTip({
                 template: this.zoomSliderText
             })
-        }];     
+        }];
+       
         
         this.overrideTools = [
             {
@@ -90,6 +91,7 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
                     strokeWidth: 2,
                     strokeColor: "#ffcc33"
                 }
+
 	            /* si es vol una capa predefinida 
 	           	layer: {
 	           	    source: "local",
@@ -127,12 +129,13 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	            ptype: "gxp_featuregrid",
                 outputConfig: {
                     id: "featuregrid",
-                    fieldVisibility: {
+                    // we don't want to limit field visibility
+                    /*fieldVisibility: {
                         "shape_area": true,
                         "adr": true,
                         "rc": true,
                         "reg": true
-                    },
+                    },*/
                     loadMask: true
                 },
                 //alwaysDisplayOnMap: true, // removes 'mostra al mapa' button
@@ -144,17 +147,14 @@ gdxp.Viewer = Ext.extend(GeoExplorer, {
 	            //showTotalResults: true,
 				featureManager: "featuremanager",
 				outputTarget: "south"
-				/*
-				listeners : {
-	                'render': function() {
-	                    // Do Something, like Adding a ZoomTo Icon
-	                }
-	            }*/
-			
 	        }, {
 			    ptype: "gxp_zoomtoselectedfeatures",
 			    featureManager: "featuremanager",
-			    actionTarget: "featuregrid.contextMenu"
+			    actionTarget: ["featuregrid.bbar", "featuregrid.contextMenu"],
+			    buttonText: this.zoomElementButtonText,
+			    menuText: this.zoomElementText,
+			    tooltip: ""
+			    
 		    }
         ]; 
 

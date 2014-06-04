@@ -23,7 +23,9 @@ GeoExt.Lang.add("ca", {
         aboutThisMapText: "Quant a aquest mapa",
         searchersTitleText: "Cercadors",
         interfaceCoords: "Coordenades",
-        featureGridText: "Taula d'atributs"
+        featureGridText: "Taula d'atributs",
+        zoomElementText: "Fer zoom a l'element",
+        zoomElementButtonText: "Zoom element"
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Exporta el Mapa",

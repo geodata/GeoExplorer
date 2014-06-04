@@ -23,7 +23,9 @@ GeoExt.Lang.add("en", {
         aboutThisMapText: "About this Map",
         searchersTitleText: "Search engines",
         interfaceCoords: "Coordinates",
-        featureGridText: "Features"
+        featureGridText: "Features",
+        zoomElementText: "Zoom to element",
+        zoomElementButtonText: "Zoom element"
     },
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Export Map",
