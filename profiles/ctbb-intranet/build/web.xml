@@ -30,7 +30,7 @@
         </init-param>
         <init-param>
             <param-name>GEOEXPLORER_DATA</param-name>
-            <param-value>/usr/share/opengeo-suite-data/geoexplorer_data/intranet</param-value>
+            <param-value>/var/lib/geoexplorer_data/intranet</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
